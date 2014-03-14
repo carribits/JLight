@@ -2,13 +2,6 @@
 
 }
 
-#main_index, #jse_select, #all_jamaican, #cross_listed,
-#info, #performance, #history, #composition,
-#quote-tab, #ordinary-tab, #preference-tab, #us-denom-tab,
-#trade-data-tab, #performance-tab
-{
-    font-size:  0.65em !important;
-}
 #content-holder{
     margin-bottom: 2.5em;
 }
@@ -29,13 +22,13 @@
     margin: .7em 0;
 }
 
-.ui-icon-news:after{background-image:url('../images/news_i.png')}
 .ui-icon-home:after{background-image:url('../images/home_i.png')}
-.ui-icon-quote:after{background-image:url('../images/quote_i.png')}
+.ui-icon-tips:after{background-image:url('../images/tips_i.png')}
+.ui-icon-setting:after{background-image:url('../images/setting_i.png')}
 
-.ui-icon-news-a:after{background-image:url('../images/news_a.png')}
 .ui-icon-home-a:after{background-image:url('../images/home_a.png')}
-.ui-icon-quote-a:after{background-image:url('../images/quote_a.png')}
+.ui-icon-tips-a:after{background-image:url('../images/tips_a.png')}
+.ui-icon-setting-a:after{background-image:url('../images/setting_a.png')}
 
 .application-icon .ui-btn-icon-left:after, 
 .application-icon .ui-btn-icon-right:after,

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JStock</string>
+    <string-array name="news_headlines">
+        <item>Performing org.stock.MainActivity activity launch</item>
+        <item>Uploading stock</item>
+        <item>Installing stock.apk</item>
+        <item>Starting activity org.stock.MainActivity on device 192.168.0.5:5555</item>
+    </string-array>
+</resources>

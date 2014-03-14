@@ -1,0 +1,11 @@
+#list-button span.ui-icon-custom {
+  background: url(../lib/glyphish/152-rolodex.png) 0 0 no-repeat;
+}
+
+#add-button span.ui-icon-custom {
+  background: url(../lib/glyphish/187-pencil.png) 0 0 no-repeat;
+}
+
+#settings-button span.ui-icon-custom {
+  background: url(../lib/glyphish/20-gear2.png) 0 0 no-repeat;
+}

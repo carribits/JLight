@@ -1,0 +1,479 @@
+<!doctype html>
+<html class="no-js ui-mobile-rendering" lang="en">
+    <head>
+        <title>JStock</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=1">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, target-densitydpi=medium-dpi, user-scalable=0" />-->
+        <!--<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+        <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" href="css/font.css">
+        <link rel="stylesheet" href="css/jqm-demos.css">
+        <script src="js/libs/require.js" data-main="js/mobile"></script>
+        <link rel="stylesheet" href="css/index.css">
+
+        <script type="text/javascript">
+
+        </script>
+    </head>
+    <body>
+        <div id="appview" data-role="page" data-title="JSE" class="jqm-demos" data-quicklinks="true">
+
+            <div data-role="header" data-tap-toggle="false" class="jqm-header" data-position="fixed">
+                <h2><a  title="Jamaica Stock Exchange"><img src="images/logo.png"></a></h2>
+                <a  class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+            </div>
+
+            <div style="display:none" id="index-navbar" data-role="navbar" class="app-navbar market-index">
+                <ul>
+                    <li><a class="ui-btn-active" id="main_index" href="">Main Index</a></li>
+                    <li><a id="jse_select" href="">JSE Select</a></li>
+                    <li><a id="all_jamaican" href="">All Jamaican</a></li>
+                    <li><a id="cross_listed" href="">Cross Listed</a></li>
+                </ul>
+            </div>
+
+            <div style="display:none" id="index-details-navbar" data-role="navbar" class="app-navbar market-index">
+                <ul>
+                    <li><a id="info">Information</a></li>
+                    <li><a id="performance" >Performance</a></li>
+                    <li><a id="history" >History</a></li>
+                    <li><a class="ui-btn-active" id="composition" >Composition</a></li>
+                </ul>
+            </div>
+
+            <div style="display:none" id="quote-navbar" data-role="navbar" class="app-navbar market-index">
+                <ul>
+                    <li><a class="ui-btn-active" id="quote-tab">Quote</a></li>
+                    <li><a id="ordinary-tab" >Ordinary</a></li>
+                    <li><a id="preference-tab" >Preference</a></li>
+                    <li><a id="us-denom-tab" >US Denominated</a></li>
+                </ul>
+            </div>
+
+            <div style="display:none" id="symbol-navbar" data-role="navbar" class="app-navbar market-index">
+                <ul>
+                    <li><a class="ui-btn-active" id="trade-data-tab">Trade Data</a></li>
+                    <li><a id="performance-tab">Performance</a></li>
+                </ul>
+            </div>
+
+            <div id="content-holder" role="main" class="ui-content jqm-content" style="padding-top: 0.3em;">
+
+            </div><!-- /content -->
+
+            <div data-role="navbar" data-position="fixed" data-iconpos="bottom" class="ui-footer ui-footer-fixed slideup ui-bar-inherit application-icon app-navbar">
+                <ul>
+                    <li><a id="home-icon" href="#home" class="ui-btn-active" data-icon="home"></a></li>
+                    <li><a id="quote-icon" href="#quote" data-icon="quote"></a></li>
+                    <li><a id="news-icon" href="#news" data-icon="news"></a></li>
+                </ul>
+            </div>
+
+            <div data-role="panel" class="jqm-search-panel" data-position="right" data-display="overlay" data-theme="a">
+                <div class="jqm-search">
+                    <ul class="jqm-list" data-filter-placeholder="Search Symbol" data-filter-reveal="true" id="sysbol-list">
+                    </ul>
+                </div>
+            </div>
+            <div id="main_head" data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
+                <ul class="jqm-list ui-alt-icon ui-nodisc-icon">
+                    <li data-filtertext="demos homepage"><a class="available" href="index.html">Main Market</a></li>
+                    <li data-filtertext=""><a class="not-available" data-ajax="false">Jnr. Market <span class="hidden-text">(not available)</span></a></li>
+                    <li data-filtertext=""><a class="not-available" data-ajax="false">Comb. Market <span class="hidden-text">(not available)</span></a></li>
+                    <li data-filtertext=""><a class="not-available" data-ajax="false">US Market <span class="hidden-text">(not available)</span></a></li>
+                    <li data-filtertext="demos homepage"><a id="disclaimer-link" class="available" href="index.html#disclaimer">Disclaimer</a></li>
+                    <li data-filtertext="demos homepage"><a id="about-link" class="available" href="index.html#about">About</a></li>
+                    <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
+                </ul>
+            </div>
+        </div>
+
+        <div id="home" data-role="page" data-title="Home">
+            <div style="margin:0.0em 0.35em 0.0em 0.35em;padding:0px;" data-demo-html="true" >
+                <a href="#" class="ui-btn ui-corner-all live-ui-btn">
+                    <span style="height:18px;display: inline-block;padding:2px">
+                        <span style="display: inline-block; overflow: hidden; height: 14px;">&nbsp;</span>
+                        <span class="live-text" style="height: 12px">Loading...</span>
+                    </span>
+
+                </a>
+            </div>
+
+            <div class="ui-block-a" style="width:100%">
+                <div class="jqm-block-content">
+                    <div style="font-size:0.80em">
+                        <h1 class="summary-heading-1">Daily Main Market Summary - <span class="market-date"></span></h1>
+                    </div>
+                    <p id="market-summart1"></p>
+                </div>
+            </div>
+
+            <a style="margin: 0 0.5em 0.5em 0px;" href="#indexdetails" data-ajax="false" class="jqm-deeplink  "><span style="white-space: nowrap" class="app-link">View Index Details</span></a>
+            <div class="ui-block-a" style="width:100%">
+                <div class="jqm-block-content">
+                    <div >
+                        <img id="graph-img" src="" alt="" width="100%">
+                    </div>
+                    <div style="font-size:0.7em"></div>
+                </div>
+            </div>
+
+            <div class="ui-block-a" style="width:100%;">
+                <div class="jqm-block-content" style="padding :0.5em 0em 0.5em 0em;">
+                    <table class="market-details">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ui-block-a" style="width:100%;">
+                <div class="jqm-block-content">
+                    <div class="summary-heading-3 advancing">Stocks Advancing</div>
+                    <table id="stock-adv" class="stock-t" summary="Stocks Advancing">
+                        <thead>
+                            <tr>
+                                <th scope="col">Security</th>
+                                <th class="alnright" scope="col">Volume</th>
+                                <th class="alnright" scope="col">Close $</th>
+                                <th class="alnright" scope="col">Change $</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ui-block-a" style="width:100%;">
+                <div class="jqm-block-content">
+                    <div class="summary-heading-3 declining">Stocks Declining</div>
+                    <table id="stock-dec" class="stock-t" summary="Stocks Declining">
+                        <thead>
+                            <tr>
+                                <th scope="col">Security</th>
+                                <th class="alnright" scope="col">Volume</th>
+                                <th class="alnright" scope="col">Close $</th>
+                                <th class="alnright" scope="col">Change $</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ui-block-a" style="width:100%;">
+                <div class="jqm-block-content">
+                    <div class="summary-heading-3 traded">Stocks Trading firm</div>
+                    <table id="stock-trd" class="stock-t" summary="Stocks Trading firm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Security</th>
+                                <th class="alnright" scope="col">Volume</th>
+                                <th class="alnright" scope="col">Close $</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="indexdetails" data-role="page" data-title="Colors">
+            <div id="index-composition-tab" class="index-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3"><span class="act-index-name">Main Index</span> Composition <span class="market-date"></span></div>
+                        <table id="index-composition-table" class="stock-t">
+                            <thead>
+                                <tr>
+                                    <th class="no-border" scope="col">Symbol</th>
+                                    <th class="alnright no-border" scope="col">Price</th>
+                                    <th class="alnright no-border" scope="col">Change ($)</th>
+                                    <th class="alnright no-border" scope="col">Change (%)</th>
+                                    <th class="alnright no-border" scope="col">Vol. Traded</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="index-history-tab" class="index-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3"><span class="act-index-name">Main Index</span> History <span class="market-date"></span></div>
+                        <table id="index-history-table" class="stock-t">
+                            <thead>
+                                <tr>
+                                    <th class="no-border" scope="col">Date</th>
+                                    <th class="alnright no-border" scope="col">Value</th>
+                                    <th class="alnright no-border" scope="col">Change</th>
+                                    <th class="alnright no-border" scope="col">Change%</th>
+                                    <th class="alnright no-border" scope="col">Vol. Traded</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="index-information-tab" class="index-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content" style="font-size: 0.8em">
+                        <span class="act-index-name">Main Index</span> Information <span class="market-date"></span>
+                    </div>
+                </div>
+
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true">
+                            <ul id="information-list" data-role="listview" data-inset="true" data-divider-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Stock Information</li>
+                                <li class=""><a  class="ui-btn text">Value Date<span id="value_date" class="figure"></span></a></li>
+                                <li><a class="ui-btn text">Value<span id="value" class="figure"></span></a></li>
+                                <li ><a  class="ui-btn text ">Change<span  id="change" class="figure value-dir"></span></a></li>
+                                <li><a  class="ui-btn text">Change%<span id="change_perc" class="figure value-dir"></span></a></li>
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a" style="background: #FFF;"></li>
+                                <li ><a  class="ui-btn text">Volume<span id="volume" class="figure"></span></a></li>
+                                <li><a  class="ui-btn text">Market Capitalization<span id="market_capitalization" class="figure"></span></a></li>
+                                <li ><a  class="ui-btn text">1969 Change<span id="change_1969" class="figure"></span></a></li>
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a" style="background: #FFF;"></li>
+                                <li class=""><a  class="ui-btn text">Week to Date<span id="wtd" class="figure value-dir"></span></a></li>
+                                <li class=""><a  class="ui-btn text">Month to Date<span id="mtd" class="figure value-dir"></span></a></li>
+                                <li class=""><a  class="ui-btn text">Quarter to Date<span id="qtd" class="figure value-dir"></span></a></li>
+                                <li class=""><a  class="ui-btn text">Year to Date<span id="ytd" class="figure value-dir"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="index-performance-tab" class="index-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content" style="font-size: 0.8em">
+                        <span class="act-index-name">Main Index</span> Performance <span class="market-date"></span>
+                    </div>
+                </div>
+
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true">
+                            <ul id="performance-list" data-role="listview" data-inset="true" data-divider-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Stock Performance</li>
+                                <li class="odd"><a  class="ui-btn text">Volume Traded <span id="vol" class="figure"></span></a></li>
+                                <li><a  class="ui-btn text">Week to Date<span id="wtd" class="figure"></span></a></li>
+                                <li class="odd"><a  class="ui-btn text">Month to Date<span id="mtd" class="figure"></span></a></li>
+                                <li><a  class="ui-btn text">Quarter to Date<span id="qtd" class="figure">%</span></a></li>
+                                <li class="odd"><a  class="ui-btn text">Year to Date<span id="ytd" class="figure"></span></a></li>
+                                <li><a class="ui-btn text"><span id="change_name"></span><span id="change_value" class="figure"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="quote" data-role="page" data-title="Quote">
+            <div id="quote-tab-page" class="quote-tabs">
+
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content" style="margin-bottom: 2.0em">
+                        <div class="summary-heading-3"><span class="">Quote Sheet for <span class="market-date"></span></div>
+                        <table id="quote-main-table" class="stock-t" style="font-size: 0.6em;">
+                            <thead>
+                                <tr>
+                                    <th class="no-border" scope="col"></th>
+                                    <th class="no-border" scope="col">Index</th>
+                                    <th class="alnright no-border" scope="col">Value</th>
+                                    <th class="alnright no-border" scope="col">Volume</th>
+                                    <th class="alnright no-border" scope="col">Change</th>
+                                    <th class="alnright no-border" scope="col">Change%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="ordinary-tab-page" class="quote-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3">
+                            <span class="">Ordinary Shares for <span class="market-date"></span></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true" class="tab-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="preference-tab-page" class="quote-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3">
+                            <span class="">Preference Shares for <span class="market-date"></span></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true" class="tab-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="us-denom-tab-page" class="quote-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3">
+                            <span class="">US Denominated Shares for <span class="market-date"></span></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true" class="tab-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="news" data-role="page" data-title="News">
+            <div data-demo-html="true">
+                <ul data-role="list-view" id="news-list" news-list data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                </ul>
+            </div>
+        </div>
+        <div id="symboldetail" data-role="page" data-title="SymbolDetail">
+
+            <div id="trade-data-tab-page" class="symbol-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3"><span class="company-name"></span> Trade Data</div></div>
+                </div>
+
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true">
+                            <ul id="trade-data-summary" data-role="listview" data-inset="true" data-divider-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a ui-first-child"><span class="company-name"></span></li>
+                                <li class="odd"><a  class="ui-btn text">Symbol <span class="figure symbol-symbol"></span></a></li>
+                                <li><a  class="ui-btn text">Financial Year End<span class="figure symbol-fin-year" ></span></a></li>
+                                <li class="odd"><a  class="ui-btn text">Last Traded Price<span class="figure symbol-last-traded"></span></a></li>
+                                <li><a  class="ui-btn text">Close Price<span id="qtd" class="figure symbol-close"></span></a></li>
+                                <li><a  class="ui-btn text">Change<span  class="figure symbol-change"></span></a></li>
+                                <li><a  class="ui-btn text">Change%<span  class="figure symbol-change-perc"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="app-content">
+                        <div data-demo-html="true">
+                            <ul id="trade-data-list" data-role="listview" data-inset="true" data-divider-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                                <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-a ui-first-child">Trade Data</li>
+                                <li class="odd"><a  class="ui-btn text">Bid <span  class="figure symbol-bid"></span></a></li>
+                                <li><a  class="ui-btn text">Week to Date<span class="figure week-to-date"></span></a></li>
+                                <li class="odd"><a  class="ui-btn text">Ask<span class="figure symbol-ask"></span></a></li>
+                                <li><a  class="ui-btn text">Month to Date<span  class="figure symbol-month-to-date"></span></a></li>
+                                <li><a  class="ui-btn text">Open (Previous day's close)<span class="figure symbol-open"></span></a></li>
+                                <li><a  class="ui-btn text">Today's Range<span  class="figure symbol-today-range"></span></a></li>
+                                <li><a  class="ui-btn text">Year to Date<span  class="figure symbol-year-to-date"></span></a></li>
+                                <li><a  class="ui-btn text">52 Week Range<span  class="figure symbol-week-range"></span></a></li>
+                                <li><a  class="ui-btn text">Volume Traded<span  class="figure symbol-vol-traded"></span></a></li>
+                                <li><a  class="ui-btn text">52 Week Volume Range<span  class="figure symbol-vol-range"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="performance-tab-page" class="symbol-tabs">
+                <div class="ui-block-a" style="width:100%;">
+                    <div class="jqm-block-content">
+                        <div class="summary-heading-3"><span class="company-name"></span></div>
+                    </div>
+                </div>
+
+                <div class="ui-block-a" style="width:100%">
+                    <div class="jqm-block-content">
+                        <div>
+                            <img id="symbol-img" src="" width="100%">
+                        </div>
+                        <div style="font-size:0.7em"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="viewnews" data-role="page" data-title="View News">
+            <div id="news-item" class="ui-block-a" style="width:100%">
+                <div class="jqm-block-content">
+                    <div id="news-heading" class="heading" style="">
+                        <h2></h2>
+                    </div>
+                    <p class="pub-date"></p>
+                    <p id="news-content"> </p>
+                </div>
+            </div>
+            <a href="#news" class="app-link-button">Back to News</a>
+        </div>
+
+        <div id="disclaimer" data-role="page" data-title="Disclaimer">
+            <div id="disclaimer-content" class="ui-block-a" style="width:100%">
+                <div class="jqm-block-content">
+                    <div  class="heading" style="">
+                        <h2>Disclaimer</h2>
+                    </div>
+                    <p class="pub-date"></p>
+                    <p class="disclaimer-msg"> 
+                        Please note that the data contained in this application 
+                        is not necessarily real time nor accurate. 
+                        All stock data are provided by The Jamaica Stock Exchange (JSE). 
+                        Therefore the developers of this application are not 
+                        liable for any loss or damage from usage of the data provided. 
+                    </p>
+                    <p class="disclaimer-msg">
+                        Please visit <span style="color:#38c">www.jamstockex.com</span> for verification 
+                        if you have any uncertainty regarding the information provided by the application at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" data-role="page" data-title="Disclaimer">
+            <div id="about-content" class="ui-block-a" style="width:100%">
+                <div class="jqm-block-content">
+                    <div  class="heading" style="">
+                        <h2>About</h2>
+                    </div>
+                    <p class="pub-date"></p>
+                    <p class="about-content">
+                    <span class="tiny-text">Version 1.0.0</span>
+                    JStock is a free application developed for the Jamaican stock market. 
+                    The data is provided by The Jamaica Stock Exchange. If you have any 
+                    questions or suggestions for improvements please contact the developers at 
+                    rivalbits@gmail.com. Please see The Jamaica Stock Exchange disclaimer 
+                    page for concerns regarding usage of the information. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -5,10 +5,16 @@
 define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule) {
     var HomeView = Backbone.View.extend({
         initialize: function() {
+            this.model.on("added", this.render, this);
         },
         // Renders all of the Category models on the UI
         render: function() {
+            var data = this.model.attributes;
+            console.log(data);
 
+            var template = _.template($("#home").html());
+            this.$el.find("#content-holder").html(template);
+            return this;
         }
     });
 

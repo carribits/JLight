@@ -11,7 +11,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {
-                    this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Home()});
+                    this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
 
@@ -44,9 +44,11 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 home: function() {
                     $('#home-icon').addClass('ui-icon-home-a');
+                    this.homeView.model.fetch().done(function() {
+                       
+                    });
                 },
                 tips: function() {
-            console.log("CCCCCCCCCC");
                     $('#tips-icon').addClass('ui-icon-tips-a');
                 },
                 setting: function() {

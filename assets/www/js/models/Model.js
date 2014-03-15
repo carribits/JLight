@@ -6,9 +6,18 @@ define(["jquery", "backbone"], function($, Backbone) {
     var BaseModel = Backbone.Model.extend({
     });
 
-    Home = Backbone.Model.extend({
+    Reading = Backbone.Model.extend({
         initialize: function() {
 
+        },
+        sync: function(method, model, options) {
+            var categories = {a: 1};
+            var deferred = $.Deferred();
+
+            options.success(categories);
+            this.trigger("added");
+            deferred.resolve();
+            return deferred;
         }
     });
 
@@ -26,7 +35,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
     // Returns the Model class
     return {
-        Home: Home,
+        Reading: Reading,
         Tips: Tips,
         Setting: Setting
     };

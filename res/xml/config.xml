@@ -20,10 +20,10 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         id        = "io.cordova.helloCordova"
         version   = "2.0.0">
-    <name>Jstock</name>
+    <name>JLight</name>
 
     <description>
-        Jamaica Stock Market Application
+        
     </description>
 
     <author href="http://cordova.io" email="dev@cordova.apache.org">
@@ -103,7 +103,6 @@
     </feature>
     <!-- Deprecated plugins element. Remove in 3.0 -->
     <plugins>
-        <plugin name="WidgetUpdate" value="org.stock.plugin.WidgetUpdate" />
         <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     </plugins>
 </widget>

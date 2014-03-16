@@ -295,3 +295,21 @@
     font-style: italic;
     font-size: 0.9em;
 }
+
+/**/
+div.rooms{
+    margin: 0.35em 0.35em 0.35em 0.35em;
+}
+table.rooms{
+    width:100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+
+}
+table.rooms tr{
+    height: 8.0em;
+}
+
+table.rooms td{
+    border: 1px solid #ddd;
+}

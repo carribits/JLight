@@ -1,4 +1,4 @@
-package org.stock;
+package org.rivalbits.jlight;
 import org.apache.cordova.DroidGap;
 
 import android.os.Bundle;

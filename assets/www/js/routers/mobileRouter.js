@@ -47,12 +47,15 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.homeView.model.fetch().done(function() {
                        
                     });
+                    $.mobile.loading("hide");
                 },
                 tips: function() {
                     $('#tips-icon').addClass('ui-icon-tips-a');
+                    $.mobile.loading("hide");
                 },
                 setting: function() {
                     $('#setting-icon').addClass('ui-icon-setting-a');
+                    $.mobile.loading("hide");
                 },
                 disclaimer: function() {
                     $(".jqm-navmenu-panel").panel("close");

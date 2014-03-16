@@ -331,6 +331,7 @@ table.rooms ul
 {
     list-style-type: none;
     margin-left: 1.0em;
+    margin-top:0.4em;
     padding:0;
 }
 .appliance-count, .room-watt, .room-cost{
@@ -360,6 +361,16 @@ table.rooms ul
 }
 
 .meter{
+    left: .35em;
+    position: absolute;
     margin: 0.5em 0.35em 0.35em 0.35em;
-    width:7em;
+    height:4.5em;
+}
+#meter-total{
+    right: 10.0%;
+    position: absolute;
+    list-style-type: none;
+    margin-left: 1.0em;
+    margin-top:1.0em;
+    padding:0;
 }

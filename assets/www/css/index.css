@@ -355,9 +355,20 @@ table.rooms ul
     font-size: 0.9em;
 }
 
-.main-title{
-    margin: 0.35em 0.35em 0.35em 0.35em;
-    font-size: 0.8em;
+.main-title img{
+    width:1.2em;
+}
+
+.main-title ul
+{
+    list-style-type: none;
+    margin-left: 1.0em;
+    margin-top:0.4em;
+    padding:0;
+}
+.main-title ul li{
+    display: inline;
+    padding-left: 0.5em;
 }
 
 .meter{
@@ -373,4 +384,8 @@ table.rooms ul
     margin-left: 1.0em;
     margin-top:1.0em;
     padding:0;
+}
+.view-control{
+    padding-right: 0.35em;
+    float:right;
 }

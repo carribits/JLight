@@ -363,7 +363,7 @@ table.rooms ul
 {
     list-style-type: none;
     margin-left: 1.0em;
-    margin-top:0.4em;
+    margin-top:0.7em;
     padding:0;
 }
 .main-title ul li{
@@ -388,4 +388,40 @@ table.rooms ul
 .view-control{
     padding-right: 0.35em;
     float:right;
+}
+
+.icon-view{
+
+}
+.list-view{
+
+}
+
+.icon-item{
+    position:absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
+
+    margin-left: 1em;
+    width:2.0em;
+}
+.room-appliances{
+    color: #333 !important;
+    font-family: 'Open Sans', sans-serif !important;
+
+}
+.room-appliances h2{
+    font-size: 0.9em !important;
+}
+.ui-icon-gear:after {
+    background:  url('../images/setting.png') no-repeat 50% 50% !important;
+    -webkit-border-radius: 0em !important;  
+    border-radius: 0em !important;  
+}
+.appliance-quantity{
+    margin-left: 1.0em;
+    font-weight: normal;
+    font-size: 0.8em;
+    font-style:italic
 }

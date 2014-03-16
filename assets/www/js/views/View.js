@@ -28,6 +28,16 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         }
     });
 
+    var RoomView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function(name) {
+            var template = _.template($("#room").html());
+            this.$el.find("#content-holder").html(template);
+            return this;
+        }
+    });
+
     var SettingView = Backbone.View.extend({
         initialize: function() {
         },
@@ -42,7 +52,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     return{
         HomeView: HomeView,
         TipsView: TipsView,
-        SettingView: SettingView
+        SettingView: SettingView,
+        RoomView: RoomView
     };
 
 });

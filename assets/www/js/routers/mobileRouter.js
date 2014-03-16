@@ -6,7 +6,6 @@ var Storage = null;
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
         function($, Backbone, indexjs, AppModules) {
-            //Import Modules
             Config = AppModules.Config;
 
             var CategoryRouter = Backbone.Router.extend({
@@ -14,16 +13,16 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
+                    this.roomView = new AppModules.Views.RoomView({el: "#appview"});
 
                     Backbone.history.start();
                 },
-                // Backbone.js Routes
                 routes: {
-                    // When there is no hash bang on the url, the home method is called
                     "": "home",
                     "home": "home",
                     "tips": "tips",
-                    "setting": "setting"
+                    "setting": "setting",
+                    "room?:name": "room"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -45,9 +44,12 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 home: function() {
                     $('#home-icon').addClass('ui-icon-home-a');
                     this.homeView.model.fetch().done(function() {
-                       
+
                     });
                     $.mobile.loading("hide");
+                },
+                room: function(name) {
+                    this.roomView.render(name);
                 },
                 tips: function() {
                     $('#tips-icon').addClass('ui-icon-tips-a');
@@ -78,7 +80,5 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.aboutView.render();
                 }
             });
-
-            // Returns the Router class
             return CategoryRouter;
         });

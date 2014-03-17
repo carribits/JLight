@@ -25,10 +25,12 @@
 .ui-icon-home:after{background-image:url('../images/home_i.png')}
 .ui-icon-tips:after{background-image:url('../images/tips_i.png')}
 .ui-icon-setting:after{background-image:url('../images/setting_i.png')}
+.ui-icon-graph:after{background-image:url('../images/graph_i.png')}
 
 .ui-icon-home-a:after{background-image:url('../images/home_a.png')}
 .ui-icon-tips-a:after{background-image:url('../images/tips_a.png')}
 .ui-icon-setting-a:after{background-image:url('../images/setting_a.png')}
+.ui-icon-graph-a:after{background-image:url('../images/graph_a.png')}
 
 .application-icon .ui-btn-icon-left:after, 
 .application-icon .ui-btn-icon-right:after,

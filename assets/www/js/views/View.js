@@ -47,13 +47,52 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             return this;
         }
     });
+	
+	var GraphView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function() {
+		var pieData = [
+				{
+					value: 30,
+					color:"#F38630"
+				},
+				{
+					value : 50,
+					color : "#00688B"
+				},
+				{
+					value : 100,
+					color : "#aa609b"
+				},
+				{
+					value: 30,
+					color:"#82ba00"
+				},
+				{
+					value : 50,
+					color : "#f92e2e"
+				},
+				{
+					value : 100,
+					color : "#d24726"
+				}
+			];
+            var template = _.template($("#graph").html());
+            this.$el.find("#content-holder").html(template);
+			var canvas = $('#canvas')[0];
+			var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
+            return this;
+        }
+    });
 
     // Returns the View class
     return{
         HomeView: HomeView,
         TipsView: TipsView,
         SettingView: SettingView,
-        RoomView: RoomView
+        RoomView: RoomView,
+		GraphView:GraphView
     };
 
 });

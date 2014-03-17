@@ -3,6 +3,8 @@
 var Config = null;
 var Storage = null;
 
+
+
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
         function($, Backbone, indexjs, AppModules) {
@@ -14,6 +16,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
                     this.roomView = new AppModules.Views.RoomView({el: "#appview"});
+					this.graphView = new AppModules.Views.GraphView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -22,7 +25,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "home": "home",
                     "tips": "tips",
                     "setting": "setting",
-                    "room?:name": "room"
+                    "room?:name": "room",
+					"graph":"graph"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -50,6 +54,9 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 room: function(name) {
                     this.roomView.render(name);
+                },
+				graph: function(name) {
+                    this.graphView.render(name);
                 },
                 tips: function() {
                     $('#tips-icon').addClass('ui-icon-tips-a');

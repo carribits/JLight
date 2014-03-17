@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="css/jqm-demos.css">
         <script src="js/libs/require.js" data-main="js/mobile"></script>
         <link rel="stylesheet" href="css/index.css">
-		<script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
 
         </script>
@@ -32,7 +32,7 @@
                 <ul>
                     <li><a id="home-icon" href="#home" class="ui-btn-active" data-icon="home"></a></li>
                     <li><a id="tips-icon" href="#tips" data-icon="tips"></a></li>
-                     <li><a id="graph-icon" href="#graph" data-icon="graph"></a></li>
+                    <li><a id="graph-icon" href="#graph" data-icon="graph"></a></li>
                     <li><a id="setting-icon" href="#setting" data-icon="setting"></a></li>
                 </ul>
             </div>
@@ -186,11 +186,14 @@
         <div id="tips" data-role="page" data-title="Tips">
 
         </div>
+        <div id="appliance" data-role="page" data-title="Appliance">
+           <input type="number" data-type="range" name="slider" id="slider-0" value="0" min="0" max="100">
+        </div>
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <div data-demo-html="true">
                     <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn">
+                        <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
                                 <img class="icon-item" src="images/icons/refrigerator.png">
                                 <h2>Refrigerator<span class="appliance-quantity">x2</span></h2> 
                                 <p>1,200 KWH</p></a>
@@ -214,8 +217,8 @@
                 </div>
             </div>
         </div>
-		<div id="graph" data-role="page" data-title="Setting">
-<canvas id="canvas"></canvas>
+        <div id="graph" data-role="page" data-title="Setting">
+            <canvas id="canvas"></canvas>
         </div>
         <div id="setting" data-role="page" data-title="Setting">
 

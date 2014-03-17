@@ -427,3 +427,7 @@ table.rooms ul
     font-size: 0.8em;
     font-style:italic
 }
+/*
+input.ui-slider-input {
+        display : none !important;
+    }*/

@@ -16,7 +16,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
                     this.roomView = new AppModules.Views.RoomView({el: "#appview"});
-					this.graphView = new AppModules.Views.GraphView({el: "#appview"});
+                    this.graphView = new AppModules.Views.GraphView({el: "#appview"});
+                    this.applianceView = new AppModules.Views.ApplianceView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -26,7 +27,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "tips": "tips",
                     "setting": "setting",
                     "room?:name": "room",
-					"graph":"graph"
+                    "appliance?:name": "appliance",
+                    "graph": "graph"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -52,10 +54,13 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     });
                     $.mobile.loading("hide");
                 },
+                appliance: function(name) {
+                    this.applianceView.render(name);
+                },
                 room: function(name) {
                     this.roomView.render(name);
                 },
-				graph: function(name) {
+                graph: function(name) {
                     this.graphView.render(name);
                 },
                 tips: function() {

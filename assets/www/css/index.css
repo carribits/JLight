@@ -422,7 +422,7 @@ table.rooms ul
     font-size: 0.9em !important;
 }
 .ui-icon-gear:after {
-    background:  url('../images/setting.png') no-repeat 50% 50% !important;
+    background:  url('../images/check.png') no-repeat 50% 50% !important;
     -webkit-border-radius: 0em !important;  
     border-radius: 0em !important;  
 }

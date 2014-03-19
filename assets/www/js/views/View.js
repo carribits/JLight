@@ -65,6 +65,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var title = name.toUpperCase() + ' ' + 'APPLIANCES';
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
+            $('#room-button').attr('href', '#discoverappliance?' + name);
 
             $('#room-name').text(title);
             return this;

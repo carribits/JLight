@@ -45,12 +45,24 @@ define([], function() {
     ];
 
     var homeoffice = [
-      
     ];
+
+    var bathroom = [
+        {name: "Hair dryer", watt: 1500, usage: "hourly", icon: "default"},
+        {name: "Curling iron", watt: 50, usage: "hourly", icon: "default"},
+        {name: "Whirlpool tub", watt: 1800, usage: "hourly", icon: "default"},
+        {name: "Sweep pump (3/4 hp)", watt: 560, usage: "hourly", icon: "default"},
+        {name: "Filter pump (1-1/2 hp)", watt: 1120, usage: "hourly", icon: "default"},
+        {name: "Filter pump (2 hp)", watt: 1500, usage: "hourly", icon: "default"},
+        {name: "Electric water heater", watt: 500, usage: "monthly", icon: "default"},
+        {name: "Electric heater (1500 W)", watt: 1500, usage: "hourly", icon: "default"},
+        {name: "Electric heater (5500 W)", watt: 5500, usage: "hourly", icon: "default"}
+    ]
 
     var DefaultAppliances = {
         kitchen: kitchen,
-        homeoffice: homeoffice
+        homeoffice: homeoffice,
+        bathroom: bathroom
     };
 
     return {

@@ -31,9 +31,29 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var DiscoverApplianceView = Backbone.View.extend({
         initialize: function() {
         },
-        render: function() {
+        render: function(name) {
+            var count = 0;
+            var appliances = DefaultAppliances[name];
             var template = _.template($("#discoverappliance").html());
             this.$el.find("#content-holder").html(template);
+            var title = 'CHOOSE ' + name.toUpperCase() + ' ' + 'APPLIANCES TO ADD';
+
+            $('#discoverappliance-title').text(title);
+
+            for (var i = 0; i < appliances.length; i++) {
+                var appliance = appliances[i];
+                console.log(appliance);
+                var item = '';
+                //var item = _.template($("script#").html(), {"appliance": appliance});
+                if (count === 0) {
+                    item = _.template($("script#appliance-add-first").html(), {"appliance": appliance});
+                } else {
+                    item = _.template($("script#appliance-add").html(), {"appliance": appliance});
+                }
+                this.$el.find('#discoverappliance-list').append(item);
+                count++;
+            }
+            $.mobile.loading("hide");
             return this;
         }
     });
@@ -42,8 +62,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(name) {
+            var title = name.toUpperCase() + ' ' + 'APPLIANCES';
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
+
+            $('#room-name').text(title);
             return this;
         }
     });

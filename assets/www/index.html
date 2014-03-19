@@ -14,7 +14,10 @@
         <link rel="stylesheet" href="css/index.css">
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
-
+            function toMoney(val) {
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            }
         </script>
     </head>
     <body>
@@ -52,6 +55,7 @@
                 </ul>
             </div>
         </div>
+        <!--home-->
         <div id="home" data-role="page" data-title="Home">
             <div class="icon-view">
                 <div class="main-title">
@@ -68,7 +72,7 @@
                         </tr>
                     </table>
                 </div>
-
+                <!--rooms-->
                 <div class="rooms">
                     <table class="rooms">
                         <tr>
@@ -76,85 +80,85 @@
                                 <a href="#room?bathroom"><img src="images/bathroom.png" alt="bathroom"></a>
                                 <ul id="bathroom"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
                             <td>
-                                <a href="#room?bathroom"><img src="images/office.png" alt="office"></a>
+                                <a href="#room?office"><img src="images/office.png" alt="office"></a>
                                 <ul id="office"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
                             <td>
-                                <a href="#room?bathroom"><img src="images/kitchen.png" alt="kitchen"></a>
+                                <a href="#room?kitchen"><img src="images/kitchen.png" alt="kitchen"></a>
                                 <ul id="kitchen"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="#room?bathroom"><img src="images/washroom.png" alt="washroom"></a>
+                                <a href="#room?washroom"><img src="images/washroom.png" alt="washroom"></a>
                                 <ul id="washroom"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
                             <td>
-                                <a href="#room?bathroom"><img class="long-img" src="images/livingroom.png" alt="livingroom"></a>
+                                <a href="#room?livingroom"><img class="long-img" src="images/livingroom.png" alt="livingroom"></a>
                                 <ul id="livingroom"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
                             <td>
-                                <a href="#room?bathroom"><img class="long-img" src="images/bedroom.png" alt="bedroom"></a>
+                                <a href="#room?bedroom"><img class="long-img" src="images/bedroom.png" alt="bedroom"></a>
                                 <ul id="bedroom"> 
                                     <li>
-                                        <span class="appliance-count">3 Appliances</span>
+                                        <span class="appliance-count">0 Appliances</span>
                                     </li>
                                     <li>
-                                        <span class="room-watt">160 KW</span>
+                                        <span class="room-watt">0 KW</span>
                                     </li>
                                     <li>
-                                        <span class="room-cost">$2,200</span>
+                                        <span class="room-cost">$0</span>
                                     </li>
                                 </ul> 
                             </td>
@@ -166,13 +170,13 @@
                 <a><img class="meter" src="images/meter.png" alt="Meter"></a>
                 <ul id="meter-total"> 
                     <li>
-                        <span class="appliance-count" style="font-size: 0.8em">3 Appliances</span>
+                        <span class="appliance-count" style="font-size: 0.8em">0 Appliances</span>
                     </li>
                     <li>
-                        <span class="room-watt" style="font-size: 0.8em">160 KW</span>
+                        <span class="room-watt" style="font-size: 0.8em">0 KW</span>
                     </li>
                     <li>
-                        <span class="room-cost" style="font-size: 1.4em">$2,200</span>
+                        <span class="room-cost" style="font-size: 1.4em">$0</span>
                     </li>
                 </ul> 
             </div>
@@ -180,15 +184,18 @@
 
             </div>
         </div>
+        <!--tips-->
         <div id="tips" data-role="page" data-title="Tips">
 
         </div>
+        <!--appliance-->
         <div id="appliance" data-role="page" data-title="Appliance">
             <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
         </div>
+        <!--room-->
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
-                <span>KITCHEN APPLIANCES</span>
+                <span id="room-name">APPLIANCES</span>
                 <div data-demo-html="true">
                     <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                         <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
@@ -216,27 +223,43 @@
                 <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
             </div>
         </div>
+        <!--graph-->
         <div id="graph" data-role="page" data-title="Setting">
             <canvas id="canvas"></canvas>
         </div>
+        <!--discoverappliance-->
         <div id="discoverappliance" data-role="page" data-title="Setting">
             <div class="room-appliances" style="margin:0.35em">
-                <span>SELECT KITCHEN APPLIANCES TO ADD</span>
+                <span id="discoverappliance-title">SELECT KITCHEN APPLIANCES TO ADD</span>
                 <div data-demo-html="true">
-                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow new-appliance">
-                        <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
-                                <img class="icon-item" src="images/icons/refrigerator.png">
-                                <h2>Refrigerator<span class="appliance-quantity">x2</span></h2> 
-                                <p>1,200 KWH</p></a>
-                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" aria-haspopup="true" aria-owns="purchase" aria-expanded="false" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-                        </li>
+                    <ul id="discoverappliance-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow new-appliance">
+
                     </ul>
                     <div style="display: none;" id="purchase-placeholder">
+                    </div>
                 </div>
             </div>
         </div>
+        <!--setting-->
         <div id="setting" data-role="page" data-title="Setting">
 
         </div>
+        <script id="appliance-add" type="text/template">
+               <li class="ui-li-has-alt ui-li-has-thumb">
+               <a href="#" class="ui-btn">
+                    <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
+                    <h2><%=appliance['name']%></h2>
+                    <p><%=toMoney(appliance['watt']) + ' Watt'%></p></a>
+                <a href="#setupappliance" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+                </li>
+        </script>
+        <script  id="appliance-add-first" type="text/template">
+            <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
+                <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
+                <h2><%=appliance['name']%></span></h2> 
+                <p><%=toMoney(appliance['watt'])+ ' Watt'%></p></a>
+             <a href="#setupappliance" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+            </li>
+        </script>
     </body>
 </html>

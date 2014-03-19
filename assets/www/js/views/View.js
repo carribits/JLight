@@ -28,6 +28,16 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         }
     });
 
+    var DiscoverApplianceView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function() {
+            var template = _.template($("#discoverappliance").html());
+            this.$el.find("#content-holder").html(template);
+            return this;
+        }
+    });
+
     var RoomView = Backbone.View.extend({
         initialize: function() {
         },
@@ -55,7 +65,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#appliance").html());
             this.$el.find("#content-holder").html(template);
 
-            $( "input#slider-0" ).slider();
+            $("input#slider-0").slider();
             return this;
         }
     });
@@ -105,7 +115,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         SettingView: SettingView,
         RoomView: RoomView,
         GraphView: GraphView,
-        ApplianceView: ApplianceView
+        ApplianceView: ApplianceView,
+        DiscoverApplianceView: DiscoverApplianceView
     };
 
 });

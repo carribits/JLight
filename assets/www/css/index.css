@@ -363,19 +363,18 @@ table.rooms ul
 }
 
 .main-title img{
-    width:1.2em;
+    width:1.4em;
 }
 
 .main-title ul
 {
     list-style-type: none;
-    margin-left: 1.0em;
-    margin-top:0.7em;
+    margin:0.0em 0.35em 0.0em 0.0em;
     padding:0;
 }
 .main-title ul li{
     display: inline;
-    padding-left: 0.5em;
+    
 }
 
 .meter{
@@ -421,8 +420,13 @@ table.rooms ul
 .room-appliances h2{
     font-size: 0.9em !important;
 }
-.ui-icon-gear:after {
+.owned-appliance .ui-icon-gear:after {
     background:  url('../images/check.png') no-repeat 50% 50% !important;
+    -webkit-border-radius: 0em !important;  
+    border-radius: 0em !important;  
+}
+.new-appliance .ui-icon-gear:after {
+    background:  url('../images/plus.png') no-repeat 50% 50% !important;
     -webkit-border-radius: 0em !important;  
     border-radius: 0em !important;  
 }
@@ -432,7 +436,3 @@ table.rooms ul
     font-size: 0.8em;
     font-style:italic
 }
-/*
-input.ui-slider-input {
-        display : none !important;
-    }*/

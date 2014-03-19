@@ -61,9 +61,6 @@
                             <td>
                                 <ul class="view-control"> 
                                     <li>
-                                        <a href="../index.html"><img src="images/icon_view_a.png" ></a>
-                                    </li>
-                                    <li>
                                         <a href="../index.html"><img src="images/list_view_a.png"></a>
                                     </li>
                                 </ul>
@@ -90,7 +87,7 @@
                                 </ul> 
                             </td>
                             <td>
-                                <a href="../index.html"><img src="images/office.png" alt="office"></a>
+                                <a href="#room?bathroom"><img src="images/office.png" alt="office"></a>
                                 <ul id="office"> 
                                     <li>
                                         <span class="appliance-count">3 Appliances</span>
@@ -104,7 +101,7 @@
                                 </ul> 
                             </td>
                             <td>
-                                <a href="../index.html"><img src="images/kitchen.png" alt="kitchen"></a>
+                                <a href="#room?bathroom"><img src="images/kitchen.png" alt="kitchen"></a>
                                 <ul id="kitchen"> 
                                     <li>
                                         <span class="appliance-count">3 Appliances</span>
@@ -120,7 +117,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="../index.html"><img src="images/washroom.png" alt="washroom"></a>
+                                <a href="#room?bathroom"><img src="images/washroom.png" alt="washroom"></a>
                                 <ul id="washroom"> 
                                     <li>
                                         <span class="appliance-count">3 Appliances</span>
@@ -134,7 +131,7 @@
                                 </ul> 
                             </td>
                             <td>
-                                <a href="../index.html"><img class="long-img" src="images/livingroom.png" alt="livingroom"></a>
+                                <a href="#room?bathroom"><img class="long-img" src="images/livingroom.png" alt="livingroom"></a>
                                 <ul id="livingroom"> 
                                     <li>
                                         <span class="appliance-count">3 Appliances</span>
@@ -148,7 +145,7 @@
                                 </ul> 
                             </td>
                             <td>
-                                <a href="../index.html"><img class="long-img" src="images/bedroom.png" alt="bedroom"></a>
+                                <a href="#room?bathroom"><img class="long-img" src="images/bedroom.png" alt="bedroom"></a>
                                 <ul id="bedroom"> 
                                     <li>
                                         <span class="appliance-count">3 Appliances</span>
@@ -166,7 +163,7 @@
                 </div>
             </div>
             <div>
-                <a href="../index.html"><img class="meter" src="images/meter.png" alt="Meter"></a>
+                <a><img class="meter" src="images/meter.png" alt="Meter"></a>
                 <ul id="meter-total"> 
                     <li>
                         <span class="appliance-count" style="font-size: 0.8em">3 Appliances</span>
@@ -187,12 +184,13 @@
 
         </div>
         <div id="appliance" data-role="page" data-title="Appliance">
-           <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+            <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
         </div>
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
+                <span>KITCHEN APPLIANCES</span>
                 <div data-demo-html="true">
-                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                         <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
                                 <img class="icon-item" src="images/icons/refrigerator.png">
                                 <h2>Refrigerator<span class="appliance-quantity">x2</span></h2> 
@@ -215,10 +213,27 @@
 
                     <div style="display: none;" id="purchase-placeholder"><!-- placeholder for purchase --></div>
                 </div>
+                <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
             </div>
         </div>
         <div id="graph" data-role="page" data-title="Setting">
             <canvas id="canvas"></canvas>
+        </div>
+        <div id="discoverappliance" data-role="page" data-title="Setting">
+            <div class="room-appliances" style="margin:0.35em">
+                <span>SELECT KITCHEN APPLIANCES TO ADD</span>
+                <div data-demo-html="true">
+                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow new-appliance">
+                        <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
+                                <img class="icon-item" src="images/icons/refrigerator.png">
+                                <h2>Refrigerator<span class="appliance-quantity">x2</span></h2> 
+                                <p>1,200 KWH</p></a>
+                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" aria-haspopup="true" aria-owns="purchase" aria-expanded="false" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+                        </li>
+                    </ul>
+                    <div style="display: none;" id="purchase-placeholder">
+                </div>
+            </div>
         </div>
         <div id="setting" data-role="page" data-title="Setting">
 

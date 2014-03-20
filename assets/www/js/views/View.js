@@ -10,8 +10,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         // Renders all of the Category models on the UI
         render: function() {
             var data = this.model.attributes;
-            console.log(data);
-
             var template = _.template($("#home").html());
             this.$el.find("#content-holder").html(template);
             return this;
@@ -31,9 +29,9 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var DiscoverApplianceView = Backbone.View.extend({
         initialize: function() {
         },
-        render: function(name) {
+        render: function(room) {
             var count = 0;
-            var appliances = DefaultAppliances[name];
+            var appliances = DefaultAppliances[room];
             var template = _.template($("#discoverappliance").html());
             this.$el.find("#content-holder").html(template);
             var title = 'CHOOSE ' + name.toUpperCase() + ' ' + 'APPLIANCES TO ADD';
@@ -42,9 +40,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var i = 0; i < appliances.length; i++) {
                 var appliance = appliances[i];
-                console.log(appliance);
+                appliance['room'] = room;
                 var item = '';
-                //var item = _.template($("script#").html(), {"appliance": appliance});
                 if (count === 0) {
                     item = _.template($("script#appliance-add-first").html(), {"appliance": appliance});
                 } else {
@@ -87,6 +84,21 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         render: function(name) {
             var template = _.template($("#appliance").html());
+            this.$el.find("#content-holder").html(template);
+
+            $("input#slider-0").slider();
+            return this;
+        }
+    });
+
+    var AddApplianceView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function(room, appid) {
+           
+            var appliance =  Appliance.getAppliance(room, appid);
+             console.log(appliance);
+            var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);
 
             $("input#slider-0").slider();
@@ -140,7 +152,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         RoomView: RoomView,
         GraphView: GraphView,
         ApplianceView: ApplianceView,
-        DiscoverApplianceView: DiscoverApplianceView
+        DiscoverApplianceView: DiscoverApplianceView,
+        AddApplianceView: AddApplianceView
     };
 
 });

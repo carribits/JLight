@@ -3,7 +3,7 @@
 var Config = null;
 var Storage = null;
 var DefaultAppliances = null;
-
+var Appliance = null;
 
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
@@ -11,6 +11,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             Config = AppModules.Config;
             Storage = AppModules.Utility.Storage;
             DefaultAppliances = AppModules.Utility.DefaultAppliances;
+            Appliance = AppModules.Utility.Appliance;
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {
@@ -21,6 +22,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.graphView = new AppModules.Views.GraphView({el: "#appview"});
                     this.applianceView = new AppModules.Views.ApplianceView({el: "#appview"});
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
+                    this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -29,9 +31,10 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "home": "home",
                     "tips": "tips",
                     "setting": "setting",
-                    "room?:name": "room",
-                    "appliance?:name": "appliance",
+                    "room?:room": "room",
+                    "appliance?:room": "appliance",
                     "discoverappliance": "discoverappliance",
+                    "addappliance?:room?:appid": "addappliance",
                     "graph": "graph"
                 },
                 route: function(route, name, callback) {
@@ -63,6 +66,10 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 discoverappliance: function(name) {
                     this.discoverApplianceView.render(name);
+                },
+                addappliance: function(room, appid) {
+                    console.log(name);
+                    this.addApplianceView.render(room, appid);
                 },
                 room: function(name) {
                     this.roomView.render(name);

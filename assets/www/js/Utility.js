@@ -24,7 +24,29 @@ define([], function() {
         return JSON.parse(window.localStorage.getItem(key));
     };
 
-    var kitchen = [
+    var Appliance = function() {
+
+    };
+
+    Appliance.prototype = {
+    };
+
+    Appliance.getKey = function(str) {
+        var key = CryptoJS.SHA256(str).toString();
+        return key;
+    };
+
+    Appliance.setUpAppliance = function(appliances) {
+        var applianceList = [];
+        for (var i = 0; i < appliances.length; i++) {
+            var appliance = appliances[i];
+            appliance['key'] = Appliance.getKey(appliance['name'].toLowerCase() + appliance['watt']);
+            applianceList.push(appliance);
+        }
+        return applianceList;
+    };
+
+    var kitchen = Appliance.setUpAppliance([
         {name: "Electric Oven", watt: 2300, usage: "hourly", icon: "oven"},
         {name: "Microwave oven", watt: 750, usage: "hourly", icon: "microwave"},
         {name: "Coffee maker", watt: 120, usage: "hourly", icon: "coffee_maker"},
@@ -42,12 +64,22 @@ define([], function() {
         {name: "Energy Star Refrigerator (Side by Side) 21 cu. Ft.", watt: 123000, usage: "monthly", icon: "refrigerator"},
         {name: "Energy Star Refrigerator (frost-free) 24 cu. Ft.", watt: 102000, usage: "monthly", icon: "refrigerator"},
         {name: "Energy Star Refrigerator (Side by Side) 25 cu. Ft.", watt: 132000, usage: "monthly", icon: "refrigerator"}
-    ];
+    ]);
 
-    var homeoffice = [
-    ];
 
-    var bathroom = [
+    var homeoffice = Appliance.setUpAppliance([
+    ]);
+
+    var bedroom = Appliance.setUpAppliance([
+    ]);
+
+    var livingroom = Appliance.setUpAppliance([
+    ]);
+
+    var washroom = Appliance.setUpAppliance([
+    ]);
+
+    var bathroom = Appliance.setUpAppliance([
         {name: "Hair dryer", watt: 1500, usage: "hourly", icon: "default"},
         {name: "Curling iron", watt: 50, usage: "hourly", icon: "default"},
         {name: "Whirlpool tub", watt: 1800, usage: "hourly", icon: "default"},
@@ -57,16 +89,31 @@ define([], function() {
         {name: "Electric water heater", watt: 500, usage: "monthly", icon: "default"},
         {name: "Electric heater (1500 W)", watt: 1500, usage: "hourly", icon: "default"},
         {name: "Electric heater (5500 W)", watt: 5500, usage: "hourly", icon: "default"}
-    ]
+    ]);
 
     var DefaultAppliances = {
-        kitchen: kitchen,
         homeoffice: homeoffice,
-        bathroom: bathroom
+        bathroom: bathroom,
+        bedroom: bedroom,
+        kitchen: kitchen,
+        livingroom: livingroom,
+        washroom: washroom
+    };
+
+    Appliance.getAppliance = function getAppliance(room, appid) {
+        var appliances = DefaultAppliances[room];
+        for (var i = 0; i < appliances.length; i++) {
+            var appliance = appliances[i];
+            if (appliance['key'] === appid) {
+                return appliance;
+            }
+        }
+        return null;
     };
 
     return {
         Storage: Storage,
-        DefaultAppliances: DefaultAppliances
+        DefaultAppliances: DefaultAppliances,
+        Appliance:Appliance
     };
 });

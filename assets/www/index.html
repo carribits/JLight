@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=1">
         <!--<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, target-densitydpi=medium-dpi, user-scalable=0" />-->
         <!--<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+        <script type="text/javascript" charset="utf-8" src="js/sha256.js"></script>
         <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
         <link rel="shortcut icon" href="../favicon.ico">
         <link rel="stylesheet" href="css/font.css">
@@ -192,6 +193,10 @@
         <div id="appliance" data-role="page" data-title="Appliance">
             <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
         </div>
+        <!--addappliance-->
+        <div id="addappliance" data-role="page" data-title="Appliance">
+            <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+        </div>
         <!--room-->
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
@@ -246,19 +251,20 @@
         </div>
         <script id="appliance-add" type="text/template">
                <li class="ui-li-has-alt ui-li-has-thumb">
-               <a href="#" class="ui-btn">
+               <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
                     <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
                     <h2><%=appliance['name']%></h2>
                     <p><%=toMoney(appliance['watt']) + ' Watt'%></p></a>
-                <a href="#setupappliance" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+                <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
                 </li>
         </script>
         <script  id="appliance-add-first" type="text/template">
-            <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
+            <li class="ui-li-has-alt ui-li-has-thumb ui-first-child">
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
                 <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
                 <h2><%=appliance['name']%></span></h2> 
                 <p><%=toMoney(appliance['watt'])+ ' Watt'%></p></a>
-             <a href="#setupappliance" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+             <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
             </li>
         </script>
     </body>

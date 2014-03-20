@@ -374,7 +374,7 @@ table.rooms ul
 }
 .main-title ul li{
     display: inline;
-    
+
 }
 
 .meter{
@@ -435,4 +435,14 @@ table.rooms ul
     font-weight: normal;
     font-size: 0.8em;
     font-style:italic
+}
+
+#addappliance-form{
+    margin:0.35em;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.ui-field-contain {
+    border-bottom-color: rgba(0,0,0,0.0);
+    border-bottom-width: 0px;
 }

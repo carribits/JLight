@@ -34,7 +34,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var appliances = DefaultAppliances[room];
             var template = _.template($("#discoverappliance").html());
             this.$el.find("#content-holder").html(template);
-            var title = 'CHOOSE ' + name.toUpperCase() + ' ' + 'APPLIANCES TO ADD';
+            var title = 'CHOOSE ' + room.toUpperCase() + ' ' + 'APPLIANCES TO ADD';
 
             $('#discoverappliance-title').text(title);
 
@@ -65,6 +65,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#room-button').attr('href', '#discoverappliance?' + name);
 
             $('#room-name').text(title);
+            
+            $.mobile.loading("hide");
             return this;
         }
     });
@@ -75,6 +77,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         render: function() {
             var template = _.template($("#about").html());
             this.$el.find("#content-holder").html(template);
+            
+            $.mobile.loading("hide");
             return this;
         }
     });
@@ -87,6 +91,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
 
             $("input#slider-0").slider();
+            
+            $.mobile.loading("hide");
             return this;
         }
     });
@@ -95,13 +101,17 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room, appid) {
-           
-            var appliance =  Appliance.getAppliance(room, appid);
-             console.log(appliance);
+            var appliance = Appliance.getAppliance(room, appid);
+            var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
+            
             var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);
-
-            $("input#slider-0").slider();
+            this.$el.find('#addappliance-form').html(applianceForm);
+            $("#addappliance-form input#slider-0").slider();
+            
+            $("#addappliance-form #select-native-2").selectmenu();
+            
+            $.mobile.loading("hide");
             return this;
         }
     });
@@ -140,6 +150,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
+            
+            $.mobile.loading("hide");
             return this;
         }
     });

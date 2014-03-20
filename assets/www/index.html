@@ -16,8 +16,8 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
         </script>
     </head>
@@ -191,11 +191,13 @@
         </div>
         <!--appliance-->
         <div id="appliance" data-role="page" data-title="Appliance">
-            <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+
         </div>
         <!--addappliance-->
         <div id="addappliance" data-role="page" data-title="Appliance">
-            <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" max="100" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+            <div id="addappliance-form" style="">
+
+            </div>
         </div>
         <!--room-->
         <div id="room" data-role="page" data-title="Rooms">
@@ -250,22 +252,47 @@
 
         </div>
         <script id="appliance-add" type="text/template">
-               <li class="ui-li-has-alt ui-li-has-thumb">
-               <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
-                    <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
-                    <h2><%=appliance['name']%></h2>
-                    <p><%=toMoney(appliance['watt']) + ' Watt'%></p></a>
-                <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-                </li>
+            <li class="ui-li-has-alt ui-li-has-thumb">
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
+            <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
+            <h2><%=appliance['name']%></h2>
+            <p><%=toMoney(appliance['watt']) + ' Watt'%></p></a>
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+            </li>
         </script>
         <script  id="appliance-add-first" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb ui-first-child">
             <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
-                <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
-                <h2><%=appliance['name']%></span></h2> 
-                <p><%=toMoney(appliance['watt'])+ ' Watt'%></p></a>
-             <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+            <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
+            <h2><%=appliance['name']%></span></h2> 
+            <p><%=toMoney(appliance['watt'])+ ' Watt'%></p></a>
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
             </li>
+        </script>
+        <script id="appliance-add-form" type="text/template">
+            <div style="margin-top:1em;">
+            <h3><%=appliance['name']%></h3>
+            <h5>Watt: <%=toMoney(appliance['watt'])%></h5>
+            </div>
+            
+            <div style="margin-top:1em;">
+            <h5>Select hours used</h5>
+            <input type="number" data-type="range" name="slider" id="slider-0" value="1" min="1" step="1" max="730" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+            </div>
+            
+            <div class="ui-field-contain" style="display:block;float:clear:both">
+            <h5>Usage</h5>
+            <select name="select-native-2" id="select-native-2" data-mini="true">
+            <option value="1">Hours/Daily</option>
+            <option value="2">Hours/Weekly</option>
+            <option value="3">Hours/Monthly</option>
+            </select>
+            </div>
+            
+            <div style="margin-top:1em;">
+            <a style="margin:0em" id="room-button" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini" href="#discoverappliance?kitchen">Save</a>
+            <a style="margin:0em" id="room-button" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini" href="#discoverappliance?kitchen">Cancel</a>
+            </div>
         </script>
     </body>
 </html>

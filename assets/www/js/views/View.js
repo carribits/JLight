@@ -107,9 +107,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);
             this.$el.find('#addappliance-form').html(applianceForm);
-            $("#addappliance-form input#slider-0").slider();
+            $("#addappliance-form input#appliance-hours").textinput();
             
-            $("#addappliance-form #select-native-2").selectmenu();
+            $("#addappliance-form #appliance-usage").selectmenu();
+             $("#addappliance-form #appliance-quantity").textinput();
             
             $.mobile.loading("hide");
             return this;

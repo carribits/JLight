@@ -1,4 +1,5 @@
 define([], function() {
+    /* Storage */
     var Storage = function() {
 
     };
@@ -8,8 +9,6 @@ define([], function() {
 
     Storage.write = function(key, value) {
         window.localStorage.setItem(key, value);
-
-        console.log(Storage);
     };
 
     Storage.writeJson = function(key, value) {
@@ -24,6 +23,24 @@ define([], function() {
         return JSON.parse(window.localStorage.getItem(key));
     };
 
+
+    /* Utility */
+    var Utility = function() {
+
+    };
+
+    Utility.prototype = {
+    };
+
+    Utility.isNumeric = function(number) {
+        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+        if (numberRegex.test(number)) {
+            return true;
+        }
+        return false;
+    };
+
+    /* Appliance */
     var Appliance = function() {
 
     };
@@ -114,6 +131,7 @@ define([], function() {
     return {
         Storage: Storage,
         DefaultAppliances: DefaultAppliances,
-        Appliance:Appliance
+        Appliance: Appliance,
+        Utility: Utility
     };
 });

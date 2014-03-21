@@ -65,7 +65,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#room-button').attr('href', '#discoverappliance?' + name);
 
             $('#room-name').text(title);
-            
+
             $.mobile.loading("hide");
             return this;
         }
@@ -77,7 +77,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         render: function() {
             var template = _.template($("#about").html());
             this.$el.find("#content-holder").html(template);
-            
+
             $.mobile.loading("hide");
             return this;
         }
@@ -91,7 +91,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
 
             $("input#slider-0").slider();
-            
+
             $.mobile.loading("hide");
             return this;
         }
@@ -101,19 +101,67 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room, appid) {
+            var self = this;
+            var storageIndex = room + '_appliances';
             var appliance = Appliance.getAppliance(room, appid);
+            appliance['room'] = room;
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
-            
+
             var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);
             this.$el.find('#addappliance-form').html(applianceForm);
             $("#addappliance-form input#appliance-hours").textinput();
-            
+
             $("#addappliance-form #appliance-usage").selectmenu();
-             $("#addappliance-form #appliance-quantity").textinput();
-            
+            $("#addappliance-form #appliance-quantity").textinput();
+
             $.mobile.loading("hide");
+
+            $('#addappliance-form a#appliance-add-form-save').click(function(event) {
+                var params = {
+                    usage: $("#addappliance-form #appliance-usage").val(),
+                    hours: $("#addappliance-form #appliance-hours").val(),
+                    quantity: $("#addappliance-form #appliance-quantity").val()
+                };
+
+                if (self.validate(params)) {
+                    var appliances = Storage.readJson(storageIndex);
+                    if (appliances === null) {
+                        appliances = {};
+                    }
+
+                    $.extend(params, {});
+                    appliances[appid] = params;
+                    console.log(appliances);
+                    Storage.writeJson(storageIndex, appliances);
+                    event.preventDefault();
+                } else {
+                    event.preventDefault();
+                }
+            });
             return this;
+        },
+        validate: function(params) {
+            if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
+                alert("Values entered are incorrect");
+                return false;
+            }
+
+            if (params['usage'] === 'daily' && (params['hours'] > 24 || params['hours'] < 0)) {
+                alert("Hours must be between 0 and 24 for daily usage");
+                return false;
+            }
+            if (params['usage'] === 'weekly' && (params['hours'] > 168 || params['hours'] < 0)) {
+                alert("Hours must be between 0 and 168 for weekly usage");
+                return false;
+            }
+
+            if (params['usage'] === 'monthly' && (params['hours'] > 730 || params['hours'] < 0)) {
+                alert("Hours must be between 0 and 730 for monthly usage");
+                return false;
+            }
+
+            return true;
         }
     });
 
@@ -151,7 +199,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
-            
+
             $.mobile.loading("hide");
             return this;
         }

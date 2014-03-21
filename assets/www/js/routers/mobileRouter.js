@@ -4,6 +4,7 @@ var Config = null;
 var Storage = null;
 var DefaultAppliances = null;
 var Appliance = null;
+var Utility = null;
 
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
@@ -12,6 +13,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             Storage = AppModules.Utility.Storage;
             DefaultAppliances = AppModules.Utility.DefaultAppliances;
             Appliance = AppModules.Utility.Appliance;
+            Utility = AppModules.Utility.Utility;
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {

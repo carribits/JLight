@@ -234,7 +234,7 @@
         </div>
         <script  id="appliance-add" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
-            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn appliance-item">
             <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
             <h2><%=appliance['name']%></span></h2> 
             <p><%=toMoney(appliance['watt'])+ ' Watt'%></p></a>
@@ -273,14 +273,14 @@
         </script>
         <script id="room-appliance-li" type="text/template">
              <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
-            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
+            <a href="#editappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn appliance-item">
             <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
             <h2><%=appliance['name']%><span> x<%=appliance['quantity']%></span></span></h2> 
             <p>
             <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> hour(s)
             </p>
             </a>
-            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+            <a href="#editappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Edit Appliance"></a>
             </li>
         </script>
     </body>

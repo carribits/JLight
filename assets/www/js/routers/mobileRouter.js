@@ -25,6 +25,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.applianceView = new AppModules.Views.ApplianceView({el: "#appview"});
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
                     this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
+                    this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -37,6 +38,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "appliance?:room": "appliance",
                     "discoverappliance": "discoverappliance",
                     "addappliance?:room?:appid": "addappliance",
+                    "editappliance?:room?:appid": "editappliance",
                     "graph": "graph"
                 },
                 route: function(route, name, callback) {
@@ -70,8 +72,11 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.discoverApplianceView.render(name);
                 },
                 addappliance: function(room, appid) {
-                    console.log(name);
                     this.addApplianceView.render(room, appid);
+                },
+                editappliance: function(room, appid) {
+                    console.log('cccc');
+                    this.editApplianceView.render(room, appid);
                 },
                 room: function(name) {
                     this.roomView.render(name);

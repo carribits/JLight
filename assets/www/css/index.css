@@ -450,3 +450,7 @@ table.rooms ul
 .form-button{
     color: #333 !important;
 }
+
+a.appliance-item{
+    padding-left: 4em !important;
+}

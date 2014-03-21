@@ -88,6 +88,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 if (count === 0) {
                     $.extend(appliance, {class: "ui-first-child"});
                 }
+                console.log(appliance);
+                $.extend(appliance, {room: room});
                 item = _.template($("script#room-appliance-li").html(), {"appliance": appliance});
 
                 this.$el.find('ul#room-appliances-list').append(item);
@@ -121,6 +123,50 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("input#slider-0").slider();
 
             $.mobile.loading("hide");
+            return this;
+        }
+    });
+
+    var EditApplianceView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function(room, appid) {
+            var self = this;
+            var storageIndex = room + '_appliances';
+            var appliance = Appliance.getAppliance(room, appid);
+            appliance['room'] = room;
+            var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
+
+            var template = _.template($("#addappliance").html());
+            this.$el.find("#content-holder").html(template);
+            this.$el.find('#addappliance-form').html(applianceForm);
+            $("#addappliance-form input#appliance-hours").textinput();
+
+            $("#addappliance-form #appliance-usage").selectmenu();
+            $("#addappliance-form #appliance-quantity").textinput();
+
+            $.mobile.loading("hide");
+
+            $('#addappliance-form a#appliance-add-form-save').click(function(event) {
+                var params = {
+                    usage: $("#addappliance-form #appliance-usage").val(),
+                    hours: $("#addappliance-form #appliance-hours").val(),
+                    quantity: $("#addappliance-form #appliance-quantity").val()
+                };
+
+                if (self.validate(params)) {
+                    var appliances = Storage.readJson(storageIndex);
+                    if (appliances === null) {
+                        appliances = {};
+                    }
+
+                    $.extend(params, {});
+                    appliances[appid] = params;
+                    Storage.writeJson(storageIndex, appliances);
+                } else {
+                    event.preventDefault();
+                }
+            });
             return this;
         }
     });
@@ -160,7 +206,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
                     $.extend(params, {});
                     appliances[appid] = params;
-                    console.log(appliances);
                     Storage.writeJson(storageIndex, appliances);
                 } else {
                     event.preventDefault();
@@ -241,7 +286,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         GraphView: GraphView,
         ApplianceView: ApplianceView,
         DiscoverApplianceView: DiscoverApplianceView,
-        AddApplianceView: AddApplianceView
+        AddApplianceView: AddApplianceView,
+        EditApplianceView: EditApplianceView
     };
 
 });

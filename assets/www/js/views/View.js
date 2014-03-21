@@ -31,6 +31,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         render: function(room) {
             var count = 0;
+            var storageIndex = room + '_appliances';
             var appliances = DefaultAppliances[room];
             var template = _.template($("#discoverappliance").html());
             this.$el.find("#content-holder").html(template);
@@ -40,15 +41,20 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var i = 0; i < appliances.length; i++) {
                 var appliance = appliances[i];
-                appliance['room'] = room;
-                var item = '';
-                if (count === 0) {
-                    item = _.template($("script#appliance-add-first").html(), {"appliance": appliance});
-                } else {
-                    item = _.template($("script#appliance-add").html(), {"appliance": appliance});
+                var storedAppliances = Storage.readJson(storageIndex);
+                if (storedAppliances === null)
+                    storedAppliances = {};
+
+                var item = storedAppliances[appliance['key']];
+                if (item === null || item === undefined) {
+                    appliance['room'] = room;
+                    if (count === 0) {
+                        $.extend(appliance, {class: "ui-first-child"});
+                    }
+                    var item = _.template($("script#appliance-add").html(), {"appliance": appliance});
+                    this.$el.find('#discoverappliance-list').append(item);
+                    count++;
                 }
-                this.$el.find('#discoverappliance-list').append(item);
-                count++;
             }
             $.mobile.loading("hide");
             return this;
@@ -58,13 +64,35 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var RoomView = Backbone.View.extend({
         initialize: function() {
         },
-        render: function(name) {
-            var title = name.toUpperCase() + ' ' + 'APPLIANCES';
+        render: function(room) {
+            var storageIndex = room + '_appliances';
+            var count = 0;
+
+            var title = room.toUpperCase() + ' ' + 'APPLIANCES';
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
-            $('#room-button').attr('href', '#discoverappliance?' + name);
-
+            $('.room-button').attr('href', '#discoverappliance?' + room);
             $('#room-name').text(title);
+
+            var appliances = Storage.readJson(storageIndex);
+            if (appliances === null) {
+                appliances = {};
+            }
+
+
+            for (var key in appliances) {
+                var applianceDetails = appliances[key];
+                var appliance = Appliance.getAppliance(room, key);
+                $.extend(appliance, applianceDetails);
+                var item = '';
+                if (count === 0) {
+                    $.extend(appliance, {class: "ui-first-child"});
+                }
+                item = _.template($("script#room-appliance-li").html(), {"appliance": appliance});
+
+                this.$el.find('ul#room-appliances-list').append(item);
+                count++;
+            }
 
             $.mobile.loading("hide");
             return this;
@@ -134,7 +162,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     appliances[appid] = params;
                     console.log(appliances);
                     Storage.writeJson(storageIndex, appliances);
-                    event.preventDefault();
                 } else {
                     event.preventDefault();
                 }

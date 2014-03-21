@@ -203,31 +203,12 @@
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="room-name">APPLIANCES</span>
-                <div data-demo-html="true">
-                    <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
-                        <li class="ui-li-has-alt ui-li-has-thumb ui-first-child"><a href="#appliance?refrigerator" class="ui-btn">
-                                <img class="icon-item" src="images/icons/refrigerator.png">
-                                <h2>Refrigerator<span class="appliance-quantity">x2</span></h2> 
-                                <p>1,200 KWH</p></a>
-                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" aria-haspopup="true" aria-owns="purchase" aria-expanded="false" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-                        </li>
-                        <li class="ui-li-has-alt ui-li-has-thumb"><a href="#" class="ui-btn">
-                                <img class="icon-item" src="images/icons/microwave.png">
-                                <h2>Refrigerator</h2>
-                                <p>1,200 KWH</p></a>
-                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" aria-haspopup="true" aria-owns="purchase" aria-expanded="false" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-                        </li>
-                        <li class="ui-li-has-alt ui-li-has-thumb ui-last-child"><a href="#" class="ui-btn">
-                                <img class="icon-item" src="images/icons/refrigerator.png">
-                                <h2>Refrigerator</h2>
-                                <p>1,200 KWH</p></a>
-                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" aria-haspopup="true" aria-owns="purchase" aria-expanded="false" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-                        </li>
+                <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button room-button" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
+                <div id="room-appliances">
+                    <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                     </ul>
-
                     <div style="display: none;" id="purchase-placeholder"><!-- placeholder for purchase --></div>
                 </div>
-                <div><a id="room-button" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
             </div>
         </div>
         <!--graph-->
@@ -251,17 +232,8 @@
         <div id="setting" data-role="page" data-title="Setting">
 
         </div>
-        <script id="appliance-add" type="text/template">
-            <li class="ui-li-has-alt ui-li-has-thumb">
-            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
-            <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
-            <h2><%=appliance['name']%></h2>
-            <p><%=toMoney(appliance['watt']) + ' Watt'%></p></a>
-            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
-            </li>
-        </script>
-        <script  id="appliance-add-first" type="text/template">
-            <li class="ui-li-has-alt ui-li-has-thumb ui-first-child">
+        <script  id="appliance-add" type="text/template">
+            <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
             <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
             <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
             <h2><%=appliance['name']%></span></h2> 
@@ -298,6 +270,18 @@
             <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="##room?<%=appliance['room']%>">Save</a>
             <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
             </div>
+        </script>
+        <script id="room-appliance-li" type="text/template">
+             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn">
+            <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
+            <h2><%=appliance['name']%><span> x<%=appliance['quantity']%></span></span></h2> 
+            <p>
+            <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> hour(s)
+            </p>
+            </a>
+            <a href="#addappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Purchase album"></a>
+            </li>
         </script>
     </body>
 </html>

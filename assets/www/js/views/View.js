@@ -3,6 +3,37 @@
 
 // Includes file dependencies
 define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule) {
+
+    var BaseView = Backbone.View.extend({
+        validateAppliance: function(params) {
+            if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
+                alert("Values entered are incorrect");
+                return false;
+            }
+
+            console.log();
+            if (params['hours'] <= 0 || params['quantity'] <= 0) {
+                alert("Values entered are incorrect");
+                return false;
+            }
+
+            if (params['usage'] === 'daily' && params['hours'] > 24) {
+                alert("Hours must be between 1 and 24 for daily usage");
+                return false;
+            }
+            if (params['usage'] === 'weekly' && params['hours'] > 168) {
+                alert("Hours must be between 1 and 168 for weekly usage");
+                return false;
+            }
+
+            if (params['usage'] === 'monthly' && params['hours'] > 730) {
+                alert("Hours must be between 1 and 730 for monthly usage");
+                return false;
+            }
+
+            return true;
+        }
+    });
     var HomeView = Backbone.View.extend({
         initialize: function() {
             this.model.on("added", this.render, this);
@@ -88,7 +119,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 if (count === 0) {
                     $.extend(appliance, {class: "ui-first-child"});
                 }
-                console.log(appliance);
                 $.extend(appliance, {room: room});
                 item = _.template($("script#room-appliance-li").html(), {"appliance": appliance});
 
@@ -131,10 +161,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room, appid) {
-            var self = this;
-            var storageIndex = room + '_appliances';
-            var appliance = Appliance.getAppliance(room, appid);
-            appliance['room'] = room;
+            var appliance = Appliance.getStoredAppliance(room, appid);
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
 
             var template = _.template($("#addappliance").html());
@@ -142,6 +169,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#addappliance-form').html(applianceForm);
             $("#addappliance-form input#appliance-hours").textinput();
 
+            $("#addappliance-form #appliance-usage").val(appliance['usage']);
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
 
@@ -154,15 +182,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     quantity: $("#addappliance-form #appliance-quantity").val()
                 };
 
-                if (self.validate(params)) {
-                    var appliances = Storage.readJson(storageIndex);
-                    if (appliances === null) {
-                        appliances = {};
-                    }
-
-                    $.extend(params, {});
-                    appliances[appid] = params;
-                    Storage.writeJson(storageIndex, appliances);
+                if (BaseView.prototype.validateAppliance.call(this, params)) {
+                    Appliance.saveAppliance(params, room, appid);
                 } else {
                     event.preventDefault();
                 }
@@ -175,10 +196,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room, appid) {
-            var self = this;
-            var storageIndex = room + '_appliances';
             var appliance = Appliance.getAppliance(room, appid);
-            appliance['room'] = room;
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
 
             var template = _.template($("#addappliance").html());
@@ -198,42 +216,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     quantity: $("#addappliance-form #appliance-quantity").val()
                 };
 
-                if (self.validate(params)) {
-                    var appliances = Storage.readJson(storageIndex);
-                    if (appliances === null) {
-                        appliances = {};
-                    }
-
-                    $.extend(params, {});
-                    appliances[appid] = params;
-                    Storage.writeJson(storageIndex, appliances);
+                if (BaseView.prototype.validateAppliance.call(this, params)) {
+                    Appliance.saveAppliance(params, room, appid);
                 } else {
                     event.preventDefault();
                 }
             });
             return this;
-        },
-        validate: function(params) {
-            if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
-                alert("Values entered are incorrect");
-                return false;
-            }
-
-            if (params['usage'] === 'daily' && (params['hours'] > 24 || params['hours'] < 0)) {
-                alert("Hours must be between 0 and 24 for daily usage");
-                return false;
-            }
-            if (params['usage'] === 'weekly' && (params['hours'] > 168 || params['hours'] < 0)) {
-                alert("Hours must be between 0 and 168 for weekly usage");
-                return false;
-            }
-
-            if (params['usage'] === 'monthly' && (params['hours'] > 730 || params['hours'] < 0)) {
-                alert("Hours must be between 0 and 730 for monthly usage");
-                return false;
-            }
-
-            return true;
         }
     });
 

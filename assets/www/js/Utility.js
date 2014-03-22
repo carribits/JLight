@@ -63,6 +63,31 @@ define([], function() {
         return applianceList;
     };
 
+    Appliance.getStoredAppliance = function(room, key) {
+        var storageIndex = room + '_appliances';
+        var storedAppliances = Storage.readJson(storageIndex);
+        var storedAppliance = storedAppliances[key];
+
+        var appliance = Appliance.getAppliance(room, key);
+        appliance['room'] = room;
+        if (appliance === null) {
+            return {};
+        }
+        $.extend(appliance, storedAppliance);
+        return appliance;
+    };
+
+    Appliance.saveAppliance = function(params, room, key) {
+        var storageIndex = room + '_appliances';
+        var appliances = Storage.readJson(storageIndex);
+        if (appliances === null) {
+            appliances = {};
+        }
+
+        appliances[key] = params;
+        Storage.writeJson(storageIndex, appliances);
+    };
+
     var kitchen = Appliance.setUpAppliance([
         {name: "Electric Oven", watt: 2300, usage: "hourly", icon: "oven"},
         {name: "Microwave oven", watt: 750, usage: "hourly", icon: "microwave"},
@@ -122,6 +147,9 @@ define([], function() {
         for (var i = 0; i < appliances.length; i++) {
             var appliance = appliances[i];
             if (appliance['key'] === appid) {
+                appliance['room'] = room;
+                appliance['hours'] = 0;
+                appliance['quantity'] = 0;
                 return appliance;
             }
         }

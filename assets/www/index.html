@@ -249,12 +249,12 @@
 
             <div>
             <h5>Hours used</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="1">
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>">
             </div>
 
             <div>
             <h5>Quantity</h5>
-            <input type="number" name="appliance-quantity" id="appliance-quantity" value="1">
+            <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
             </div>
 
             <div class="ui-field-contain">
@@ -280,7 +280,7 @@
             <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> hour(s)
             </p>
             </a>
-            <a href="#editappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Edit Appliance"></a>
+            <a href="#deleteappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
             </li>
         </script>
     </body>

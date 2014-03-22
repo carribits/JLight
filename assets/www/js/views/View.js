@@ -127,6 +127,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             $.mobile.loading("hide");
+            $( "#popupDialog" ).popup( );
             return this;
         }
     });

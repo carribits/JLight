@@ -272,7 +272,7 @@
             </div>
         </script>
         <script id="room-appliance-li" type="text/template">
-             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
+            <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>" id="<%=appliance['key']%>">
             <a href="#editappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn appliance-item">
             <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
             <h2><%=appliance['name']%><span> x<%=appliance['quantity']%></span></span></h2> 
@@ -280,7 +280,7 @@
             <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> hour(s)
             </p>
             </a>
-            <a href="#deleteappliance?<%=appliance['room']%>?<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
+            <a onclick="return Appliance.deleteRoomAppliance(this)" data-room="<%=appliance['room']%>" data-role="popup" data-rel="popup"  data-appid="<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
             </li>
         </script>
     </body>

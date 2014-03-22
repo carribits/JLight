@@ -53,6 +53,20 @@ define([], function() {
         return key;
     };
 
+    Appliance.getAppliance = function getAppliance(room, appid) {
+        var appliances = DefaultAppliances[room];
+        for (var i = 0; i < appliances.length; i++) {
+            var appliance = appliances[i];
+            if (appliance['key'] === appid) {
+                appliance['room'] = room;
+                appliance['hours'] = 0;
+                appliance['quantity'] = 0;
+                return appliance;
+            }
+        }
+        return null;
+    };
+
     Appliance.setUpAppliance = function(appliances) {
         var applianceList = [];
         for (var i = 0; i < appliances.length; i++) {
@@ -77,6 +91,14 @@ define([], function() {
         return appliance;
     };
 
+    Appliance.deleteStoredAppliance = function(room, key) {
+        var storageIndex = room + '_appliances';
+        var storedAppliances = Storage.readJson(storageIndex);
+
+        delete storedAppliances[key];
+        Storage.writeJson(storageIndex, storedAppliances);
+    };
+
     Appliance.saveAppliance = function(params, room, key) {
         var storageIndex = room + '_appliances';
         var appliances = Storage.readJson(storageIndex);
@@ -86,6 +108,14 @@ define([], function() {
 
         appliances[key] = params;
         Storage.writeJson(storageIndex, appliances);
+    };
+
+    Appliance.deleteRoomAppliance = function(context) {
+        var key = $(context).attr('data-appid');
+        var room = $(context).attr('data-room');
+
+        Appliance.deleteStoredAppliance(room, key);
+        $('#' + key).remove();
     };
 
     var kitchen = Appliance.setUpAppliance([
@@ -140,20 +170,6 @@ define([], function() {
         kitchen: kitchen,
         livingroom: livingroom,
         washroom: washroom
-    };
-
-    Appliance.getAppliance = function getAppliance(room, appid) {
-        var appliances = DefaultAppliances[room];
-        for (var i = 0; i < appliances.length; i++) {
-            var appliance = appliances[i];
-            if (appliance['key'] === appid) {
-                appliance['room'] = room;
-                appliance['hours'] = 0;
-                appliance['quantity'] = 0;
-                return appliance;
-            }
-        }
-        return null;
     };
 
     return {

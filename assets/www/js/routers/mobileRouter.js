@@ -60,9 +60,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 home: function() {
                     $('#home-icon').addClass('ui-icon-home-a');
-                    this.homeView.model.fetch().done(function() {
-
-                    });
+                    this.homeView.render();
                     $.mobile.loading("hide");
                 },
                 appliance: function(name) {

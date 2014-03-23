@@ -40,10 +40,25 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         // Renders all of the Category models on the UI
         render: function() {
-            var data = this.model.attributes;
+            this.renderListView();
+            return this;
+        },
+        renderListView: function() {
             var template = _.template($("#home").html());
             this.$el.find("#content-holder").html(template);
-            return this;
+
+            this.computeRoom('bathroom');
+            this.computeRoom('homeoffice');
+            this.computeRoom('kitchen');
+            this.computeRoom('washroom');
+            this.computeRoom('livingroom');
+            this.computeRoom('bedroom');
+        },
+        computeRoom: function(room) {
+            var roomInfo = Appliance.getRoomInfo(room);
+            this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
+            this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' KW');
+            this.$el.find('ul#' + room + ' .room-cost').text('00000000');
         }
     });
 
@@ -127,7 +142,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             $.mobile.loading("hide");
-            $( "#popupDialog" ).popup( );
+            $("#popupDialog").popup( );
             return this;
         }
     });
@@ -179,8 +194,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#addappliance-form a#appliance-add-form-save').click(function(event) {
                 var params = {
                     usage: $("#addappliance-form #appliance-usage").val(),
-                    hours: $("#addappliance-form #appliance-hours").val(),
-                    quantity: $("#addappliance-form #appliance-quantity").val()
+                    hours: parseFloat($("#addappliance-form #appliance-hours").val()),
+                    quantity: parseInt($("#addappliance-form #appliance-quantity").val()),
+                    name: appliance['name'],
+                    watt: parseFloat(appliance['watt']),
+                    icon: appliance['icon'],
+                    room: room
                 };
 
                 if (BaseView.prototype.validateAppliance.call(this, params)) {
@@ -213,8 +232,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#addappliance-form a#appliance-add-form-save').click(function(event) {
                 var params = {
                     usage: $("#addappliance-form #appliance-usage").val(),
-                    hours: $("#addappliance-form #appliance-hours").val(),
-                    quantity: $("#addappliance-form #appliance-quantity").val()
+                    hours: parseFloat($("#addappliance-form #appliance-hours").val()),
+                    quantity: parseInt($("#addappliance-form #appliance-quantity").val()),
+                    name: appliance['name'],
+                    watt: parseFloat(appliance['watt']),
+                    icon: appliance['icon'],
+                    room: room
                 };
 
                 if (BaseView.prototype.validateAppliance.call(this, params)) {

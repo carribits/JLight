@@ -81,14 +81,7 @@ define([], function() {
         var storageIndex = room + '_appliances';
         var storedAppliances = Storage.readJson(storageIndex);
         var storedAppliance = storedAppliances[key];
-
-        var appliance = Appliance.getAppliance(room, key);
-        appliance['room'] = room;
-        if (appliance === null) {
-            return {};
-        }
-        $.extend(appliance, storedAppliance);
-        return appliance;
+        return storedAppliance;
     };
 
     Appliance.deleteStoredAppliance = function(room, key) {
@@ -116,6 +109,23 @@ define([], function() {
 
         Appliance.deleteStoredAppliance(room, key);
         $('#' + key).remove();
+    };
+
+    Appliance.getRoomInfo = function(room) {
+        var count = 0;
+        var watt = 0;
+        var storageIndex = room + '_appliances';
+        var appliances = Storage.readJson(storageIndex);
+
+        for (var key in appliances) {
+            var appliance = appliances[key];
+            count += appliance['quantity'];
+            watt += appliance['watt'] * appliance['quantity'];
+        }
+        var result = {count: count, watt: watt / 1000};
+        console.log(result);
+        //console.log(appliances);
+        return result;
     };
 
     var kitchen = Appliance.setUpAppliance([

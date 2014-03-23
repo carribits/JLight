@@ -112,8 +112,12 @@ define([], function() {
     };
 
     Appliance.getRoomInfo = function(room) {
+        var rate = 27;
+        var kwh = 0;
         var count = 0;
         var watt = 0;
+        var hours = 0;
+        var cost = 0;
         var storageIndex = room + '_appliances';
         var appliances = Storage.readJson(storageIndex);
 
@@ -121,8 +125,27 @@ define([], function() {
             var appliance = appliances[key];
             count += appliance['quantity'];
             watt += appliance['watt'] * appliance['quantity'];
+
+            switch (appliance['usage']) {
+                case 'daily':
+                    hours = ((appliance['hours'] * 7) * 4);
+                    break;
+                case 'weekly':
+                    hours = (appliance['hours']) * 4;
+                    break;
+                default:
+                    hours = appliance['hours'];
+            }
+
+            kwh += (watt / 1000) * hours;
         }
-        var result = {count: count, watt: watt / 1000};
+        cost = rate * kwh;
+        var result = {
+            count: count,
+            cost: cost.toFixed(2),
+            watt: (watt / 1000).toFixed(2)
+        };
+
         console.log(result);
         //console.log(appliances);
         return result;
@@ -150,6 +173,7 @@ define([], function() {
 
 
     var homeoffice = Appliance.setUpAppliance([
+        {name: "Computer", watt: 200, usage: "hourly", icon: "computer"}
     ]);
 
     var bedroom = Appliance.setUpAppliance([

@@ -36,7 +36,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     });
     var HomeView = Backbone.View.extend({
         initialize: function() {
-            this.model.on("added", this.render, this);
         },
         // Renders all of the Category models on the UI
         render: function() {
@@ -58,7 +57,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var roomInfo = Appliance.getRoomInfo(room);
             this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' KW');
-            this.$el.find('ul#' + room + ' .room-cost').text('00000000');
+            this.$el.find('ul#' + room + ' .room-cost').text('$ ' + roomInfo['cost']);
         }
     });
 

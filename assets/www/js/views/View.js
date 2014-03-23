@@ -43,6 +43,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             return this;
         },
         renderListView: function() {
+            this.houseInfo = {
+                count: 0,
+                cost: 0,
+                watt: 0
+            };
+
             var template = _.template($("#home").html());
             this.$el.find("#content-holder").html(template);
 
@@ -52,12 +58,23 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.computeRoom('washroom');
             this.computeRoom('livingroom');
             this.computeRoom('bedroom');
+
+            this.houseInfo['watt'] = this.houseInfo['watt'].toFixed(2);
+            this.houseInfo['cost'] = this.houseInfo['cost'].toFixed(2);
+
+            this.$el.find('ul#meter-total .appliance-count').text(this.houseInfo['count'] + ' Appliance(s)');
+            this.$el.find('ul#meter-total .room-watt').text(this.houseInfo['watt'] + ' KW');
+            this.$el.find('ul#meter-total .room-cost').text('$ ' + this.houseInfo['cost']);
         },
         computeRoom: function(room) {
             var roomInfo = Appliance.getRoomInfo(room);
             this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' KW');
             this.$el.find('ul#' + room + ' .room-cost').text('$ ' + roomInfo['cost']);
+
+            this.houseInfo.count += roomInfo['count'];
+            this.houseInfo.watt += parseFloat(roomInfo['watt']);
+            this.houseInfo.cost += parseFloat(roomInfo['cost']);
         }
     });
 
@@ -176,6 +193,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room, appid) {
+            var option = '';
             var appliance = Appliance.getStoredAppliance(room, appid);
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
 
@@ -183,6 +201,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
             this.$el.find('#addappliance-form').html(applianceForm);
             $("#addappliance-form input#appliance-hours").textinput();
+
+            for (var i = 0; i < appliance['usage_list'].length; i++) {
+                option += '<option value="' + appliance['usage_list'][i] + '">' + ucfirst(appliance['usage_list'][i]) + '</option>';
+            }
+            $("#addappliance-form #appliance-usage").html(option);
 
             $("#addappliance-form #appliance-usage").val(appliance['usage']);
             $("#addappliance-form #appliance-usage").selectmenu();
@@ -193,11 +216,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#addappliance-form a#appliance-add-form-save').click(function(event) {
                 var params = {
                     usage: $("#addappliance-form #appliance-usage").val(),
+                    usage_list: appliance['usage_list'],
                     hours: parseFloat($("#addappliance-form #appliance-hours").val()),
                     quantity: parseInt($("#addappliance-form #appliance-quantity").val()),
                     name: appliance['name'],
                     watt: parseFloat(appliance['watt']),
                     icon: appliance['icon'],
+                    duty_cycle: appliance['duty_cycle'],
+                    ballast_factor: appliance['ballast_factor'],
                     room: room
                 };
 
@@ -216,12 +242,28 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         render: function(room, appid) {
             var appliance = Appliance.getAppliance(room, appid);
+            var option = '';
+
+            if (appliance['hours_fixed'] !== undefined) {
+                appliance['hours'] = appliance['hours_fixed'];
+                appliance['hours_input'] = "disabled='disabled'";
+            } else {
+                appliance['hours_input'] = '';
+            }
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
+
+
+
 
             var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);
             this.$el.find('#addappliance-form').html(applianceForm);
             $("#addappliance-form input#appliance-hours").textinput();
+
+            for (var i = 0; i < appliance['usage_list'].length; i++) {
+                option += '<option value="' + appliance['usage_list'][i] + '">' + ucfirst(appliance['usage_list'][i]) + '</option>';
+            }
+            $("#addappliance-form #appliance-usage").html(option);
 
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
@@ -231,11 +273,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#addappliance-form a#appliance-add-form-save').click(function(event) {
                 var params = {
                     usage: $("#addappliance-form #appliance-usage").val(),
+                    usage_list: appliance['usage_list'],
                     hours: parseFloat($("#addappliance-form #appliance-hours").val()),
                     quantity: parseInt($("#addappliance-form #appliance-quantity").val()),
                     name: appliance['name'],
                     watt: parseFloat(appliance['watt']),
                     icon: appliance['icon'],
+                    duty_cycle: appliance['duty_cycle'],
+                    ballast_factor: appliance['ballast_factor'],
                     room: room
                 };
 

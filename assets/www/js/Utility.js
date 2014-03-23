@@ -59,8 +59,6 @@ define([], function() {
             var appliance = appliances[i];
             if (appliance['key'] === appid) {
                 appliance['room'] = room;
-                appliance['hours'] = 0;
-                appliance['quantity'] = 0;
                 return appliance;
             }
         }
@@ -124,7 +122,6 @@ define([], function() {
         for (var key in appliances) {
             var appliance = appliances[key];
             count += appliance['quantity'];
-            watt += appliance['watt'] * appliance['quantity'];
 
             switch (appliance['usage']) {
                 case 'daily':
@@ -133,11 +130,14 @@ define([], function() {
                 case 'weekly':
                     hours = (appliance['hours']) * 4;
                     break;
-                default:
+                case 'monthly':
                     hours = appliance['hours'];
+                    break;
+                default:
+                    hours = 0;
             }
-
-            kwh += (watt / 1000) * hours;
+            watt += appliance['watt'] * appliance['quantity'] * hours;
+            kwh += (watt / 1000) * appliance['duty_cycle'];
         }
         cost = rate * kwh;
         var result = {
@@ -145,35 +145,27 @@ define([], function() {
             cost: cost.toFixed(2),
             watt: (watt / 1000).toFixed(2)
         };
-
-        console.log(result);
-        //console.log(appliances);
         return result;
     };
 
     var kitchen = Appliance.setUpAppliance([
-        {name: "Electric Oven", watt: 2300, usage: "hourly", icon: "oven"},
-        {name: "Microwave oven", watt: 750, usage: "hourly", icon: "microwave"},
-        {name: "Coffee maker", watt: 120, usage: "hourly", icon: "coffee_maker"},
-        {name: "Dishwasher", watt: 1500, usage: "hourly", icon: "dishwasher"},
-        {name: "Toaster oven", watt: 750, usage: "hourly", icon: "toaster"},
-        {name: "Refrigerator (frost-free), 15 cu. Ft. (1996 unit)", watt: 150000, usage: "monthly", icon: "refrigerator"},
-        {name: "Freezer (manual defrost), 15 cu. Ft. (old unit)", watt: 90000, usage: "monthly", icon: "refrigerator"},
-        {name: "Refrigerator (frost-free), 15 cu. Ft. (1996 unit)", watt: 50000, usage: "monthly", icon: "refrigerator"},
-        {name: "Refrigerator (frost-free), 20 cu. Ft. (1996 unit)", watt: 54000, usage: "monthly", icon: "refrigerator"},
-        {name: "Refrigerator, 1.7 cu. Ft.", watt: 30000, icon: "refrigerator"},
-        {name: "Energy Star Refrigerator, 14 cu. Ft.", watt: 43000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (frost-free), 14 cu. Ft.", watt: 57000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (frost-free), 17 cu. Ft.", watt: 73000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (frost-free), 19 cu. Ft.", watt: 80000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (Side by Side) 21 cu. Ft.", watt: 123000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (frost-free) 24 cu. Ft.", watt: 102000, usage: "monthly", icon: "refrigerator"},
-        {name: "Energy Star Refrigerator (Side by Side) 25 cu. Ft.", watt: 132000, usage: "monthly", icon: "refrigerator"}
+        {name: "Electric Oven", watt: 2300, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "oven", },
+        {name: "Microwave", watt: 1150, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "microwave"},
+        {name: "Coffee maker", watt: 120, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "coffee_maker"},
+        {name: "Dishwasher", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "dishwasher"},
+        {name: "Toaster oven", watt: 750, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"},
+        {name: "Refrigerator (small < 12 cuft)", hours_fixed: 730, watt: 130, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator (medium 15-17 cuft)", hours_fixed: 730, watt: 170, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator (large 21-25 cuft)", hours_fixed: 730, watt: 210, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Freezer (small < 10 cuft)", hours_fixed: 730, watt: 100, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Freezer (medium 17 cuft)", hours_fixed: 730, watt: 170, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Freezer (large > 17 cuft)", hours_fixed: 730, watt: 220, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"}
     ]);
 
 
     var homeoffice = Appliance.setUpAppliance([
-        {name: "Computer", watt: 200, usage: "hourly", icon: "computer"}
+        {name: "Computer", watt: 200, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Laptop", watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"}
     ]);
 
     var bedroom = Appliance.setUpAppliance([
@@ -186,15 +178,15 @@ define([], function() {
     ]);
 
     var bathroom = Appliance.setUpAppliance([
-        {name: "Hair dryer", watt: 1500, usage: "hourly", icon: "default"},
-        {name: "Curling iron", watt: 50, usage: "hourly", icon: "default"},
-        {name: "Whirlpool tub", watt: 1800, usage: "hourly", icon: "default"},
-        {name: "Sweep pump (3/4 hp)", watt: 560, usage: "hourly", icon: "default"},
-        {name: "Filter pump (1-1/2 hp)", watt: 1120, usage: "hourly", icon: "default"},
-        {name: "Filter pump (2 hp)", watt: 1500, usage: "hourly", icon: "default"},
-        {name: "Electric water heater", watt: 500, usage: "monthly", icon: "default"},
-        {name: "Electric heater (1500 W)", watt: 1500, usage: "hourly", icon: "default"},
-        {name: "Electric heater (5500 W)", watt: 5500, usage: "hourly", icon: "default"}
+        {name: "Hair dryer", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Curling iron", watt: 50, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Whirlpool tub", watt: 1800, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Sweep pump (3/4 hp)", watt: 560, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Filter pump (1-1/2 hp)", watt: 1120, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Filter pump (2 hp)", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Electric water heater", watt: 500, usage_list: ['monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Electric heater (1500 W)", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Electric heater (5500 W)", watt: 5500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ]);
 
     var DefaultAppliances = {

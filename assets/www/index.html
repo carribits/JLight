@@ -19,6 +19,9 @@
                 var parts = val.toString().split(".");
                 return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
+            function ucfirst(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
         </script>
     </head>
     <body>
@@ -249,7 +252,7 @@
 
             <div>
             <h5>Hours used</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>">
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
             </div>
 
             <div>
@@ -260,9 +263,7 @@
             <div class="ui-field-contain">
             <h5>Usage</h5>
             <select name="usage" id="appliance-usage" data-mini="true">
-            <option value="daily">Hours/Daily</option>
-            <option value="weekly">Hours/Weekly</option>
-            <option value="monthly">Hours/Monthly</option>
+
             </select>
             </div>
 

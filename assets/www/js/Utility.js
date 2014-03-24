@@ -125,7 +125,7 @@ define([], function() {
 
             switch (appliance['usage']) {
                 case 'daily':
-                    hours = ((appliance['hours'] * 7) * 4);
+                    hours = appliance['hours'] * 30;
                     break;
                 case 'weekly':
                     hours = (appliance['hours']) * 4;
@@ -137,7 +137,7 @@ define([], function() {
                     hours = 0;
             }
             watt += appliance['watt'] * appliance['quantity'] * hours;
-            kwh += (watt / 1000) * appliance['duty_cycle'];
+            kwh += (watt / 1000);
         }
         cost = rate * kwh;
         var result = {
@@ -149,45 +149,72 @@ define([], function() {
     };
 
     var kitchen = Appliance.setUpAppliance([
-        {name: "Electric Oven", watt: 2300, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "oven", },
-        {name: "Microwave", watt: 1150, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "microwave"},
-        {name: "Coffee maker", watt: 120, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "coffee_maker"},
-        {name: "Dishwasher", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "dishwasher"},
-        {name: "Toaster oven", watt: 750, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"},
-        {name: "Refrigerator (small < 12 cuft)", hours_fixed: 730, watt: 130, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Refrigerator (medium 15-17 cuft)", hours_fixed: 730, watt: 170, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Refrigerator (large 21-25 cuft)", hours_fixed: 730, watt: 210, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Freezer (small < 10 cuft)", hours_fixed: 730, watt: 100, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Freezer (medium 17 cuft)", hours_fixed: 730, watt: 170, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Freezer (large > 17 cuft)", hours_fixed: 730, watt: 220, usage_list: ['monthly'], duty_cycle: 0.7, ballast_factor: 1, icon: "refrigerator"}
+        {name: "Cooking Stove Top", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Electric Oven", watt: 2400, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Dishwasher", watt: 1800, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Refrigerator", watt: 180, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Freezer", watt: 200, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Coffee Maker", watt: 800, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Microwave", watt: 1200, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Toaster", watt: 1200, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
     ]);
 
 
     var homeoffice = Appliance.setUpAppliance([
         {name: "Computer", watt: 200, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
-        {name: "Laptop", watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"}
+        {name: "Laptop, Notebook or Netbook", watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "CRT Monitor", watt: 75, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ]);
 
     var bedroom = Appliance.setUpAppliance([
     ]);
 
     var livingroom = Appliance.setUpAppliance([
+        {name: "Electric Furnace", watt: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ]);
 
     var washroom = Appliance.setUpAppliance([
+        {name: "Electrical Iron", watt: 1100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Clothes Washer", watt: 500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Clothes Dryer", watt: 3000, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+         {name: "Iron", watt: 1100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ]);
 
     var bathroom = Appliance.setUpAppliance([
-        {name: "Hair dryer", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Curling iron", watt: 50, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Whirlpool tub", watt: 1800, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Sweep pump (3/4 hp)", watt: 560, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Filter pump (1-1/2 hp)", watt: 1120, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Filter pump (2 hp)", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Electric water heater", watt: 500, usage_list: ['monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Electric heater (1500 W)", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Electric heater (5500 W)", watt: 5500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
+          {name: "Hair Dryer", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ]);
+
+    var lighting = [
+        {name: "Compact Fluorescent Light Bulbs (CFLs)", watt: 14, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Incandescent Light Bulb", watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
+    ];
+
+    var entertainment = [
+        {name: "LCD/LED Display or TV Screen", watt: 30, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "CRT Monitor", watt: 75, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Game Console", watt: 90, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "DVR", watt: 51, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
+    ];
+
+    var heating = [
+        {name: "Space Heater", watt: 1500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Water Heater", watt: 4000, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+    ];
+
+    var cooling = [
+        {name: "Air Conditioner", watt: 1000, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Central Air Conditioner", watt: 3500, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+    ];
+
+
+    var computing = [
+        {name: "Desktop Computer", watt: 100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Wi-Fi Router", watt: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Printer", watt: 40, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Cell Phone Charger", watt: 5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Cordless Phone", watt: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Alarm Clock Radio", watt: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+    ];
 
     var DefaultAppliances = {
         homeoffice: homeoffice,

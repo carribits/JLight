@@ -234,20 +234,19 @@ define([], function() {
 
     var homeoffice = Appliance.setUpAppliance([
         {name: "CRT Monitor", watt: 75, hours: 5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
-    ], [computing, general, internet, entertainment, lighting]);
+    ], [computing, general, internet, entertainment, cooling, lighting]);
 
     var bedroom = Appliance.setUpAppliance([
     ], [cooling, entertainment, cleaning, internet, lighting]);
 
     var livingroom = Appliance.setUpAppliance([
         {name: "Electric Furnace", watt: 18000, hours: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
-    ], [entertainment, internet, general, cleaning, lighting]);
+    ], [entertainment, internet, general, cooling, cleaning, lighting]);
 
     var washroom = Appliance.setUpAppliance([
-        {name: "Electrical Iron", watt: 1100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Electrical Iron", watt: 1100, hours: 1.0, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Clothes Washer", watt: 500, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Clothes Dryer", watt: 3000, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Iron", watt: 1100, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ], [lighting]);
 
     var bathroom = Appliance.setUpAppliance([

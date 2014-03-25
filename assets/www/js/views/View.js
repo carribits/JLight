@@ -242,18 +242,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         render: function(room, appid) {
             var appliance = Appliance.getAppliance(room, appid);
+            appliance['quantity'] = 1;
             var option = '';
 
-            if (appliance['hours_fixed'] !== undefined) {
-                appliance['hours'] = appliance['hours_fixed'];
-                appliance['hours_input'] = "disabled='disabled'";
-            } else {
-                appliance['hours_input'] = '';
-            }
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
-
-
-
 
             var template = _.template($("#addappliance").html());
             this.$el.find("#content-holder").html(template);

@@ -53,6 +53,14 @@ define([], function() {
         return key;
     };
 
+    Appliance.getConfig = function() {
+        return {
+            first100Rate: 6.28,
+            nextRate: 14.36,
+            ippRate: 21.704
+        };
+    };
+
     Appliance.getAppliance = function getAppliance(room, appid) {
         var appliances = DefaultAppliances[room];
         for (var i = 0; i < appliances.length; i++) {
@@ -116,8 +124,32 @@ define([], function() {
         $('#' + key).remove();
     };
 
+    Appliance.calculateTotal = function(config, kwh) {
+        var first100 = 0;
+        var next = 0;
+        var ipp = 0;
+        var total = 0;
+
+        if (kwh > 100) {
+            first100 = 100;
+            next = kwh - 100;
+        } else {
+            first100 = kwh;
+            next = 0;
+        }
+
+        first100 = config.first100Rate * first100;
+        next = config.nextRate * next;
+        ipp = config.ippRate * kwh;
+
+        total = first100 + next + ipp;
+
+        console.log(total);
+        return total;
+    };
+
     Appliance.getRoomInfo = function(room) {
-        var rate = 27;
+        var rate = 36;
         var kwh = 0;
         var count = 0;
         var watt = 0;
@@ -146,6 +178,7 @@ define([], function() {
             watt += appliance['watt'] * appliance['quantity'] * (hours * appliance['duty_cycle']);
             kwh += (watt / 1000);
         }
+
         cost = rate * kwh;
         var result = {
             count: count,
@@ -154,6 +187,8 @@ define([], function() {
         };
         return result;
     };
+
+
 
     var lighting = [
         {name: "Compact Fluorescent Light Bulbs (CFL 24 Watt)", hours: 5, watt: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
@@ -230,7 +265,6 @@ define([], function() {
         {name: "Blender", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"},
         {name: "Can Opener", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"}
     ], [lighting]);
-
 
     var homeoffice = Appliance.setUpAppliance([
         {name: "CRT Monitor", watt: 75, hours: 5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}

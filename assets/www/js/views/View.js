@@ -59,6 +59,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.computeRoom('livingroom');
             this.computeRoom('bedroom');
 
+
             this.houseInfo['watt'] = this.houseInfo['watt'].toFixed(2);
             this.houseInfo['cost'] = this.houseInfo['cost'].toFixed(2);
 

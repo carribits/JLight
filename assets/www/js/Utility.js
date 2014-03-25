@@ -186,10 +186,10 @@ define([], function() {
     ];
 
     var cooling = [
-        {name: "Portable Fan", watt: 75, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "standing_fan"},
+        {name: "Portable Fan", watt: 60, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "standing_fan"},
         {name: "Ceiling Fan", watt: 75, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "ceiling_fan"},
-        {name: "Aur Conditioner (5,000 BTUH Room Unit)", watt: 900, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Aur Conditioner (12,000 BTUH Room Unit)", watt: 1500, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Air Conditioner (5,000 BTUH Room Unit)", watt: 900, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Air Conditioner (12,000 BTUH Room Unit)", watt: 1500, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Central Air Conditioner", watt: 3500, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ];
 
@@ -199,7 +199,6 @@ define([], function() {
 
     var computing = [
         {name: "Desktop Computer", watt: 150, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Monitor", watt: 2, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Printer", watt: 40, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Cordless Phone", watt: 2, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Radio", watt: 40, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
@@ -214,8 +213,8 @@ define([], function() {
     ];
 
     var general = [
-        {name: "Cell Phone Charger", watt: 5, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Laptop, Notebook or Netbook", watt: 60, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
+        {name: "Cell Phone Charger", watt: 7.5, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Laptop, Notebook or Netbook", watt: 60, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"}
     ];
 
     var kitchen = Appliance.setUpAppliance([
@@ -223,6 +222,7 @@ define([], function() {
         {name: "Electric Oven", watt: 2400, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "oven"},
         {name: "Dishwasher", watt: 1800, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "dishwasher"},
         {name: "Refrigerator", watt: 180, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Mini Refrigerator", watt: 70, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
         {name: "Freezer", watt: 200, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
         {name: "Coffee Maker", watt: 800, hours: 0.33, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "coffee_maker"},
         {name: "Microwave", watt: 1200, hours: 0.5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "microwave"},
@@ -233,11 +233,11 @@ define([], function() {
 
 
     var homeoffice = Appliance.setUpAppliance([
-        {name: "CRT Monitor", watt: 75, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
+        {name: "CRT Monitor", watt: 75, hours: 5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ], [computing, general, internet, entertainment, lighting]);
 
     var bedroom = Appliance.setUpAppliance([
-    ], [cooling, entertainment, cleaning, lighting]);
+    ], [cooling, entertainment, cleaning, internet, lighting]);
 
     var livingroom = Appliance.setUpAppliance([
         {name: "Electric Furnace", watt: 18000, hours: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}

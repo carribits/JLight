@@ -175,15 +175,15 @@ define([], function() {
                 default:
                     hours = 0;
             }
-            watt += appliance['watt'] * appliance['quantity'] * (hours * appliance['duty_cycle']);
+            watt = appliance['watt'] * appliance['quantity'] * (hours * appliance['duty_cycle']);
             kwh += (watt / 1000);
         }
-
         cost = rate * kwh;
+        
         var result = {
             count: count,
             cost: cost.toFixed(2),
-            watt: (watt / 1000).toFixed(2)
+            watt: (kwh).toFixed(2)
         };
         return result;
     };

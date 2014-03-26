@@ -5,6 +5,7 @@ var Storage = null;
 var DefaultAppliances = null;
 var Appliance = null;
 var Utility = null;
+var Application = null;
 
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
@@ -14,9 +15,11 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             DefaultAppliances = AppModules.Utility.DefaultAppliances;
             Appliance = AppModules.Utility.Appliance;
             Utility = AppModules.Utility.Utility;
+            Application = AppModules.Utility.Application;
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {
+                    var self = this;
                     this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
@@ -26,6 +29,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
                     this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
                     this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
+
+                   
 
                     Backbone.history.start();
                 },

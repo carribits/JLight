@@ -371,11 +371,11 @@ table.rooms ul
     float:right;
 }
 
-.icon-view{
+#icon-view{
 
 }
-.list-view{
-
+#list-view{
+    margin:1.0em 0.35em 1.0em 0.35em;
 }
 
 .icon-item{

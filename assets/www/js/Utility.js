@@ -41,6 +41,15 @@ define([], function() {
     };
 
     /* Appliance */
+    var Application = function() {
+
+    };
+
+    Application.prototype = {
+    };
+
+    Application.view = 'icon';
+
     var Appliance = function() {
 
     };
@@ -308,6 +317,7 @@ define([], function() {
         Storage: Storage,
         DefaultAppliances: DefaultAppliances,
         Appliance: Appliance,
-        Utility: Utility
+        Utility: Utility,
+        Application: Application
     };
 });

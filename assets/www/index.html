@@ -62,7 +62,7 @@
         </div>
         <!--home-->
         <div id="home" data-role="page" data-title="Home">
-            <div class="icon-view">
+            <div>
                 <div class="main-title">
                     <table style="width:100%;">
                         <tr>
@@ -70,7 +70,7 @@
                             <td>
                                 <ul class="view-control"> 
                                     <li>
-                                        <a id="app-view" href="../index.html"><img src="images/list_view_a.png"></a>
+                                        <a href="" id="app-view-switch"><img src="images/list_view_a.png"></a>
                                     </li>
                                 </ul>
                             </td>
@@ -78,7 +78,7 @@
                     </table>
                 </div>
                 <!--rooms-->
-                <div class="rooms" style="display:none">
+                <div class="rooms" id="icon-view">
                     <table class="rooms">
                         <tr>
                             <td>
@@ -186,7 +186,7 @@
                 </div>
 
             </div>
-            <div class="list-view" style="margin:1.0em 0.35em 1.0em 0.35em;">
+            <div id="list-view">
                 <div>
                     <ul data-role="list-view" id="room-appl-listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                     </ul>
@@ -296,7 +296,7 @@
         <script id="appliance-item" type="text/template">
             <% _.each( appliances, function( row, id ) { %>
             <li>
-            <a href="#news?<%=row['id']%>" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+            <a href="#editappliance?<%=row['room']%>?<%=row['key']%>" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
             <h2><%=row['name']%></h2>
             <span><%=row['watt']%> Watt</span> For <span>$85</span>
             </a>

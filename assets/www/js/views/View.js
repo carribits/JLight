@@ -39,9 +39,38 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         // Renders all of the Category models on the UI
         render: function() {
+            var self = this;
             this.renderIconView();
             this.renderListView();
+            this.initLayout();
+
+            $("a#app-view-switch").click(function(event) {
+                event.preventDefault();
+                self.changeLayout();
+            });
+
             return this;
+        },
+        changeLayout: function() {
+            if (Application.view === 'icon') {
+                Application.view = 'list';
+                $('#icon-view').hide();
+                $('#list-view').show();
+            } else {
+                Application.view = 'icon';
+                $('#list-view').hide();
+                $('#icon-view').show();
+            }
+
+        },
+        initLayout: function() {
+            if (Application.view === 'icon') {
+                $('#list-view').hide();
+                $('#icon-view').show();
+            } else {
+                $('#icon-view').hide();
+                $('#list-view').show();
+            }
         },
         renderListView: function() {
             this.renderRoom('bathroom', 'Bathroom', 'ui-first-child');
@@ -77,7 +106,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.computeRoom('washroom');
             this.computeRoom('livingroom');
             this.computeRoom('bedroom');
-
 
             this.houseInfo['watt'] = this.houseInfo['watt'].toFixed(2);
             this.houseInfo['cost'] = this.houseInfo['cost'].toFixed(2);

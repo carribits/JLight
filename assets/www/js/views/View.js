@@ -44,20 +44,22 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             return this;
         },
         renderListView: function() {
-            this.renderRoom('kitchen');
+            this.renderRoom('bathroom', 'Bathroom', 'ui-first-child');
+            this.renderRoom('homeoffice', 'Home Office', '');
+            this.renderRoom('kitchen', 'Kitchen', '');
+            this.renderRoom('washroom', 'Washroom', '');
+            this.renderRoom('livingroom', 'Living Room', '');
+            this.renderRoom('bedroom', 'Bedroom', '');
         },
-        renderRoom: function(room) {
-            console.log('XXX');
-            var count = 0;
+        renderRoom: function(room, roomName, elClass) {
             var appliances = Appliance.getAppliances(room);
 
-            var divider = _.template($("script#new-divider").html(), {room: room});
+            var divider = _.template($("script#new-divider").html(), {room: roomName, class: elClass});
             this.$el.find('#news-list').append(divider);
 
             var applianceItem = _.template($("script#new-item").html(), {"appliances": appliances});
             console.log(appliances);
             this.$el.find('#news-list').append(applianceItem);
-            count++;
         },
         renderIconView: function() {
             this.houseInfo = {

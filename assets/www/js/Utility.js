@@ -179,7 +179,7 @@ define([], function() {
             kwh += (watt / 1000);
         }
         cost = rate * kwh;
-        
+
         var result = {
             count: count,
             cost: cost.toFixed(2),
@@ -188,10 +188,9 @@ define([], function() {
         return result;
     };
 
-
-
     var lighting = [
         {name: "Compact Fluorescent Light Bulbs (CFL 24 Watt)", hours: 5, watt: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
+        {name: "Compact Fluorescent Light Bulbs (CFL 18 Watt)", hours: 5, watt: 18, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
         {name: "Compact Fluorescent Light Bulbs (CFL 14 Watt)", hours: 5, watt: 14, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
         {name: "Incandescent Light Bulb (100 Watt)", hours: 5, watt: 100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
         {name: "Incandescent Light Bulb (60 Watt)", hours: 5, watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},

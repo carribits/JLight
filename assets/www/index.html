@@ -53,10 +53,10 @@
             </div>
             <div id="main_head" data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
                 <ul class="jqm-list ui-alt-icon ui-nodisc-icon">
-                    <li data-filtertext="demos homepage"><a class="available" href="index.html">Home</a></li>
-                    <li data-filtertext="demos homepage"><a id="disclaimer-link" class="available" href="index.html#disclaimer">Disclaimer</a></li>
-                    <li data-filtertext="demos homepage"><a id="about-link" class="available" href="index.html#about">About</a></li>
-                    <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
+                    <li data-filtertext="demos homepage"><a class="" href="index.html">Home</a></li>
+                    <li data-filtertext="demos homepage"><a id="disclaimer-link" class="" href="index.html#disclaimer">Disclaimer</a></li>
+                    <li data-filtertext="demos homepage"><a id="about-link" class="" href="index.html#about">About</a></li>
+                    <li data-role="collapsible" data-collapsed-icon="carat-d" data--icon="carat-u" data-iconpos="right" data-inset="false">
                 </ul>
             </div>
         </div>
@@ -70,7 +70,7 @@
                             <td>
                                 <ul class="view-control"> 
                                     <li>
-                                        <a href="../index.html"><img src="images/list_view_a.png"></a>
+                                        <a id="app-view" href="../index.html"><img src="images/list_view_a.png"></a>
                                     </li>
                                 </ul>
                             </td>
@@ -188,7 +188,7 @@
             </div>
             <div class="list-view" style="margin:1.0em 0.35em 1.0em 0.35em;">
                 <div>
-                    <ul data-role="list-view" id="news-list" news-list data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    <ul data-role="list-view" id="room-appl-listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                     </ul>
                 </div>
             </div>
@@ -201,7 +201,7 @@
         <div id="appliance" data-role="page" data-title="Appliance">
 
         </div>
-        <!--addappliance-->
+        <!--add appliance-->
         <div id="addappliance" data-role="page" data-title="Appliance">
             <div id="addappliance-form" style="margin-bottom:3.2em">
 
@@ -211,7 +211,7 @@
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="room-name">APPLIANCES</span>
-                <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button room-button" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
+                <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
                 <div id="room-appliances">
                     <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                     </ul>
@@ -223,7 +223,7 @@
         <div id="graph" data-role="page" data-title="Setting">
             <canvas id="canvas"></canvas>
         </div>
-        <!--discoverappliance-->
+        <!--discover appliance-->
         <div id="discoverappliance" data-role="page" data-title="Setting">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="discoverappliance-title">SELECT KITCHEN APPLIANCES TO ADD</span>
@@ -289,11 +289,11 @@
             <a onclick="return Appliance.deleteRoomAppliance(this)" data-room="<%=appliance['room']%>" data-role="popup" data-rel="popup"  data-appid="<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
             </li>
         </script>
-        <script id="new-divider" type="text/template">
+        <script id="appliance-divider" type="text/template">
             <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count <%=class%>"><%=room%></li>
         </script>
 
-        <script id="new-item" type="text/template">
+        <script id="appliance-item" type="text/template">
             <% _.each( appliances, function( row, id ) { %>
             <li>
             <a href="#news?<%=row['id']%>" class="ui-btn ui-btn-icon-right ui-icon-carat-r">

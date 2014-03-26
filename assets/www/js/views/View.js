@@ -54,12 +54,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         renderRoom: function(room, roomName, elClass) {
             var appliances = Appliance.getAppliances(room);
 
-            var divider = _.template($("script#new-divider").html(), {room: roomName, class: elClass});
-            this.$el.find('#news-list').append(divider);
+            var divider = _.template($("script#appliance-divider").html(), {room: roomName, class: elClass});
+            this.$el.find('#room-appl-listview').append(divider);
 
-            var applianceItem = _.template($("script#new-item").html(), {"appliances": appliances});
+            var applianceItem = _.template($("script#appliance-item").html(), {"appliances": appliances});
             console.log(appliances);
-            this.$el.find('#news-list').append(applianceItem);
+            this.$el.find('#room-appl-listview').append(applianceItem);
         },
         renderIconView: function() {
             this.houseInfo = {

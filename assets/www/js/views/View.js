@@ -39,10 +39,27 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         // Renders all of the Category models on the UI
         render: function() {
+            this.renderIconView();
             this.renderListView();
             return this;
         },
         renderListView: function() {
+            this.renderRoom('kitchen');
+        },
+        renderRoom: function(room) {
+            console.log('XXX');
+            var count = 0;
+            var appliances = Appliance.getAppliances(room);
+
+            var divider = _.template($("script#new-divider").html(), {room: room});
+            this.$el.find('#news-list').append(divider);
+
+            var applianceItem = _.template($("script#new-item").html(), {"appliances": appliances});
+            console.log(appliances);
+            this.$el.find('#news-list').append(applianceItem);
+            count++;
+        },
+        renderIconView: function() {
             this.houseInfo = {
                 count: 0,
                 cost: 0,

@@ -78,7 +78,7 @@
                     </table>
                 </div>
                 <!--rooms-->
-                <div class="rooms">
+                <div class="rooms" style="display:none">
                     <table class="rooms">
                         <tr>
                             <td>
@@ -169,24 +169,28 @@
                             </td>
                         </tr>
                     </table>
+                    <div>
+                        <a><img class="meter" src="images/meter.png" alt="Meter"></a>
+                        <ul id="meter-total"> 
+                            <li>
+                                <span class="appliance-count" style="font-size: 0.8em">0 Appliances</span>
+                            </li>
+                            <li>
+                                <span class="room-watt" style="font-size: 0.8em">0 KW</span>
+                            </li>
+                            <li>
+                                <span class="room-cost" style="font-size: 1.4em">$0</span>
+                            </li>
+                        </ul> 
+                    </div>
                 </div>
-            </div>
-            <div>
-                <a><img class="meter" src="images/meter.png" alt="Meter"></a>
-                <ul id="meter-total"> 
-                    <li>
-                        <span class="appliance-count" style="font-size: 0.8em">0 Appliances</span>
-                    </li>
-                    <li>
-                        <span class="room-watt" style="font-size: 0.8em">0 KW</span>
-                    </li>
-                    <li>
-                        <span class="room-cost" style="font-size: 1.4em">$0</span>
-                    </li>
-                </ul> 
+
             </div>
             <div class="list-view">
-
+                <div>
+                    <ul data-role="list-view" id="news-list" news-list data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                    </ul>
+                </div>
             </div>
         </div>
         <!--tips-->
@@ -199,7 +203,7 @@
         </div>
         <!--addappliance-->
         <div id="addappliance" data-role="page" data-title="Appliance">
-            <div id="addappliance-form" style="">
+            <div id="addappliance-form" style="margin-bottom:3.2em">
 
             </div>
         </div>
@@ -284,6 +288,20 @@
             </a>
             <a onclick="return Appliance.deleteRoomAppliance(this)" data-room="<%=appliance['room']%>" data-role="popup" data-rel="popup"  data-appid="<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
             </li>
+        </script>
+        <script id="new-divider" type="text/template">
+            <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count ui-first-child"><%=room%></li>
+        </script>
+
+        <script id="new-item" type="text/template">
+            <% _.each( appliances, function( row, id ) { %>
+            <li>
+            <a href="#news?<%=row['id']%>" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+            <h2><%=row['name']%></h2>
+            <span><%=row['watt']%> Watt</span> For <span>$85</span>
+            </a>
+            </li>
+            <% }); %>
         </script>
     </body>
 </html>

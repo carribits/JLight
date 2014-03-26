@@ -147,7 +147,14 @@ define([], function() {
         console.log(total);
         return total;
     };
-
+    Appliance.getAppliances = function(room) {
+        var storageIndex = room + '_appliances';
+        var appliances = Storage.readJson(storageIndex);
+        if (appliances === null) {
+            appliances = {};
+        }
+        return appliances;
+    };
     Appliance.getRoomInfo = function(room) {
         var rate = 36;
         var kwh = 0;

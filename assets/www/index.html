@@ -211,7 +211,7 @@
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="room-name">APPLIANCES</span>
-                <div><a class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#discoverappliance?kitchen">+ Add Appliance</a></div>
+                <div><a id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Appliance</a></div>
                 <div id="room-appliances">
                     <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                     </ul>
@@ -290,15 +290,16 @@
             </li>
         </script>
         <script id="appliance-divider" type="text/template">
-            <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count <%=class%>"><%=room%></li>
+                    <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count <%=class%>"><a href="#room?<%=room%>"><%=roomName%></a></li>
         </script>
 
         <script id="appliance-item" type="text/template">
-            <% _.each( appliances, function( row, id ) { %>
+            <% _.each( appliances, function( row, key ) { %>
             <li>
-            <a href="#editappliance?<%=row['room']%>?<%=row['key']%>" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
-            <h2><%=row['name']%></h2>
-            <span><%=row['watt']%> Watt</span> For <span>$85</span>
+            <a href="#editappliance?<%=row['room']%>?<%=key%>" class="ui-btn /*ui-btn-icon-right*/ ui-icon-carat-r">
+            <span class="appliance-list-item app-li-app-name"><span><%=row['name']%><span> x<%=row['quantity']%></span></span></span>
+            <span class="appliance-list-item app-li-app-watt"><%=row['watt']%> Watt</span>
+            <span class="appliance-list-item app-li-app-cost">$<%=row['cost']%></span>
             </a>
             </li>
             <% }); %>

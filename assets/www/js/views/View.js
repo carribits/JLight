@@ -83,11 +83,15 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         renderRoom: function(room, roomName, elClass) {
             var appliances = Appliance.getAppliances(room);
 
-            var divider = _.template($("script#appliance-divider").html(), {room: roomName, class: elClass});
+            for (var key in appliances) {
+                var appliance = appliances[key];
+                appliance['cost'] = Appliance.getItemCost(appliance);;
+            }
+
+            var divider = _.template($("script#appliance-divider").html(), {room: room, roomName: roomName, class: elClass});
             this.$el.find('#room-appl-listview').append(divider);
 
             var applianceItem = _.template($("script#appliance-item").html(), {"appliances": appliances});
-            console.log(appliances);
             this.$el.find('#room-appl-listview').append(applianceItem);
         },
         renderIconView: function() {
@@ -181,14 +185,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var title = room.toUpperCase() + ' ' + 'APPLIANCES';
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
-            $('.room-button').attr('href', '#discoverappliance?' + room);
+            $('#room-link').attr('href', '#discoverappliance?' + room);
             $('#room-name').text(title);
 
             var appliances = Storage.readJson(storageIndex);
             if (appliances === null) {
                 appliances = {};
             }
-
 
             for (var key in appliances) {
                 var applianceDetails = appliances[key];

@@ -64,9 +64,7 @@ define([], function() {
 
     Appliance.getConfig = function() {
         return {
-            first100Rate: 6.28,
-            nextRate: 14.36,
-            ippRate: 21.704
+            rate: 36
         };
     };
 
@@ -133,28 +131,28 @@ define([], function() {
         $('#' + key).remove();
     };
 
-    Appliance.calculateTotal = function(config, kwh) {
-        var first100 = 0;
-        var next = 0;
-        var ipp = 0;
-        var total = 0;
-
-        if (kwh > 100) {
-            first100 = 100;
-            next = kwh - 100;
-        } else {
-            first100 = kwh;
-            next = 0;
+    Appliance.getItemCost = function(appliance) {
+        var config = Appliance.getConfig();
+        var hours = Appliance.getHours(appliance);
+        var cost = config.rate * hours * appliance['quantity'] * (appliance['watt'] / 1000);
+        return cost.toFixed(2);
+    };
+    Appliance.getHours = function(appliance) {
+        var hours = 0;
+        switch (appliance['usage']) {
+            case 'daily':
+                hours = appliance['hours'] * 30;
+                break;
+            case 'weekly':
+                hours = (appliance['hours']) * 4;
+                break;
+            case 'monthly':
+                hours = appliance['hours'];
+                break;
+            default:
+                hours = 0;
         }
-
-        first100 = config.first100Rate * first100;
-        next = config.nextRate * next;
-        ipp = config.ippRate * kwh;
-
-        total = first100 + next + ipp;
-
-        console.log(total);
-        return total;
+        return hours * appliance['duty_cycle'];
     };
     Appliance.getAppliances = function(room) {
         var storageIndex = room + '_appliances';
@@ -178,20 +176,8 @@ define([], function() {
             var appliance = appliances[key];
             count += appliance['quantity'];
 
-            switch (appliance['usage']) {
-                case 'daily':
-                    hours = appliance['hours'] * 30;
-                    break;
-                case 'weekly':
-                    hours = (appliance['hours']) * 4;
-                    break;
-                case 'monthly':
-                    hours = appliance['hours'];
-                    break;
-                default:
-                    hours = 0;
-            }
-            watt = appliance['watt'] * appliance['quantity'] * (hours * appliance['duty_cycle']);
+            hours = Appliance.getHours(appliance);
+            watt = appliance['watt'] * appliance['quantity'] * hours;
             kwh += (watt / 1000);
         }
         cost = rate * kwh;

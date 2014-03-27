@@ -233,9 +233,11 @@
     font-style: italic;
 }
 
-#room-appl-listview>.ui-li-divider, .emphasis-col {
+#room-appl-listview>.ui-li-divider a {
     color: #666600 !important;
     font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em !important;
+    text-decoration: none;
 }
 
 .heading {
@@ -428,4 +430,27 @@ table.rooms ul
 
 a.appliance-item{
     padding-left: 4em !important;
+}
+
+.appliance-list-item{
+    display:block;
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    margin-left: 0em;
+}
+
+.app-li-app-name{
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.app-li-app-watt{
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.app-li-app-cost{
+   font-size: 0.8em;
+    color: #ff6633;
+    font-weight: 300;
 }

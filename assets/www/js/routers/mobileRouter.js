@@ -29,8 +29,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
                     this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
                     this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
-
-                   
+                    this.rateView = new AppModules.Views.RateView({el: "#appview"});
+                    this.addcustomApplianceView = new AppModules.Views.AddCustomApplianceView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -44,7 +44,10 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "discoverappliance": "discoverappliance",
                     "addappliance?:room?:appid": "addappliance",
                     "editappliance?:room?:appid": "editappliance",
-                    "graph": "graph"
+                    "graph": "graph",
+                    "appliancestat": "appliancestat",
+                    "setrate": "setrate",
+                    "addcustom": "addcustom"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -89,10 +92,12 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 tips: function() {
                     $('#tips-icon').addClass('ui-icon-tips-a');
+                    this.tipsView.render(name);
                     $.mobile.loading("hide");
                 },
                 setting: function() {
                     $('#setting-icon').addClass('ui-icon-setting-a');
+                    this.settingView.render();
                     $.mobile.loading("hide");
                 },
                 disclaimer: function() {
@@ -114,6 +119,14 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
 
                     $.mobile.loading("hide");
                     this.aboutView.render();
+                },
+                setrate: function() {
+                    this.rateView.render();
+                    $.mobile.loading("hide");
+                },
+                addcustom: function() {
+                    this.addcustomApplianceView.render();
+                    $.mobile.loading("hide");
                 }
             });
             return CategoryRouter;

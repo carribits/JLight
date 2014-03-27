@@ -16,12 +16,12 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-                if (str !== null && str !== undefined)
-                    return str.charAt(0).toUpperCase() + str.slice(1);
+            if (str !== null && str !== undefined)
+            return str.charAt(0).toUpperCase() + str.slice(1);
             }
         </script>
     </head>
@@ -70,7 +70,7 @@
                             <td>
                                 <ul class="view-control"> 
                                     <li>
-                                        <a href="" id="app-view-switch"><img src="images/list_view_a.png"></a>
+                                        <a href="" id="app-view-switch"><img src="images/list_view_i.png"></a>
                                     </li>
                                 </ul>
                             </td>
@@ -195,7 +195,7 @@
         </div>
         <!--tips-->
         <div id="tips" data-role="page" data-title="Tips">
-
+            Tips
         </div>
         <!--appliance-->
         <div id="appliance" data-role="page" data-title="Appliance">
@@ -220,13 +220,13 @@
             </div>
         </div>
         <!--graph-->
-        <div id="graph" data-role="page" data-title="Setting">
+        <div id="graph" data-role="page" data-title="Graph">
             <canvas id="canvas"></canvas>
         </div>
         <!--discover appliance-->
-        <div id="discoverappliance" data-role="page" data-title="Setting">
+        <div id="discoverappliance" data-role="page" data-title="Discover Appliance">
             <div class="room-appliances" style="margin:0.35em">
-                <span id="discoverappliance-title">SELECT KITCHEN APPLIANCES TO ADD</span>
+                <span id="discoverappliance-title">SELECT APPLIANCES TO ADD</span>
                 <div data-demo-html="true">
                     <ul id="discoverappliance-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow new-appliance">
 
@@ -238,7 +238,27 @@
         </div>
         <!--setting-->
         <div id="setting" data-role="page" data-title="Setting">
-
+            Settings
+            <a href="#setrate" class="ui-shadow ui-btn ui-corner-all">Set Electricity Rate</a>
+            <a href="#addcustom" class="ui-shadow ui-btn ui-corner-all">+ Add Custom Appliance</a>
+        </div>
+        <!--setting-->
+        <div id="setrate" data-role="page" data-title="Setting">
+            Set Rate
+            <form>
+                <input id="filter-for-listview" data-type="search" placeholder="Type to search...">
+            </form>
+            <ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
+                <li><a href="#">Acura</a></li>
+                <li><a href="#">Audi</a></li>
+                <li><a href="#">BMW</a></li>
+                <li><a href="#">Cadillac</a></li>
+                <li><a href="#">Ferrari</a></li>
+            </ul>
+        </div>
+        <!--add custom-->
+        <div id="addcustom" data-role="page" data-title="Add Custom Appliance">
+            Add Custom Appliance
         </div>
         <script  id="appliance-add" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
@@ -290,7 +310,7 @@
             </li>
         </script>
         <script id="appliance-divider" type="text/template">
-                    <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count <%=class%>"><a href="#room?<%=room%>"><%=roomName%></a></li>
+            <li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-li-has-count <%=class%>"><a href="#room?<%=room%>"><%=roomName%></a></li>
         </script>
 
         <script id="appliance-item" type="text/template">

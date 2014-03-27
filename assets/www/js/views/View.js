@@ -11,7 +11,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 return false;
             }
 
-            console.log();
             if (params['hours'] <= 0 || params['quantity'] <= 0) {
                 alert("Values entered are incorrect");
                 return false;
@@ -56,10 +55,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 Application.view = 'list';
                 $('#icon-view').hide();
                 $('#list-view').show();
+                $('#app-view-switch img').attr("src", 'images/icon_view_i.png');
             } else {
                 Application.view = 'icon';
                 $('#list-view').hide();
                 $('#icon-view').show();
+                $('#app-view-switch img').attr("src", 'images/list_view_i.png');
             }
 
         },
@@ -85,7 +86,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var key in appliances) {
                 var appliance = appliances[key];
-                appliance['cost'] = Appliance.getItemCost(appliance);;
+                appliance['cost'] = Appliance.getItemCost(appliance);
+                ;
             }
 
             var divider = _.template($("script#appliance-divider").html(), {room: room, roomName: roomName, class: elClass});
@@ -134,7 +136,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
-            var template = _.template($("#disclaimer").html());
+            var template = _.template($("#tips").html());
             this.$el.find("#content-holder").html(template);
             return this;
         }
@@ -218,7 +220,33 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
-            var template = _.template($("#about").html());
+            var template = _.template($("#setting").html());
+            this.$el.find("#content-holder").html(template);
+
+            $.mobile.loading("hide");
+            return this;
+        }
+    });
+
+    var RateView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function() {
+            console.log('RateView');
+            var template = _.template($("#setrate").html());
+            this.$el.find("#content-holder").html(template);
+
+            $.mobile.loading("hide");
+            return this;
+        }
+    });
+
+    var AddCustomApplianceView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function() {
+            console.log('AddCustomApplianceView');
+            var template = _.template($("#addcustom").html());
             this.$el.find("#content-holder").html(template);
 
             $.mobile.loading("hide");
@@ -387,7 +415,9 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         ApplianceView: ApplianceView,
         DiscoverApplianceView: DiscoverApplianceView,
         AddApplianceView: AddApplianceView,
-        EditApplianceView: EditApplianceView
+        EditApplianceView: EditApplianceView,
+        RateView: RateView,
+        AddCustomApplianceView: AddCustomApplianceView
     };
 
 });

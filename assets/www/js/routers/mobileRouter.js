@@ -19,7 +19,6 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {
-                    var self = this;
                     this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
                     this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
@@ -122,6 +121,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 setrate: function() {
                     this.rateView.render();
+                    //$.mobile.changePage("#test");
                     $.mobile.loading("hide");
                 },
                 addcustom: function() {

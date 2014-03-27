@@ -87,7 +87,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             for (var key in appliances) {
                 var appliance = appliances[key];
                 appliance['cost'] = Appliance.getItemCost(appliance);
-                ;
             }
 
             var divider = _.template($("script#appliance-divider").html(), {room: room, roomName: roomName, class: elClass});
@@ -235,6 +234,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             console.log('RateView');
             var template = _.template($("#setrate").html());
             this.$el.find("#content-holder").html(template);
+
+            //var listTmp = _.template($("script#rate-view-tmp").html());
+            //this.$el.find('#country-view').html(listTmp);
+            
+            //$(this.$el).find("input#pre-rendered-filterable").listview().filterable();
+
+            //$("input#pre-rendered-filterable").filterable();
+            //$(".ui-controlgroup-controls").listview();
 
             $.mobile.loading("hide");
             return this;

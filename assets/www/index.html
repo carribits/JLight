@@ -211,12 +211,13 @@
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="room-name">APPLIANCES</span>
-                <div><a id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Appliance</a></div>
+                <div><a id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Regular Appliance</a></div>
                 <div id="room-appliances">
                     <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                     </ul>
                     <div style="display: none;" id="purchase-placeholder"><!-- placeholder for purchase --></div>
                 </div>
+                <div><a id="custom-app-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Custom Appliance</a></div>
             </div>
         </div>
         <!--graph-->
@@ -276,7 +277,7 @@
             </div>
 
             <div>
-            <h5>Hours used</h5>
+            <h5 id="unit-title">Hours used</h5>
             <table style="width:100%">
             <tr>
                 <td style="width:70%">
@@ -284,8 +285,8 @@
                 </td>
                 <td style="width:30%;float:left;padding-left:1em;">
                 <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
-                <option value="off">Hrs</option>
-                <option value="on">Min</option>
+                <option value="hour">Hrs</option>
+                <option value="minute">Min</option>
                 </select>
                 </td>
             </tr>
@@ -313,7 +314,7 @@
             <img class="icon-item" src="images/icons/<%=appliance['icon']%>.png">
             <h2><%=appliance['name']%><span> x<%=appliance['quantity']%></span></span></h2> 
             <p>
-            <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> hour(s)
+            <%=toMoney(appliance['watt'])+ ' Watt'%><span> used <%=appliance['usage']%> for <span> <%=appliance['hours']%> <%=appliance['time_unit']%>(s)
             </p>
             </a>
             <a onclick="return Appliance.deleteRoomAppliance(this)" data-room="<%=appliance['room']%>" data-role="popup" data-rel="popup"  data-appid="<%=appliance['key']%>" class="ui-btn ui-btn-icon-notext ui-icon-gear ui-btn-a" title="Delete Appliance"></a>
@@ -359,35 +360,56 @@
 
         <script id="add-custom-appl-tmp" type="text/template">
             <div style="margin-top:1em;">
+            <div>
+                Add Custom Appliance for <span class="room-custom"></span>
+            </div>
+            
              <div>
             <h5>Applicance Name</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            <input type="text" name="appliance-name" id="appliance-name" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
             </div>
             
             <div>
             <h5>Appliance Wattage</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            <input type="number" name="appliance-quantity" id="appliance-watt" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
             </div>
+    
+    
             <div>
-            
             <h5>Quantity</h5>
             <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
             </div>
             <div>
-            <h5>Hours used</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
-            </div>
+
+             <div>
+            <h5 class="unit-title">Hours used</h5>
+            <table style="width:100%">
+            <tr>
+                <td style="width:70%">
+                <input type="number" name="appliance-hours" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+                </td>
+                <td style="width:30%;float:left;padding-left:1em;">
+                <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
+                <option value="hour">Hrs</option>
+                <option value="minute">Min</option>
+                </select>
+                </td>
+            </tr>
+            </table>
+        </div>
 
             <div class="ui-field-contain">
             <h5>Usage</h5>
             <select name="usage" id="appliance-usage" data-mini="true">
-
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
             </select>
             </div>
 
             <div>
-            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Save</a>
-            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
+            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
+            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
             </div>
         </script>
     </body>

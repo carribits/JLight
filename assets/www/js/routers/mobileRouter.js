@@ -21,14 +21,14 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 initialize: function() {
                     this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
-                    this.settingView = new AppModules.Views.SettingView({el: "#appview", model: new AppModules.Models.Setting()});
+                    this.settingView = new AppModules.Views.RateView({el: "#appview", model: new AppModules.Models.Setting()});
                     this.roomView = new AppModules.Views.RoomView({el: "#appview"});
                     this.graphView = new AppModules.Views.GraphView({el: "#appview"});
                     this.applianceView = new AppModules.Views.ApplianceView({el: "#appview"});
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
                     this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
                     this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
-                    this.rateView = new AppModules.Views.RateView({el: "#appview"});
+                    //this.rateView = new AppModules.Views.RateView({el: "#appview"});
                     this.addcustomApplianceView = new AppModules.Views.AddCustomApplianceView({el: "#appview"});
 
                     Backbone.history.start();
@@ -46,7 +46,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "graph": "graph",
                     "appliancestat": "appliancestat",
                     "setrate": "setrate",
-                    "addcustom": "addcustom"
+                    "addcustom?:room": "addcustom"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -124,8 +124,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     //$.mobile.changePage("#test");
                     $.mobile.loading("hide");
                 },
-                addcustom: function() {
-                    this.addcustomApplianceView.render();
+                addcustom: function(room) {
+                    this.addcustomApplianceView.render(room);
                     $.mobile.loading("hide");
                 }
             });

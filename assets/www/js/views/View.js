@@ -31,6 +31,33 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             return true;
+        },
+        validateCustomAppliance: function(params) {
+            if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
+                alert("Values entered are incorrect");
+                return false;
+            }
+
+            if (params['hours'] <= 0 || params['quantity'] <= 0) {
+                alert("Values entered are incorrect");
+                return false;
+            }
+
+            if (params['usage'] === 'daily' && params['hours'] > 24) {
+                alert("Hours must be between 1 and 24 for daily usage");
+                return false;
+            }
+            if (params['usage'] === 'weekly' && params['hours'] > 168) {
+                alert("Hours must be between 1 and 168 for weekly usage");
+                return false;
+            }
+
+            if (params['usage'] === 'monthly' && params['hours'] > 730) {
+                alert("Hours must be between 1 and 730 for monthly usage");
+                return false;
+            }
+
+            return true;
         }
     });
     var HomeView = Backbone.View.extend({
@@ -187,6 +214,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
             $('#room-link').attr('href', '#discoverappliance?' + room);
+            $('#custom-app-link').attr('href', '#addcustom?' + room);
             $('#room-name').text(title);
 
             var appliances = Storage.readJson(storageIndex);
@@ -198,6 +226,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 var applianceDetails = appliances[key];
                 var appliance = Appliance.getAppliance(room, key);
                 $.extend(appliance, applianceDetails);
+                console.log(applianceDetails);
                 var item = '';
                 if (count === 0) {
                     $.extend(appliance, {class: "ui-first-child"});
@@ -210,7 +239,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             $.mobile.loading("hide");
-            $("#popupDialog").popup( );
             return this;
         }
     });
@@ -248,14 +276,53 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var AddCustomApplianceView = Backbone.View.extend({
         initialize: function() {
         },
-        render: function() {
-            
+        render: function(room) {
+            var appliance = {};
             var template = _.template($("#addcustom").html());
             this.$el.find("#content-holder").html(template);
-            
             var formContent = _.template($("script#add-custom-appl-tmp").html());
-            console.log(formContent);
+
             this.$el.find('#custom-appl-form').html(formContent);
+
+            $('#custom-appl-form .room-custom').html(room);
+
+            $("#custom-appl-form #appliance-usage").val(appliance['usage']);
+            $("#custom-appl-form #time-unit").val(appliance['time_unit']);
+
+            $("#custom-appl-form #appliance-name").textinput();
+            $("#custom-appl-form #appliance-watt").textinput();
+            $("#custom-appl-form #appliance-hours").textinput();
+            $("#custom-appl-form #appliance-usage").selectmenu();
+            $("#custom-appl-form #appliance-quantity").textinput();
+            $("#custom-appl-form #time-unit").flipswitch();
+
+            $("#custom-appl-form #time-unit").change(function(e) {
+                $('#custom-appl-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+            });
+            $('#custom-appl-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+
+            $('#custom-appl-form a#appliance-add-form-save').click(function(event) {
+                var params = {
+                    usage: $("#custom-appl-form #appliance-usage").val(),
+                    usage_list: ['daily', 'weekly', 'monthly'],
+                    hours: parseFloat($("#custom-appl-form #appliance-hours").val()),
+                    quantity: parseInt($("#custom-appl-form #appliance-quantity").val()),
+                    name: $("#custom-appl-form #appliance-name").val(),
+                    watt: $("#custom-appl-form #appliance-watt").val(),
+                    icon: "default",
+                    duty_cycle: 1,
+                    ballast_factor: 1,
+                    room: room,
+                    time_unit: "hour"
+                };
+                var appid = Appliance.getKey(params['name'].toLowerCase() + params['watt'])
+
+                if (BaseView.prototype.validateCustomAppliance.call(this, params)) {
+                    Appliance.saveAppliance(params, room, appid);
+                } else {
+                    event.preventDefault();
+                }
+            });
 
             $.mobile.loading("hide");
             return this;
@@ -265,7 +332,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var ApplianceView = Backbone.View.extend({
         initialize: function() {
         },
-        render: function(name) {
+        render: function() {
             var template = _.template($("#appliance").html());
             this.$el.find("#content-holder").html(template);
 
@@ -295,9 +362,16 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#addappliance-form #appliance-usage").html(option);
 
             $("#addappliance-form #appliance-usage").val(appliance['usage']);
+            $("#addappliance-form #time-unit").val(appliance['time_unit']);
+
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
-            $( "#addappliance-form #time-unit" ).flipswitch();
+            $("#addappliance-form #time-unit").flipswitch();
+
+            $("#addappliance-form #time-unit").change(function(e) {
+                $('#addappliance-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+            });
+            $('#addappliance-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
 
             $.mobile.loading("hide");
 
@@ -312,7 +386,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     icon: appliance['icon'],
                     duty_cycle: appliance['duty_cycle'],
                     ballast_factor: appliance['ballast_factor'],
-                    room: room
+                    room: room,
+                    time_unit: $("#addappliance-form #time-unit").val()
                 };
 
                 if (BaseView.prototype.validateAppliance.call(this, params)) {
@@ -347,7 +422,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
-            $( "#addappliance-form #time-unit" ).flipswitch();
+            $("#addappliance-form #time-unit").flipswitch();
+
+            $("#addappliance-form #time-unit").change(function(e) {
+                $('#addappliance-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+            });
 
             $.mobile.loading("hide");
 
@@ -362,7 +441,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     icon: appliance['icon'],
                     duty_cycle: appliance['duty_cycle'],
                     ballast_factor: appliance['ballast_factor'],
-                    room: room
+                    room: room,
+                    time_unit: $("#addappliance-form #time-unit").val()
                 };
 
                 if (BaseView.prototype.validateAppliance.call(this, params)) {

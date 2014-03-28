@@ -235,13 +235,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#setrate").html());
             this.$el.find("#content-holder").html(template);
 
-            //var listTmp = _.template($("script#rate-view-tmp").html());
-            //this.$el.find('#country-view').html(listTmp);
-            
-            //$(this.$el).find("input#pre-rendered-filterable").listview().filterable();
+            var formContent = _.template($("script#rate-view-tmp").html());
+            this.$el.find('#rateform').html(formContent);
 
-            //$("input#pre-rendered-filterable").filterable();
-            //$(".ui-controlgroup-controls").listview();
+            $("#rateform #country").selectmenu();
+            $("#rateform #rate-amt").textinput();
 
             $.mobile.loading("hide");
             return this;

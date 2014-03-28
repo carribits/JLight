@@ -16,12 +16,12 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-            var parts = val.toString().split(".");
-            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-            if (str !== null && str !== undefined)
-            return str.charAt(0).toUpperCase() + str.slice(1);
+                if (str !== null && str !== undefined)
+                    return str.charAt(0).toUpperCase() + str.slice(1);
             }
         </script>
     </head>
@@ -238,13 +238,19 @@
         </div>
         <!--setting-->
         <div id="setting" data-role="page" data-title="Setting">
-            Settings
-            <a href="#setrate" class="ui-shadow ui-btn ui-corner-all">Set Electricity Rate</a>
-            <a href="#addcustom" class="ui-shadow ui-btn ui-corner-all">+ Add Custom Appliance</a>
+            <div class="application-form"> 
+                <h3>Application settings</h3>
+                <a href="#setrate" class="ui-shadow ui-btn ui-corner-all app-font">Set Electricity Rate</a>
+                <a href="#addcustom" class="ui-shadow ui-btn ui-corner-all app-font" style="margin-top:2em">+ Add Custom Appliance</a>
+            </div>
         </div>
         <!--setting-->
         <div id="setrate" data-role="page" data-title="Setting">
-            Set Rate
+            <div class="application-form">
+                <form id="rateform">
+
+                </form>
+            </div>
         </div>
         <!--add custom-->
         <div id="addcustom" data-role="page" data-title="Add Custom Appliance">
@@ -283,7 +289,7 @@
             </div>
 
             <div>
-            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="##room?<%=appliance['room']%>">Save</a>
+            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Save</a>
             <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
             </div>
         </script>
@@ -313,6 +319,28 @@
             </a>
             </li>
             <% }); %>
+        </script>
+        <script id="rate-view-tmp" type="text/template">
+            <h3>Enter electricity rate or select country</h3>
+
+            <div>
+            <input placeholder="Enter electricity rate" type="number" name="rate-amt" id="rate-amt" value="<%=setting['rate']%>">
+            </div>
+
+            <div style="text-align: center;">
+            <span style="display: inline-block;position: relative;font-size:1.2em;font-weight:300">-OR-</span>
+            </div>
+
+            <div class="ui-field-contain">
+            <select name="country" id="country" data-mini="true">
+            <option value="small">Select Country</option>
+            </select>
+            </div>
+
+            <div class="app-form-button">
+            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
+            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
+            </div>
         </script>
     </body>
 </html>

@@ -442,6 +442,11 @@ a.appliance-item{
 .app-li-app-name{
     font-size: 0.8em;
     font-weight: 600;
+    display: block;
+    margin: .45em 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .app-li-app-watt{
@@ -450,7 +455,21 @@ a.appliance-item{
 }
 
 .app-li-app-cost{
-   font-size: 0.8em;
+    font-size: 0.8em;
     color: #ff6633;
     font-weight: 300;
+}
+
+.application-form{
+    margin: 1em 2em 3em 2em;
+}
+
+.app-form-button{
+    margin-top:2em;
+}
+
+.app-font{
+    font-size: 1.0em;
+    font-weight: 500 !important;
+    font-family: 'Open Sans', sans-serif !important;
 }

@@ -254,7 +254,11 @@
         </div>
         <!--add custom-->
         <div id="addcustom" data-role="page" data-title="Add Custom Appliance">
-            Add Custom Appliance
+            <div class="application-form">
+                <form id="custom-appl-form">
+
+                </form>
+            </div>
         </div>
         <script  id="appliance-add" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">
@@ -273,10 +277,21 @@
 
             <div>
             <h5>Hours used</h5>
-            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
-            </div>
-
-            <div>
+            <table style="width:100%">
+            <tr>
+                <td style="width:70%">
+                <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+                </td>
+                <td style="width:30%;float:left;padding-left:1em;">
+                <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
+                <option value="off">Hrs</option>
+                <option value="on">Min</option>
+                </select>
+                </td>
+            </tr>
+            </table>
+        </div>
+            
             <h5>Quantity</h5>
             <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
             </div>
@@ -284,7 +299,6 @@
             <div class="ui-field-contain">
             <h5>Usage</h5>
             <select name="usage" id="appliance-usage" data-mini="true">
-
             </select>
             </div>
 
@@ -340,6 +354,40 @@
             <div class="app-form-button">
             <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
             <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
+            </div>
+        </script>
+
+        <script id="add-custom-appl-tmp" type="text/template">
+            <div style="margin-top:1em;">
+             <div>
+            <h5>Applicance Name</h5>
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            </div>
+            
+            <div>
+            <h5>Appliance Wattage</h5>
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            </div>
+            <div>
+            
+            <h5>Quantity</h5>
+            <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
+            </div>
+            <div>
+            <h5>Hours used</h5>
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            </div>
+
+            <div class="ui-field-contain">
+            <h5>Usage</h5>
+            <select name="usage" id="appliance-usage" data-mini="true">
+
+            </select>
+            </div>
+
+            <div>
+            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Save</a>
+            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
             </div>
         </script>
     </body>

@@ -473,3 +473,16 @@ a.appliance-item{
     font-weight: 500 !important;
     font-family: 'Open Sans', sans-serif !important;
 }
+
+#addappliance-form .ui-slider-switch { 
+    width: 7em !important 
+}
+.ui-flipswitch{
+    height:37px;
+}
+.ui-flipswitch .ui-btn.ui-flipswitch-on, .ui-flipswitch .ui-flipswitch-off {
+    float: left !important;
+    height:36px !important;
+    margin: .0725em;
+    line-height: 1.95em !important;
+}

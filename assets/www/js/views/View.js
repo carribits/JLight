@@ -231,7 +231,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
-            console.log('RateView');
             var template = _.template($("#setrate").html());
             this.$el.find("#content-holder").html(template);
 
@@ -250,9 +249,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
-            console.log('AddCustomApplianceView');
+            
             var template = _.template($("#addcustom").html());
             this.$el.find("#content-holder").html(template);
+            
+            var formContent = _.template($("script#add-custom-appl-tmp").html());
+            console.log(formContent);
+            this.$el.find('#custom-appl-form').html(formContent);
 
             $.mobile.loading("hide");
             return this;
@@ -294,6 +297,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#addappliance-form #appliance-usage").val(appliance['usage']);
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
+            $( "#addappliance-form #time-unit" ).flipswitch();
 
             $.mobile.loading("hide");
 
@@ -343,6 +347,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();
+            $( "#addappliance-form #time-unit" ).flipswitch();
 
             $.mobile.loading("hide");
 

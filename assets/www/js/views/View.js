@@ -223,10 +223,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             for (var key in appliances) {
-                var applianceDetails = appliances[key];
-                var appliance = Appliance.getAppliance(room, key);
-                $.extend(appliance, applianceDetails);
-                console.log(applianceDetails);
+                var appliance = appliances[key];
+                appliance['key'] = key;
                 var item = '';
                 if (count === 0) {
                     $.extend(appliance, {class: "ui-first-child"});
@@ -297,9 +295,9 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#custom-appl-form #time-unit").flipswitch();
 
             $("#custom-appl-form #time-unit").change(function(e) {
-                $('#custom-appl-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+                $('#custom-appl-form #unit-title').text((ucfirst($("#custom-appl-form #time-unit").val() + 's' + ' Used')));
             });
-            $('#custom-appl-form #unit-title').text((ucfirst($("#addappliance-form #time-unit").val() + 's' + ' Used')));
+            $('#custom-appl-form #unit-title').text((ucfirst($("#custom-appl-form #time-unit").val() + 's' + ' Used')));
 
             $('#custom-appl-form a#appliance-add-form-save').click(function(event) {
                 var params = {
@@ -313,7 +311,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     duty_cycle: 1,
                     ballast_factor: 1,
                     room: room,
-                    time_unit: "hour"
+                    time_unit: $("#custom-appl-form #time-unit").val()
                 };
                 var appid = Appliance.getKey(params['name'].toLowerCase() + params['watt'])
 

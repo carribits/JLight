@@ -480,45 +480,62 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
-            var pieData = [
-                {
-                    value: 30,
-                    color: "#F38630"
-                },
-                {
-                    value: 50,
-                    color: "#00688B"
-                },
-                {
-                    value: 100,
-                    color: "#aa609b"
-                },
-                {
-                    value: 30,
-                    color: "#82ba00"
-                },
-                {
-                    value: 50,
-                    color: "#f92e2e"
-                },
-                {
-                    value: 100,
-                    color: "#d24726"
-                }
-            ];
+            var pieData = [];
+            var totalWatt = 0;
+
+            var bathroom = Appliance.getRoomInfo('bathroom');
+            totalWatt += bathroom['watt'];
+            pieData.push({value: bathroom['watt'] * 1000, color: Colors.bathroom});
+            $('#piechart-stat .bathroom').css('background', Colors.bathroom);
+
+            var homeoffice = Appliance.getRoomInfo('homeoffice');
+            totalWatt += homeoffice['watt'];
+            pieData.push({value: homeoffice['watt'] * 1000, color: Colors.homeoffice});
+            $('#piechart-stat .homeoffice').css('background', Colors.homeoffice);
+
+            var kitchen = Appliance.getRoomInfo('kitchen');
+            totalWatt += kitchen['watt'];
+            pieData.push({value: kitchen['watt'] * 1000, color: Colors.kitchen});
+            $('#piechart-stat .kitchen').css('background', Colors.kitchen);
+
+            var washroom = Appliance.getRoomInfo('washroom');
+            totalWatt += washroom['watt'];
+            pieData.push({value: washroom['watt'] * 1000, color: Colors.washroom});
+            $('#piechart-stat .washroom').css('background', Colors.washroom);
+
+            var livingroom = Appliance.getRoomInfo('livingroom');
+            totalWatt += livingroom['watt'];
+            pieData.push({value: livingroom['watt'] * 1000, color: Colors.livingroom});
+            $('#piechart-stat .livingroom').css('background', Colors.livingroom);
+
+            var bedroom = Appliance.getRoomInfo('bedroom');
+            totalWatt += bedroom['watt'];
+            pieData.push({value: bedroom['watt'] * 1000, color: Colors.bedroom});
+            $('#piechart-stat .bedroom').css('background', Colors.bedroom);
+
+            $('#piechart-stat .bathroom-perc').text(this.percentage(bathroom['watt'], totalWatt));
+            $('#piechart-stat .homeoffice-perc').text(this.percentage(homeoffice['watt'], totalWatt));
+            $('#piechart-stat .kitchen-perc').text(this.percentage(kitchen['watt'], totalWatt));
+            $('#piechart-stat .washroom-perc').text(this.percentage(washroom['watt'], totalWatt));
+            $('#piechart-stat .livingroom-perc').text(this.percentage(livingroom['watt'], totalWatt));
+            $('#piechart-stat .bedroom-perc').text(this.percentage(bedroom['watt'], totalWatt));
+
             var template = _.template($("#graph").html());
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
 
             canvas.width = $(window).width() * 0.65;
             canvas.height = $(window).width() * 0.65;
-            
-            $("#room-stats-list").l
 
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
 
             $.mobile.loading("hide");
             return this;
+        },
+        percentage: function(value, total) {
+            console.log([value, total]);
+            var perc = value / total * 100;
+            return perc.toFixed(2) + '%';
         }
     });
 

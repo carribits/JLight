@@ -497,13 +497,6 @@ a.appliance-item{
     display: inline-block
 }
 
-#piechart-stat .bathroom{ background-color: #F38630;}
-#piechart-stat .homeoffice{ background-color: #00688B;}
-#piechart-stat .kitchen{ background-color: #aa609b;}
-#piechart-stat .washroom{ background-color: #82ba00;}
-#piechart-stat .livingroom{ background-color: #f92e2e;}
-#piechart-stat .bedroom{ background-color: #d24726;}
-
 .slice-perc{
     padding-right: 16px;
     position: absolute;

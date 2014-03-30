@@ -198,8 +198,8 @@ define([], function() {
 
         var result = {
             count: count,
-            cost: cost.toFixed(2),
-            watt: (kwh).toFixed(2)
+            cost: parseFloat(cost.toFixed(2)),
+            watt: parseFloat((kwh).toFixed(2))
         };
         return result;
     };
@@ -313,11 +313,22 @@ define([], function() {
         washroom: washroom
     };
 
+    var Colors = {
+        bathroom: "#F38630",
+        homeoffice: "#00688B",
+        kitchen: "#aa609b",
+        washroom: "#82ba00",
+        livingroom: "#f92e2e",
+        bedroom: "#d24726"
+    };
+
+
     return {
         Storage: Storage,
         DefaultAppliances: DefaultAppliances,
         Appliance: Appliance,
         Utility: Utility,
-        Application: Application
+        Application: Application,
+        Colors: Colors
     };
 });

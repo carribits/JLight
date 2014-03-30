@@ -6,6 +6,7 @@ var DefaultAppliances = null;
 var Appliance = null;
 var Utility = null;
 var Application = null;
+var Colors = null;
 
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
@@ -16,6 +17,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             Appliance = AppModules.Utility.Appliance;
             Utility = AppModules.Utility.Utility;
             Application = AppModules.Utility.Application;
+            Colors = AppModules.Utility.Colors;
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {

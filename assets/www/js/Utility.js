@@ -49,6 +49,19 @@ define([], function() {
     };
 
     Application.view = 'icon';
+    Application.defaultRate = {rate: 44.7, country: 'Jamaica'};
+
+    Application.saveRate = function(rateInfo) {
+        Storage.writeJson('rate', rateInfo);
+    };
+
+    Application.getRate = function() {
+        var rate = Storage.readJson('rate');
+        if (rate === null || rate === undefined) {
+            return Application.defaultRate;
+        }
+        return rate;
+    };
 
     var Appliance = function() {
 
@@ -63,9 +76,8 @@ define([], function() {
     };
 
     Appliance.getConfig = function() {
-        return {
-            rate: 36
-        };
+        var config = Application.getRate();
+        return config;
     };
 
     Appliance.getAppliance = function getAppliance(room, appid) {
@@ -163,7 +175,8 @@ define([], function() {
         return appliances;
     };
     Appliance.getRoomInfo = function(room) {
-        var rate = 36;
+        var config = Appliance.getConfig();
+        var rate = config.rate;
         var kwh = 0;
         var count = 0;
         var watt = 0;

@@ -16,12 +16,12 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-                if (str !== null && str !== undefined)
-                    return str.charAt(0).toUpperCase() + str.slice(1);
+            if (str !== null && str !== undefined)
+            return str.charAt(0).toUpperCase() + str.slice(1);
             }
         </script>
     </head>
@@ -280,19 +280,19 @@
             <h5 id="unit-title">Hours used</h5>
             <table style="width:100%">
             <tr>
-                <td style="width:70%">
-                <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
-                </td>
-                <td style="width:30%;float:left;padding-left:1em;">
-                <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
-                <option value="hour">Hrs</option>
-                <option value="minute">Min</option>
-                </select>
-                </td>
+            <td style="width:70%">
+            <input type="number" name="appliance-quantity" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            </td>
+            <td style="width:30%;float:left;padding-left:1em;">
+            <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
+            <option value="hour">Hrs</option>
+            <option value="minute">Min</option>
+            </select>
+            </td>
             </tr>
             </table>
-        </div>
-            
+            </div>
+
             <h5>Quantity</h5>
             <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
             </div>
@@ -305,7 +305,7 @@
 
             <div>
             <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Save</a>
-            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
+            <a style="margin:0 0 0 1.2em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#room?<%=appliance['room']%>">Cancel</a>
             </div>
         </script>
         <script id="room-appliance-li" type="text/template">
@@ -348,68 +348,69 @@
 
             <div class="ui-field-contain">
             <select name="country" id="country" data-mini="true">
-            <option value="small">Select Country</option>
+            <option value="0">Select Country</option>
+            <option value="44.70">Jamaica</option>
             </select>
             </div>
 
             <div class="app-form-button">
-            <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
-            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
+            <a style="margin:0em" id="appliance-rate-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
+            <a style="margin:0 0 0 1.2em" id="appliance-rate-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
             </div>
         </script>
 
         <script id="add-custom-appl-tmp" type="text/template">
             <div style="margin-top:1em;">
             <div>
-                Add Custom Appliance for <span class="room-custom"></span>
+            Add Custom Appliance for <span class="room-custom"></span>
             </div>
-            
-             <div>
+
+            <div>
             <h5>Applicance Name</h5>
             <input type="text" name="appliance-name" id="appliance-name" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
             </div>
-            
+
             <div>
             <h5>Appliance Wattage</h5>
             <input type="number" name="appliance-quantity" id="appliance-watt" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
             </div>
-    
-    
+
+
             <div>
             <h5>Quantity</h5>
             <input type="number" name="appliance-quantity" id="appliance-quantity" value="<%=appliance['quantity']%>">
             </div>
             <div>
 
-             <div>
+            <div>
             <h5 class="unit-title">Hours used</h5>
             <table style="width:100%">
             <tr>
-                <td style="width:70%">
-                <input type="number" name="appliance-hours" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
-                </td>
-                <td style="width:30%;float:left;padding-left:1em;">
-                <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
-                <option value="hour">Hrs</option>
-                <option value="minute">Min</option>
-                </select>
-                </td>
+            <td style="width:70%">
+            <input type="number" name="appliance-hours" id="appliance-hours" value="<%=appliance['hours']%>" <%=appliance['hours_input']%>>
+            </td>
+            <td style="width:30%;float:left;padding-left:1em;">
+            <select style="float:right" name="time-unit" id="time-unit" data-role="slider">
+            <option value="hour">Hrs</option>
+            <option value="minute">Min</option>
+            </select>
+            </td>
             </tr>
             </table>
-        </div>
+            </div>
 
             <div class="ui-field-contain">
             <h5>Usage</h5>
             <select name="usage" id="appliance-usage" data-mini="true">
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
             </select>
             </div>
 
             <div>
             <a style="margin:0em" id="appliance-add-form-save" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Save</a>
-            <a style="margin:0em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
+            <a style="margin:0 0 0 1.2em" id="appliance-add-cancel" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button" href="#">Cancel</a>
             </div>
         </script>
     </body>

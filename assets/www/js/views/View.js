@@ -257,14 +257,30 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function() {
+            var config = Application.getRate();
             var template = _.template($("#setrate").html());
             this.$el.find("#content-holder").html(template);
+            var rate = config.rate;
 
             var formContent = _.template($("script#rate-view-tmp").html());
             this.$el.find('#rateform').html(formContent);
 
+            $("#country").val((rate).toFixed(2));
             $("#rateform #country").selectmenu();
             $("#rateform #rate-amt").textinput();
+            $("#rateform #rate-amt").val(rate.toFixed(2));
+
+            $('#rateform #country').on('change', function() {
+                rate = $(this).val();
+                $("#rateform #rate-amt").val(rate);
+            });
+
+            $('#rateform a#appliance-rate-form-save').click(function() {
+                rate = $("#rateform #rate-amt").val();
+                if (Utility.isNumeric(rate)) {
+                    Application.saveRate({rate: parseFloat(rate)});
+                }
+            });
 
             $.mobile.loading("hide");
             return this;

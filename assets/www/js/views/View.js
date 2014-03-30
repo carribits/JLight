@@ -509,6 +509,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#graph").html());
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
+
+            canvas.width = $(window).width() * 0.65;
+            canvas.height = $(window).width() * 0.65;
+            
+            $("#room-stats-list").l
+
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
 
             $.mobile.loading("hide");

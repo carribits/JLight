@@ -486,3 +486,26 @@ a.appliance-item{
     margin: .0725em;
     line-height: 1.95em !important;
 }
+
+.chart-color{
+    display: inline-block;
+    width:1em;height:1em
+}
+
+.slice-name{
+    margin-left:1.5em ;
+    display: inline-block
+}
+
+#piechart-stat .bathroom{ background-color: #F38630;}
+#piechart-stat .homeoffice{ background-color: #00688B;}
+#piechart-stat .kitchen{ background-color: #aa609b;}
+#piechart-stat .washroom{ background-color: #82ba00;}
+#piechart-stat .livingroom{ background-color: #f92e2e;}
+#piechart-stat .bedroom{ background-color: #d24726;}
+
+.slice-perc{
+    padding-right: 16px;
+    position: absolute;
+    right: 1.6em;
+}

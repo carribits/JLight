@@ -550,7 +550,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#roomstat").html());
             this.$el.find("#content-holder").html(template);
 
-            var applNmes = [];
+            var applNames = [];
             var appReading = [];
 
             var canvas = $('#canvas')[0];
@@ -560,15 +560,19 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var key in appliances) {
                 var appliance = appliances[key];
+                applNames.push(appliance['name'].ellipse(15));
+                appReading.push(Appliance.getItemWatt(appliance)*1000);
             }
 
+            console.log(appReading);
+
             var data = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: applNames,
                 datasets: [
                     {
                         fillColor: "rgba(62, 178, 73,0.5)",
                         strokeColor: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 96, 27, 100]
+                        data: appReading
                     }
                 ]
             };

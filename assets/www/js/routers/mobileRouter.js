@@ -133,7 +133,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     $.mobile.loading("hide");
                 },
                 roomstat: function(room) {
-                    this.roomStatView.render('ddd');
+                    this.roomStatView.render(room);
                     $.mobile.loading("hide");
                 }
             });

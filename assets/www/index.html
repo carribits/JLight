@@ -23,6 +23,14 @@
             if (str !== null && str !== undefined)
             return str.charAt(0).toUpperCase() + str.slice(1);
             }
+            
+             String.prototype.ellipse =
+                    function(n, useWordBoundary) {
+                        var toLong = this.length > n,
+                                s_ = toLong ? this.substr(0, n - 1) : this;
+                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+                        return  toLong ? s_ + '...' : s_;
+                    };
         </script>
     </head>
     <body>

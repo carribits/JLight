@@ -114,6 +114,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             for (var key in appliances) {
                 var appliance = appliances[key];
                 appliance['cost'] = Appliance.getItemCost(appliance);
+                appliance['watt'] = Appliance.getItemWatt(appliance);
             }
 
             var divider = _.template($("script#appliance-divider").html(), {room: room, roomName: roomName, class: elClass});
@@ -524,7 +525,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
 
-            canvas.width =  208;
+            canvas.width = 208;
             canvas.height = 208;
 
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
@@ -536,6 +537,47 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             console.log([value, total]);
             var perc = value / total * 100;
             return perc.toFixed(2) + '%';
+        }
+    });
+
+    var RoomStatView = Backbone.View.extend({
+        initialize: function() {
+            this.defaults = {
+                scaleLineColor: "rgba(0,0,0,.0)"
+            };
+        },
+        render: function(room) {
+            var template = _.template($("#roomstat").html());
+            this.$el.find("#content-holder").html(template);
+
+            var applNmes = [];
+            var appReading = [];
+
+            var canvas = $('#canvas')[0];
+            canvas.height = $(window).height() * 0.65;
+
+            var appliances = Appliance.getAppliances(room);
+
+            for (var key in appliances) {
+                var appliance = appliances[key];
+            }
+
+            var data = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        fillColor: "rgba(62, 178, 73,0.5)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 96, 27, 100]
+                    }
+                ]
+            };
+
+
+            var myPie = new Chart(canvas.getContext("2d")).Bar(data, this.defaults);
+
+            $.mobile.loading("hide");
+            return this;
         }
     });
 
@@ -551,7 +593,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         AddApplianceView: AddApplianceView,
         EditApplianceView: EditApplianceView,
         RateView: RateView,
-        AddCustomApplianceView: AddCustomApplianceView
+        AddCustomApplianceView: AddCustomApplianceView,
+        RoomStatView: RoomStatView
     };
 
 });

@@ -220,6 +220,11 @@
                 <div><a id="custom-app-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Custom Appliance</a></div>
             </div>
         </div>
+        <!--roomstat-->
+        <div id="roomstat" data-role="page" data-title="Rooms Stats">
+            <h4 style="margin-bottom: 1em">CONSUMPTION BY APPLIANCES</h4>
+            <canvas style="margin:0" id="canvas"></canvas>
+        </div>
         <!--graph-->
         <div id="graph" data-role="page" data-title="Graph">
             <div id="piechart-stat" style="margin-bottom: 2em">
@@ -227,41 +232,41 @@
                 <canvas style="margin:0" id="canvas"></canvas>
                 <ul style="margin: 1em 0 0 0.35em;width:85%" data-role="listview" data-filter="true"  data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                     <li class="ui-first-child">
-                        <a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                        <a href="#roomstat?bathroom" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color bathroom"></div>
                             <span class="slice-name">Bathroom</span>
                             <span class="slice-perc bathroom-perc">0%</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                        <a href="#roomstat?homeoffice" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color homeoffice"></div>
                             <span class="slice-name">Home Office</span>
                             <span class="slice-perc homeoffice-perc">0%</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                        <a href="#roomstat?kitchen" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color kitchen">
                             </div><span class="slice-name">Kitchen</span>
                             <span class="slice-perc kitchen-perc">0%</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                        <a href="#roomstat?washroom" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color washroom"></div>
                             <span class="slice-name">Washroom</span>
                             <span class="slice-perc washroom-perc">0%</span>
                         </a>
                     </li>
-                    <li><a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                    <li><a href="#roomstat?livingroom" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color livingroom">
                             </div><span class="slice-name">Living Room</span>
                             <span class="slice-perc livingroom-perc">0%</span>
                         </a>
                     </li>
                     <li class="ui-last-child">
-                        <a href="#room-app-stat" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+                        <a href="#roomstat?bedroom" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
                             <div class="chart-color bedroom">
                             </div><span class="slice-name">Bedroom</span>
                             <span class="slice-perc bedroom-perc">0%</span>
@@ -375,7 +380,7 @@
             <li>
             <a href="#editappliance?<%=row['room']%>?<%=key%>" class="ui-btn /*ui-btn-icon-right*/ ui-icon-carat-r">
             <span class="appliance-list-item app-li-app-name"><span><%=row['name']%><span> x<%=row['quantity']%></span></span></span>
-            <span class="appliance-list-item app-li-app-watt"><%=row['watt']%> Watt</span>
+            <span class="appliance-list-item app-li-app-watt"><%=row['watt']%> Kilowatts</span>
             <span class="appliance-list-item app-li-app-cost">$<%=row['cost']%></span>
             </a>
             </li>

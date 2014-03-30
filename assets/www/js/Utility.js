@@ -145,9 +145,13 @@ define([], function() {
 
     Appliance.getItemCost = function(appliance) {
         var config = Appliance.getConfig();
+        var cost = config.rate * Appliance.getItemWatt(appliance);
+        return parseFloat(cost.toFixed(2));
+    };
+    Appliance.getItemWatt = function(appliance) {
         var hours = Appliance.getHours(appliance);
-        var cost = config.rate * hours * appliance['quantity'] * (appliance['watt'] / 1000);
-        return cost.toFixed(2);
+        var watt = hours * appliance['quantity'] * (appliance['watt'] / 1000);
+        return parseFloat(watt.toFixed(2));
     };
     Appliance.getHours = function(appliance) {
         var factor = (appliance['time_unit'] === 'minute') ? 0.01666 : 1;

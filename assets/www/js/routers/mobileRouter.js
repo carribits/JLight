@@ -32,6 +32,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
                     //this.rateView = new AppModules.Views.RateView({el: "#appview"});
                     this.addcustomApplianceView = new AppModules.Views.AddCustomApplianceView({el: "#appview"});
+                    this.roomStatView = new AppModules.Views.RoomStatView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -48,7 +49,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "graph": "graph",
                     "appliancestat": "appliancestat",
                     "setrate": "setrate",
-                    "addcustom?:room": "addcustom"
+                    "addcustom?:room": "addcustom",
+                    "roomstat": "roomstat"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -128,6 +130,10 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 addcustom: function(room) {
                     this.addcustomApplianceView.render(room);
+                    $.mobile.loading("hide");
+                },
+                roomstat: function(room) {
+                    this.roomStatView.render('ddd');
                     $.mobile.loading("hide");
                 }
             });

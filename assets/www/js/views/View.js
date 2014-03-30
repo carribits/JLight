@@ -316,6 +316,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#custom-appl-form #unit-title').text((ucfirst($("#custom-appl-form #time-unit").val() + 's' + ' Used')));
 
             $('#custom-appl-form a#appliance-add-form-save').click(function(event) {
+                var name = $("#custom-appl-form #appliance-name").val();
+                var dutyCycle = 1.0;
+
+                if (name.toLowerCase().indexOf("freezer") !== -1 || name.toLowerCase().indexOf("refrigerator") !== -1) {
+                    dutyCycle = 0.50;
+                }
+
                 var params = {
                     usage: $("#custom-appl-form #appliance-usage").val(),
                     usage_list: ['daily', 'weekly', 'monthly'],
@@ -324,7 +331,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     name: $("#custom-appl-form #appliance-name").val(),
                     watt: $("#custom-appl-form #appliance-watt").val(),
                     icon: "default",
-                    duty_cycle: 1,
+                    duty_cycle: dutyCycle,
                     ballast_factor: 1,
                     room: room,
                     time_unit: $("#custom-appl-form #time-unit").val()

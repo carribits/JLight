@@ -150,6 +150,7 @@ define([], function() {
         return cost.toFixed(2);
     };
     Appliance.getHours = function(appliance) {
+        var factor = (appliance['time_unit'] === 'minute') ? 0.01666 : 1;
         var hours = 0;
         switch (appliance['usage']) {
             case 'daily':
@@ -164,7 +165,7 @@ define([], function() {
             default:
                 hours = 0;
         }
-        return hours * appliance['duty_cycle'];
+        return (hours * factor) * appliance['duty_cycle'];
     };
     Appliance.getAppliances = function(room) {
         var storageIndex = room + '_appliances';
@@ -294,7 +295,7 @@ define([], function() {
     var washroom = Appliance.setUpAppliance([
         {name: "Electrical Iron", watt: 1100, hours: 1.0, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
         {name: "Clothes Washer", watt: 500, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
-        {name: "Clothes Dryer", watt: 3000, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"},
+        {name: "Clothes Dryer", watt: 3000, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "default"}
     ], [lighting]);
 
     var bathroom = Appliance.setUpAppliance([

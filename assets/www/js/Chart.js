@@ -1168,7 +1168,7 @@ window.Chart = function(context){
 				//If the text length is longer - make that equal to longest text!
 				widestXLabel = (textLength > widestXLabel)? textLength : widestXLabel;
 			}
-			if (width/data.labels.length < widestXLabel){
+			if (/*width/data.labels.length < widestXLabel*/true){
 				rotateLabels = 45;
 				if (width/data.labels.length < Math.cos(rotateLabels) * widestXLabel){
 					rotateLabels = 90;
@@ -1310,6 +1310,7 @@ window.Chart = function(context){
 	        };
 
 	        var labels = [];
+                console.log(labels);
 	        populateLabels(labelTemplateString, labels, numberOfSteps, graphMin, stepValue);
 		
 	        return {
@@ -1326,13 +1327,18 @@ window.Chart = function(context){
 
 
 	}
+        
+        function formatNumber(val) {
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            }
 
     //Populate an array of all the labels by interpolating the string.
     function populateLabels(labelTemplateString, labels, numberOfSteps, graphMin, stepValue) {
         if (labelTemplateString) {
             //Fix floating point errors by setting to fixed the on the same decimal as the stepValue.
             for (var i = 1; i < numberOfSteps + 1; i++) {
-                labels.push(tmpl(labelTemplateString, {value: (graphMin + (stepValue * i)).toFixed(getDecimalPlaces(stepValue))}));
+                labels.push(tmpl(labelTemplateString, {value: formatNumber((graphMin + (stepValue * i)).toFixed(0))}));
             }
         }
     }

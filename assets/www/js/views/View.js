@@ -542,9 +542,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
     var RoomStatView = Backbone.View.extend({
         initialize: function() {
-            this.defaults = {
-                scaleLineColor: "rgba(0,0,0,.0)"
-            };
         },
         render: function(room) {
             var template = _.template($("#roomstat").html());
@@ -560,11 +557,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var key in appliances) {
                 var appliance = appliances[key];
-                applNames.push(appliance['name'].ellipse(15));
-                appReading.push(Appliance.getItemWatt(appliance)*1000);
+                applNames.push(appliance['name'].ellipse(20));
+                appReading.push(Appliance.getItemWatt(appliance) * 1000);
             }
 
-            console.log(appReading);
+            applNames.push('');
+            appReading.push(0);
 
             var data = {
                 labels: applNames,
@@ -578,7 +576,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             };
 
 
-            var myPie = new Chart(canvas.getContext("2d")).Bar(data, this.defaults);
+            var myPie = new Chart(canvas.getContext("2d")).Bar(data);
 
             $.mobile.loading("hide");
             return this;

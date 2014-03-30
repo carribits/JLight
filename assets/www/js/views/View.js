@@ -524,8 +524,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find("#content-holder").html(template);
             var canvas = $('#canvas')[0];
 
-            canvas.width = $(window).width() * 0.65;
-            canvas.height = $(window).width() * 0.65;
+            canvas.width =  208;
+            canvas.height = 208;
 
             var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
 

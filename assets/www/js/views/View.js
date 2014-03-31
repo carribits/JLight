@@ -561,8 +561,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 appReading.push(Appliance.getItemWatt(appliance) * 1000);
             }
 
-            applNames.push('');
-            appReading.push(0);
+            if (applNames.length === 1) {
+                applNames.push('');
+                appReading.push(0);
+            }
 
             var data = {
                 labels: applNames,

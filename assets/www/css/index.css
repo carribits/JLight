@@ -506,3 +506,7 @@ a.appliance-item{
 .room-link{
     text-decoration: none;
 }
+
+#tips-list{
+    list-style-image: url(images/arrow.gif);
+}

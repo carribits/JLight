@@ -68,6 +68,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     $('#home-icon').removeClass('ui-icon-home-a');
                     $('#tips-icon').removeClass('ui-icon-tips-a');
                     $('#setting-icon').removeClass('ui-icon-setting-a');
+                    $('#graph-icon').removeClass('ui-icon-graph-a');
                 },
                 home: function() {
                     $('#home-icon').addClass('ui-icon-home-a');
@@ -91,6 +92,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.roomView.render(name);
                 },
                 graph: function(name) {
+                    $('#graph-icon').addClass('ui-icon-graph-a');
                     this.graphView.render(name);
                 },
                 tips: function() {

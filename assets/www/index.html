@@ -23,14 +23,14 @@
             if (str !== null && str !== undefined)
             return str.charAt(0).toUpperCase() + str.slice(1);
             }
-            
-             String.prototype.ellipse =
-                    function(n, useWordBoundary) {
-                        var toLong = this.length > n,
-                                s_ = toLong ? this.substr(0, n - 1) : this;
-                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-                        return  toLong ? s_ + '...' : s_;
-                    };
+
+            String.prototype.ellipse =
+            function(n, useWordBoundary) {
+            var toLong = this.length > n,
+            s_ = toLong ? this.substr(0, n - 1) : this;
+            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+            return  toLong ? s_ + '...' : s_;
+            };
         </script>
     </head>
     <body>
@@ -90,90 +90,97 @@
                     <table class="rooms">
                         <tr>
                             <td>
-                                <a href="#room?bathroom"><img src="images/bathroom.png" alt="bathroom"></a>
-                                <ul id="bathroom"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?bathroom" class="room-link"><img src="images/bathroom.png" alt="bathroom">
+                                    <ul id="bathroom"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                             <td>
-                                <a href="#room?homeoffice"><img src="images/office.png" alt="office"></a>
-                                <ul id="homeoffice"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?homeoffice" class="room-link"><img src="images/office.png" alt="office">
+                                    <ul id="homeoffice"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                             <td>
-                                <a href="#room?kitchen"><img src="images/kitchen.png" alt="kitchen"></a>
-                                <ul id="kitchen"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?kitchen" class="room-link">
+                                    <img src="images/kitchen.png" alt="kitchen">
+                                    <ul id="kitchen"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="#room?washroom"><img src="images/washroom.png" alt="washroom"></a>
-                                <ul id="washroom"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?washroom" class="room-link"><img src="images/washroom.png" alt="washroom">
+                                    <ul id="washroom"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                             <td>
-                                <a href="#room?livingroom"><img class="long-img" src="images/livingroom.png" alt="livingroom"></a>
-                                <ul id="livingroom"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?livingroom" class="room-link"><img class="long-img" src="images/livingroom.png" alt="livingroom">
+                                    <ul id="livingroom"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                             <td>
-                                <a href="#room?bedroom"><img class="long-img" src="images/bedroom.png" alt="bedroom"></a>
-                                <ul id="bedroom"> 
-                                    <li>
-                                        <span class="appliance-count">0 Appliances</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-watt">0 KW</span>
-                                    </li>
-                                    <li>
-                                        <span class="room-cost">$0</span>
-                                    </li>
-                                </ul> 
+                                <a href="#room?bedroom" class="room-link"><img class="long-img" src="images/bedroom.png" alt="bedroom"> 
+                                    <ul id="bedroom"> 
+                                        <li>
+                                            <span class="appliance-count">0 Appliances</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-watt">0 KW</span>
+                                        </li>
+                                        <li>
+                                            <span class="room-cost">$0</span>
+                                        </li>
+                                    </ul> 
+                                </a>
                             </td>
                         </tr>
                     </table>

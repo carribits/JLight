@@ -321,9 +321,10 @@ table.rooms ul
 .appliance-count, .room-watt, .room-cost{
     font-family: 'Open Sans', sans-serif;
     font-size: 0.7em;
+    font-weight: 300;
     display:block;
     margin-left: 0em;
-
+    color:#575757;
 }
 .appliance-count{
     display:block;
@@ -331,7 +332,6 @@ table.rooms ul
 }
 .room-watt{
     color: #888687;
-    font-style:italic;
 }
 
 .room-cost{
@@ -501,4 +501,8 @@ a.appliance-item{
     padding-right: 16px;
     position: absolute;
     right: 1.6em;
+}
+
+.room-link{
+    text-decoration: none;
 }

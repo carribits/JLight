@@ -234,7 +234,7 @@
 }
 
 #room-appl-listview>.ui-li-divider a {
-    color: #666600 !important;
+    color: #3eb249 !important;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.2em !important;
     text-decoration: none;
@@ -507,6 +507,17 @@ a.appliance-item{
     text-decoration: none;
 }
 
-#tips-list{
-    list-style-image: url(images/arrow.gif);
+.tips-list{
+    list-style-image: url('../images/check.png') !important;
+}
+
+.tips-container{
+    font-family: 'Open Sans', sans-serif !important;
+    margin:0.5em;
+}
+
+.header{
+    font-size: 1.0em !important;
+    font-weight: 300;
+    color: #3eb249 !important;
 }

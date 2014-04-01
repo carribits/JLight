@@ -36,7 +36,7 @@
     <body>
         <div id="appview" data-role="page" data-title="POWER HOUSE" class="jqm-demos" data-quicklinks="true">
             <div data-role="header" data-tap-toggle="false" class="jqm-header" data-position="fixed">
-                <h2><a  title="Jamaica Stock Exchange"><img src="images/logo.png"></a></h2>
+                <h2><a href="#" title="Jamaica Stock Exchange"><img src="images/logo.png"></a></h2>
                 <a  class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
             </div>
 
@@ -74,7 +74,7 @@
                 <div class="main-title">
                     <table style="width:100%;">
                         <tr>
-                            <td><span>MONTHLY CONSUMPTION</span></td>
+                            <td><span class="header">MONTHLY CONSUMPTION</span></td>
                             <td>
                                 <ul class="view-control"> 
                                     <li>
@@ -210,42 +210,51 @@
         </div>
         <!--tips-->
         <div id="tips" data-role="page" data-title="Tips">
-            <h4 id="room-name">TIPS FOR SAVING ON ENERGY</h4>
-            <h3>Living Room</h3>
-            <ul class="tips-list">
-                <li>Switch light bulbs to CFLs</li>
-                <li>Unplug unused appliances or switch them off</li>
-                <li>Seal Windows and Doors to Reduce Drafts</li>
-                <li>Make sure all windows and doors are  closed when the AC unit is on</li>
-            </ul>
-            <h3>Bedrooms</h3>
-            <ul>
-                <li>Make sure all the lights are turned off when you go to bed</li>
-                <li>Use energy saver light bulbs</li>
-            </ul>
-            <h3>Bathroom</h3>
-            <ul>
-                <li>Reduce Hot Water Use</li>
-                <li>Lower the temperature on your hot water heater</li>
-            </ul>
-             <h3>Washroom</h3>
-            <ul>
-                <li>Try to  iron clothes once a week rather than everyday</li>
-                <li>Wash full loads</li>
-                <li>Use shorter wash cycles</li>
-                <li>Use cold water to wash clothes</li>
-                <li>Use the sun to dry clothes when you can</li>
-            </ul>
-              <h3>Kitchen</h3>
-            <ul>
-                 <li>Make sure the refrigerator is closed  properly</li>
-                <li>Ensure the door seal on your oven and fridge are in good condition</li>
-                <li>Defrost food naturally instead of using the microwave</li>
-                <li>Avoid opening refrigerator doors too often</li>
-                <li>Leave space around the back of your fridge or freezer for air to circulate</li>
-                <li>Avoid placing your fridge or freezer next to your oven or stove</li>
-                <li>Use a gas stove instead of an electric stove</li>
-            </ul>
+            <div class="tips-container">
+                <h3 class="header">ENERGY SAVING TIPS</h4>
+                    <h4>Living Room</h4>
+                    <ul class="tips-list">
+                        <li>Switch light bulbs to CFLs</li>
+                        <li>Unplug unused appliances or switch them off</li>
+                        <li>Seal Windows and Doors to Reduce Drafts</li>
+                        <li>Make sure all windows and doors are  closed when the AC unit is on</li>
+                    </ul>
+                    <h4>Bedrooms</h4>
+                    <ul class="tips-list">
+                        <li>Turn off lights when you go to bed</li>
+                        <li>Use energy saver light bulbs</li>
+                    </ul>
+                    <h4>Bathroom</h4>
+                    <ul class="tips-list">
+                        <li>Reduce Hot Water Use</li>
+                        <li>Lower the temperature on your hot water heater</li>
+                    </ul>
+                    <h4>Washroom</h4>
+                    <ul class="tips-list">
+                        <li>Try to  iron clothes once a week rather than everyday</li>
+                        <li>Wash full loads when using the washing machine</li>
+                        <li>Use shorter wash cycles when using the washing machine</li>
+                        <li>Use cold water to wash clothes</li>
+                        <li>Use the sun to dry clothes when you can</li>
+                    </ul>
+                    <h4>Kitchen</h4>
+                    <ul class="tips-list">
+                        <li>Make sure the refrigerator is closed  properly</li>
+                        <li>Ensure the door seal on your oven and fridge are in good condition</li>
+                        <li>Defrost food naturally instead of using the microwave</li>
+                        <li>Avoid opening refrigerator doors too often</li>
+                        <li>Leave space around the back of your fridge or freezer for air to circulate</li>
+                        <li>Avoid placing your fridge or freezer next to your oven or stove</li>
+                        <li>Use a gas stove instead of an electric stove</li>
+                    </ul>
+                    <h4>Home Office</h4>
+                    <ul class="tips-list">
+                        <li>Configure power plan software on computers</li>
+                        <li>Switch computer monitors off when using</li>
+                        <li>Switch off lights  when room not occupied</li>
+                        <li>Use daylight where possible</li>
+                    </ul>
+            </div>
         </div>
         <!--appliance-->
         <div id="appliance" data-role="page" data-title="Appliance">
@@ -260,7 +269,7 @@
         <!--room-->
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
-                <span id="room-name">APPLIANCES</span>
+                <span id="room-name" class="header">APPLIANCES</span>
                 <div><a id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Regular Appliance</a></div>
                 <div id="room-appliances">
                     <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
@@ -272,13 +281,13 @@
         </div>
         <!--roomstat-->
         <div id="roomstat" data-role="page" data-title="Rooms Stats">
-            <h4 style="margin-bottom: 1em">MONTHLY WATTAGE CONSUMPTION</h4>
+            <h4 style="margin-bottom: 1em" class="header">MONTHLY WATTAGE CONSUMPTION</h4>
             <canvas style="margin:0" id="canvas"></canvas>
         </div>
         <!--graph-->
         <div id="graph" data-role="page" data-title="Graph">
             <div id="piechart-stat" style="margin-bottom: 2em">
-                <h4 style="margin-bottom: 1em">MONTHLY CONSUMPTION BY ROOM</h4>
+                <h4 style="margin-bottom: 1em" class="header">MONTHLY CONSUMPTION BY ROOM</h4>
                 <canvas style="margin:0" id="canvas"></canvas>
                 <ul style="margin: 1em 0 0 0.35em;width:85%" data-role="listview" data-filter="true"  data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                     <li class="ui-first-child">

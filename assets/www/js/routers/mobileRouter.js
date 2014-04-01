@@ -7,6 +7,7 @@ var Appliance = null;
 var Utility = null;
 var Application = null;
 var Colors = null;
+var Room = null;
 
 // Includes file dependencies
 define(["jquery", "backbone", "indexjs", "AppModules"],
@@ -18,6 +19,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             Utility = AppModules.Utility.Utility;
             Application = AppModules.Utility.Application;
             Colors = AppModules.Utility.Colors;
+            Room = AppModules.Utility.Room;
 
             var CategoryRouter = Backbone.Router.extend({
                 initialize: function() {

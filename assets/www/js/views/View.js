@@ -211,7 +211,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var storageIndex = room + '_appliances';
             var count = 0;
 
-            var title = room.toUpperCase() + ' ' + 'APPLIANCES';
+            var title = Room.getName(room).toUpperCase() + ' ' + 'APPLIANCES';
             var template = _.template($("#room").html());
             this.$el.find("#content-holder").html(template);
             $('#room-link').attr('href', '#discoverappliance?' + room);

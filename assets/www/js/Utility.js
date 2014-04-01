@@ -208,6 +208,17 @@ define([], function() {
         return result;
     };
 
+    var Room = function() {
+
+    };
+
+    Room.prototype = {
+    };
+
+    Room.getName = function(key) {
+        return rooms[key];
+    };
+
     var lighting = [
         {name: "Compact Fluorescent Light Bulbs (CFL 24 Watt)", hours: 5, watt: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
         {name: "Compact Fluorescent Light Bulbs (CFL 18 Watt)", hours: 5, watt: 18, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
@@ -326,6 +337,15 @@ define([], function() {
         bedroom: "#d24726"
     };
 
+    var rooms = {
+        bathroom: "bathroom",
+        homeoffice: "home office",
+        kitchen: "kitchen",
+        washroom: "washroom",
+        livingroom: "livingroom",
+        bedroom: "bedroom"
+    };
+
 
     return {
         Storage: Storage,
@@ -333,6 +353,7 @@ define([], function() {
         Appliance: Appliance,
         Utility: Utility,
         Application: Application,
-        Colors: Colors
+        Colors: Colors,
+        Room: Room
     };
 });

@@ -7,7 +7,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
     var BaseView = Backbone.View.extend({
         validateAppliance: function(params) {
             console.log(params);
-            
+
             if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
                 Utility.alert("Values entered are incorrect");
                 return false;
@@ -22,12 +22,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 Utility.alert("Hours must be between 1 and 24 for daily usage");
                 return false;
             }
-            
+
             if (params['usage'] === 'daily' && params['hours'] > 1440 && params['time_unit'] === 'minute') {
                 Utility.alert("Minutes must be between 1 and 1440 for daily usage");
                 return false;
             }
-            
+
             if (params['usage'] === 'weekly' && params['hours'] > 168) {
                 Utility.alert("Hours must be between 1 and 168 for weekly usage");
                 return false;
@@ -262,16 +262,51 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var template = _.template($("#setrate").html());
             this.$el.find("#content-holder").html(template);
             var rate = config.rate;
+            var countryList = '';
+            var stateList = '';
+            var country = '';
+            var currency = null;
 
             var formContent = _.template($("script#rate-view-tmp").html());
             this.$el.find('#rateform').html(formContent);
 
-            $("#country").val((rate).toFixed(2));
-            $("#rateform #country").selectmenu();
-            $("#rateform #rate-amt").textinput();
-            $("#rateform #rate-amt").val(rate.toFixed(2));
+            for (var i = 0; i < Countries.length; i++) {
+                var country = Countries[i];
+                if (country['currency'] === 'USD') {
+                    country['rate'] = (parseFloat(country['rate']) / 100).toFixed(4);
+                }
+                countryList += _.template($("script#rate-form-option-tmp").html(), country);
+            }
+            this.$el.find('#rateform #country').append(countryList);
 
-            $('#rateform #country').on('change', function() {
+
+            for (var i = 0; i < USStates.length; i++) {
+                var state = USStates[i];
+                stateList += _.template($("script#rate-form-option-tmp").html(), state);
+            }
+            this.$el.find('#rateform #state').append(stateList);
+
+            //$("#country").val((rate).toFixed(2));
+            $("#rateform #state-list").hide();
+            $("#rateform #country").selectmenu();
+            $("#rateform #state").selectmenu();
+            $("#rateform #rate-amt").textinput();
+            $("#rateform #rate-amt").val(rate.toFixed(4));
+
+            /*$("#rateform #rate-amt").keypress(function() {
+             currency = null;
+             });*/
+
+            $('#rateform #country, #rateform #state').on('change', function() {
+                country = $(this).find(":selected").text();
+                currency = $(this).find(":selected").attr('data-currency');
+
+                if (country === 'United States') {
+                    $("#rateform #state-list").show();
+                } else {
+                    $("#rateform #state-list").hide();
+                }
+
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
             });
@@ -282,6 +317,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     Application.saveRate({rate: parseFloat(rate)});
                 }
             });
+
 
             $.mobile.loading("hide");
             return this;

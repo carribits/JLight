@@ -40,6 +40,10 @@ define([], function() {
         return false;
     };
 
+    Utility.alert = function(msg) {
+        navigator.notification.alert(msg);
+    };
+
     /* Appliance */
     var Application = function() {
 

@@ -6,54 +6,54 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
     var BaseView = Backbone.View.extend({
         validateAppliance: function(params) {
+            console.log(params);
+            
             if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
-                alert("Values entered are incorrect");
+                Utility.alert("Values entered are incorrect");
                 return false;
             }
 
             if (params['hours'] <= 0 || params['quantity'] <= 0) {
-                alert("Values entered are incorrect");
+                Utility.alert("Values entered are incorrect");
                 return false;
             }
 
-            if (params['usage'] === 'daily' && params['hours'] > 24) {
-                alert("Hours must be between 1 and 24 for daily usage");
+            if (params['usage'] === 'daily' && params['hours'] > 24 && params['time_unit'] === 'hour') {
+                Utility.alert("Hours must be between 1 and 24 for daily usage");
                 return false;
             }
+            
+            if (params['usage'] === 'daily' && params['hours'] > 1440 && params['time_unit'] === 'minute') {
+                Utility.alert("Minutes must be between 1 and 1440 for daily usage");
+                return false;
+            }
+            
             if (params['usage'] === 'weekly' && params['hours'] > 168) {
-                alert("Hours must be between 1 and 168 for weekly usage");
+                Utility.alert("Hours must be between 1 and 168 for weekly usage");
                 return false;
             }
 
             if (params['usage'] === 'monthly' && params['hours'] > 730) {
-                alert("Hours must be between 1 and 730 for monthly usage");
+                Utility.alert("Hours must be between 1 and 730 for monthly usage");
                 return false;
             }
 
             return true;
         },
         validateCustomAppliance: function(params) {
-            if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
-                alert("Values entered are incorrect");
-                return false;
-            }
+            var validation = BaseView.prototype.validateAppliance.call(this, params);
 
-            if (params['hours'] <= 0 || params['quantity'] <= 0) {
-                alert("Values entered are incorrect");
-                return false;
-            }
+            if (validation) {
+                if (!Utility.isNumeric(params['watt']) || params['watt'] <= 0) {
+                    Utility.alert("Watt amount is incorrect");
+                    return false;
+                }
 
-            if (params['usage'] === 'daily' && params['hours'] > 24) {
-                alert("Hours must be between 1 and 24 for daily usage");
-                return false;
-            }
-            if (params['usage'] === 'weekly' && params['hours'] > 168) {
-                alert("Hours must be between 1 and 168 for weekly usage");
-                return false;
-            }
-
-            if (params['usage'] === 'monthly' && params['hours'] > 730) {
-                alert("Hours must be between 1 and 730 for monthly usage");
+                if ($.trim(params['name']) === '') {
+                    Utility.alert("Appliance name is incorrect");
+                    return false;
+                }
+            } else {
                 return false;
             }
 
@@ -330,7 +330,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     hours: parseFloat($("#custom-appl-form #appliance-hours").val()),
                     quantity: parseInt($("#custom-appl-form #appliance-quantity").val()),
                     name: $("#custom-appl-form #appliance-name").val(),
-                    watt: $("#custom-appl-form #appliance-watt").val(),
+                    watt: parseFloat($("#custom-appl-form #appliance-watt").val()),
                     icon: "default",
                     duty_cycle: dutyCycle,
                     ballast_factor: 1,

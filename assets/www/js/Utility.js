@@ -53,7 +53,7 @@ define([], function() {
     };
 
     Application.view = 'icon';
-    Application.defaultRate = {rate: 44.7, country: 'Jamaica'};
+    Application.defaultRate = {rate: 0.12, country: 'United States', currency: 'USD'};
 
     Application.saveRate = function(rateInfo) {
         Storage.writeJson('rate', rateInfo);
@@ -65,6 +65,15 @@ define([], function() {
             return Application.defaultRate;
         }
         return rate;
+    };
+
+    Application.getCurrency = function() {
+        var rateObj = Storage.readJson('rate');
+
+        if (rateObj !== undefined && rateObj !== null) {
+            return rateObj.currency;
+        }
+        return Application.defaultRate.currency;
     };
 
     var Appliance = function() {
@@ -346,7 +355,7 @@ define([], function() {
         homeoffice: "home office",
         kitchen: "kitchen",
         washroom: "washroom",
-        livingroom: "livingroom",
+        livingroom: "living room",
         bedroom: "bedroom"
     };
 
@@ -419,7 +428,7 @@ define([], function() {
         {name: "Tuvalu", rate: 36.55, currency: "USD"},
         {name: "Ukraine", rate: 3.05, currency: "USD"},
         {name: "United Kingdom", rate: 20, currency: "USD"},
-        {name: "United States", rate: 10, currency: "USD"},
+        {name: "United States", rate: 12, currency: "USD"},
         {name: "United States Virgin Islands", rate: 50.8, currency: "USD"},
         {name: "Uruguay", rate: 17.07, currency: "USD"},
         {name: "Uzbekistan", rate: 4.95, currency: "USD"},

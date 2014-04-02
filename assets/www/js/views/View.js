@@ -124,6 +124,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#room-appl-listview').append(applianceItem);
         },
         renderIconView: function() {
+            var currency = Application.getCurrency();
             this.houseInfo = {
                 count: 0,
                 cost: 0,
@@ -145,7 +146,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             this.$el.find('ul#meter-total .appliance-count').text(this.houseInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#meter-total .room-watt').text(this.houseInfo['watt'] + ' KW');
-            this.$el.find('ul#meter-total .room-cost').text('$ ' + this.houseInfo['cost']);
+            this.$el.find('ul#meter-total .room-cost').text('$ ' + this.houseInfo['cost'] + ' ' + currency);
         },
         computeRoom: function(room) {
             var roomInfo = Appliance.getRoomInfo(room);
@@ -264,18 +265,25 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var rate = config.rate;
             var countryList = '';
             var stateList = '';
-            var country = '';
-            var currency = '';
+            var country = config.country;
+            var currency = config.currency;
+
+            rate = rate.toFixed(2);
 
             var formContent = _.template($("script#rate-view-tmp").html());
             this.$el.find('#rateform').html(formContent);
 
+            if (currency !== null && currency !== '') {
+                $("#rateform #currency-ind").text('Current rate is in ' + currency);
+
+            }
+
             for (var i = 0; i < Countries.length; i++) {
-                var country = {name: Countries[i]['name'], rate: Countries[i]['rate'], currency: Countries[i]['currency']};
-                if (country['currency'] === 'USD') {
-                    country['rate'] = (parseFloat(country['rate']) / 100).toFixed(2);
+                var countryObj = {name: Countries[i]['name'], rate: Countries[i]['rate'], currency: Countries[i]['currency']};
+                if (countryObj['currency'] === 'USD') {
+                    countryObj['rate'] = (parseFloat(countryObj['rate']) / 100).toFixed(2);
                 }
-                countryList += _.template($("script#rate-form-option-tmp").html(), country);
+                countryList += _.template($("script#rate-form-option-tmp").html(), countryObj);
             }
             this.$el.find('#rateform #country').append(countryList);
 
@@ -294,13 +302,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#rateform #country").selectmenu();
             $("#rateform #state").selectmenu();
             $("#rateform #rate-amt").textinput();
-            $("#rateform #rate-amt").val(rate.toFixed(2));
-
-            $("#rateform #rate-amt").keypress(function() {
-                $("#rateform #currency-ind").hide();
-                currency = '';
-                country = '';
-            });
+            $("#rateform #rate-amt").val(rate);
 
             $('#rateform #country, #rateform #state').on('change', function() {
                 country = $(this).find(":selected").text();
@@ -309,6 +311,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
                 $("#rateform #currency-ind").text('Current rate is in ' + currency);
+                $("#rateform #currency-ind").show();
             });
 
             $('#rateform #country').on('change', function() {
@@ -319,13 +322,38 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 }
             });
 
-            $('#rateform a#appliance-rate-form-save').click(function() {
+            $('#rateform a#appliance-rate-form-save').click(function(event) {
                 rate = $("#rateform #rate-amt").val();
-                if (Utility.isNumeric(rate)) {
+                if (Utility.isNumeric(rate) && rate > 0) {
                     Application.saveRate({rate: parseFloat(rate), currency: currency, country: country});
+                } else {
+                    event.preventDefault();
+                    Utility.alert("Rate is incorrect");
                 }
             });
 
+            $("#country option").each(function() {
+                this.selected = false;
+            });
+            $("#country option").each(function() {
+                this.selected = (this.text === country);
+            });
+            $('#country').selectmenu('refresh');
+
+            //var lastValue = $("#rateform #rate-amt").val();
+            $("#rateform #rate-amt").on('change keyup paste mouseup', function() {
+                if ($(this).val() !== rate) {
+                    rate = $(this).val();
+                    $("#rateform #currency-ind").hide();
+                    currency = '';
+                    country = '';
+                }
+            });
+            
+            if (country === 'United States') {
+                $("#rateform #state-list").show();
+            }
+            
             $.mobile.loading("hide");
             return this;
         }

@@ -1,3 +1,6 @@
+*{
+    font-family: 'Open Sans', sans-serif !important;
+}
 .jqm-demos .jqm-header {
     background: #fff;
     border-top: 4px solid #3eb249;
@@ -522,7 +525,12 @@ a.appliance-item{
 }
 
 .header{
+    font-family: 'Open Sans', sans-serif !important;
     font-size: 1.0em !important;
-    font-weight: 300;
+    font-weight: 300 !important;
     color: #3eb249 !important;
+}
+
+.tips-container h4{
+    font-weight: 600 !important;
 }

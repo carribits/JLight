@@ -5,7 +5,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=1">
         <!--<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, target-densitydpi=medium-dpi, user-scalable=0" />-->
-        <!--<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+        <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/sha256.js"></script>
         <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
         <link rel="shortcut icon" href="../favicon.ico">
@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-            var parts = val.toString().split(".");
-            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-            if (str !== null && str !== undefined)
-            return str.charAt(0).toUpperCase() + str.slice(1);
+                if (str !== null && str !== undefined)
+                    return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-            function(n, useWordBoundary) {
-            var toLong = this.length > n,
-            s_ = toLong ? this.substr(0, n - 1) : this;
-            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-            return  toLong ? s_ + '...' : s_;
-            };
+                    function(n, useWordBoundary) {
+                        var toLong = this.length > n,
+                                s_ = toLong ? this.substr(0, n - 1) : this;
+                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+                        return  toLong ? s_ + '...' : s_;
+                    };
         </script>
     </head>
     <body>
@@ -211,49 +211,49 @@
         <!--tips-->
         <div id="tips" data-role="page" data-title="Tips">
             <div class="tips-container">
-                <h3 class="header">ENERGY SAVING TIPS</h4>
-                    <h4>Living Room</h4>
-                    <ul class="tips-list">
-                        <li>Switch light bulbs to CFLs</li>
-                        <li>Unplug unused appliances or switch them off</li>
-                        <li>Seal Windows and Doors to Reduce Drafts</li>
-                        <li>Make sure all windows and doors are  closed when the AC unit is on</li>
-                    </ul>
-                    <h4>Bedrooms</h4>
-                    <ul class="tips-list">
-                        <li>Turn off lights when you go to bed</li>
-                        <li>Use energy saver light bulbs</li>
-                    </ul>
-                    <h4>Bathroom</h4>
-                    <ul class="tips-list">
-                        <li>Reduce Hot Water Use</li>
-                        <li>Lower the temperature on your hot water heater</li>
-                    </ul>
-                    <h4>Washroom</h4>
-                    <ul class="tips-list">
-                        <li>Try to  iron clothes once a week rather than everyday</li>
-                        <li>Wash full loads when using the washing machine</li>
-                        <li>Use shorter wash cycles for smaller load sizes</li>
-                        <li>Use cold water to wash clothes</li>
-                        <li>Use the sun to dry clothes when you can</li>
-                    </ul>
-                    <h4>Kitchen</h4>
-                    <ul class="tips-list">
-                        <li>Make sure the refrigerator is closed  properly</li>
-                        <li>Ensure the door seal on your oven and fridge are in good condition</li>
-                        <li>Defrost food naturally instead of using the microwave</li>
-                        <li>Avoid opening refrigerator doors too often</li>
-                        <li>Leave space around the back of your fridge or freezer for air to circulate</li>
-                        <li>Avoid placing your fridge or freezer next to your oven or stove</li>
-                        <li>Use a gas stove instead of an electric stove</li>
-                    </ul>
-                    <h4>Home Office</h4>
-                    <ul class="tips-list">
-                        <li>Configure power plan software on computers</li>
-                        <li>Switch computer monitors off when not in use</li>
-                        <li>Switch off lights  when room not occupied</li>
-                        <li>Use daylight where possible</li>
-                    </ul>
+                <span class="header">ENERGY SAVING TIPS</span>
+                <h4>Living Room</h4>
+                <ul class="tips-list">
+                    <li>Switch light bulbs to CFLs</li>
+                    <li>Unplug unused appliances or switch them off</li>
+                    <li>Seal Windows and Doors to Reduce Drafts</li>
+                    <li>Make sure all windows and doors are  closed when the AC unit is on</li>
+                </ul>
+                <h4>Bedrooms</h4>
+                <ul class="tips-list">
+                    <li>Turn off lights when you go to bed</li>
+                    <li>Use energy saver light bulbs</li>
+                </ul>
+                <h4>Bathroom</h4>
+                <ul class="tips-list">
+                    <li>Reduce Hot Water Use</li>
+                    <li>Lower the temperature on your hot water heater</li>
+                </ul>
+                <h4>Washroom</h4>
+                <ul class="tips-list">
+                    <li>Try to  iron clothes once a week rather than everyday</li>
+                    <li>Wash full loads when using the washing machine</li>
+                    <li>Use shorter wash cycles for smaller load sizes</li>
+                    <li>Use cold water to wash clothes</li>
+                    <li>Use the sun to dry clothes when you can</li>
+                </ul>
+                <h4>Kitchen</h4>
+                <ul class="tips-list">
+                    <li>Make sure the refrigerator is closed  properly</li>
+                    <li>Ensure the door seal on your oven and fridge are in good condition</li>
+                    <li>Defrost food naturally instead of using the microwave</li>
+                    <li>Avoid opening refrigerator doors too often</li>
+                    <li>Leave space around the back of your fridge or freezer for air to circulate</li>
+                    <li>Avoid placing your fridge or freezer next to your oven or stove</li>
+                    <li>Use a gas stove instead of an electric stove</li>
+                </ul>
+                <h4>Home Office</h4>
+                <ul class="tips-list">
+                    <li>Configure power plan software on computers</li>
+                    <li>Switch computer monitors off when not in use</li>
+                    <li>Switch off lights when room not occupied</li>
+                    <li>Use daylight where possible</li>
+                </ul>
             </div>
         </div>
         <!--appliance-->
@@ -461,7 +461,7 @@
             <option value="0">Select Country</option>
             </select>
             </div>
-            
+
             <div class="ui-field-contain" id="state-list">
             <select name="state" id="state" data-mini="true">
             <option value="0">Select State</option>

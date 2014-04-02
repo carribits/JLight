@@ -534,3 +534,9 @@ a.appliance-item{
 .tips-container h4{
     font-weight: 600 !important;
 }
+
+#currency-ind{
+    font-size: 0.7em !important;
+    font-weight: 200 !important;
+    font-style: italic;
+}

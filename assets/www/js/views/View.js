@@ -265,7 +265,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var countryList = '';
             var stateList = '';
             var country = '';
-            var currency = null;
+            var currency = '';
 
             var formContent = _.template($("script#rate-view-tmp").html());
             this.$el.find('#rateform').html(formContent);
@@ -296,17 +296,19 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#rateform #rate-amt").textinput();
             $("#rateform #rate-amt").val(rate.toFixed(2));
 
-            /*$("#rateform #rate-amt").keypress(function() {
-             currency = null;
-             });*/
+            $("#rateform #rate-amt").keypress(function() {
+                $("#rateform #currency-ind").hide();
+                currency = '';
+                country = '';
+            });
 
             $('#rateform #country, #rateform #state').on('change', function() {
                 country = $(this).find(":selected").text();
                 currency = $(this).find(":selected").attr('data-currency');
-                currency = $(this).find(":selected").attr('data-currency');
 
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
+                $("#rateform #currency-ind").text('Current rate is in ' + currency);
             });
 
             $('#rateform #country').on('change', function() {
@@ -320,7 +322,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#rateform a#appliance-rate-form-save').click(function() {
                 rate = $("#rateform #rate-amt").val();
                 if (Utility.isNumeric(rate)) {
-                    Application.saveRate({rate: parseFloat(rate), currency: currency});
+                    Application.saveRate({rate: parseFloat(rate), currency: currency, country: country});
                 }
             });
 

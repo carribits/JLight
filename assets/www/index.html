@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-                if (str !== null && str !== undefined)
-                    return str.charAt(0).toUpperCase() + str.slice(1);
+            if (str !== null && str !== undefined)
+            return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-                    function(n, useWordBoundary) {
-                        var toLong = this.length > n,
-                                s_ = toLong ? this.substr(0, n - 1) : this;
-                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-                        return  toLong ? s_ + '...' : s_;
-                    };
+            function(n, useWordBoundary) {
+            var toLong = this.length > n,
+            s_ = toLong ? this.substr(0, n - 1) : this;
+            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+            return  toLong ? s_ + '...' : s_;
+            };
         </script>
     </head>
     <body>
@@ -466,6 +466,9 @@
             <select name="state" id="state" data-mini="true">
             <option value="0">Select State</option>
             </select>
+            </div>
+
+            <div class="ui-field-contain" id="currency-ind">
             </div>
 
             <div class="app-form-button">

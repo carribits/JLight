@@ -271,9 +271,9 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#rateform').html(formContent);
 
             for (var i = 0; i < Countries.length; i++) {
-                var country = Countries[i];
+                var country = {name: Countries[i]['name'], rate: Countries[i]['rate'], currency: Countries[i]['currency']};
                 if (country['currency'] === 'USD') {
-                    country['rate'] = (parseFloat(country['rate']) / 100).toFixed(4);
+                    country['rate'] = (parseFloat(country['rate']) / 100).toFixed(2);
                 }
                 countryList += _.template($("script#rate-form-option-tmp").html(), country);
             }
@@ -281,7 +281,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
 
             for (var i = 0; i < USStates.length; i++) {
-                var state = USStates[i];
+                var state = {name: USStates[i]['name'], rate: USStates[i]['rate'], currency: USStates[i]['currency']};
+                if (state['currency'] === 'USD') {
+                    state['rate'] = (parseFloat(state['rate']) / 100).toFixed(2);
+                }
                 stateList += _.template($("script#rate-form-option-tmp").html(), state);
             }
             this.$el.find('#rateform #state').append(stateList);
@@ -291,7 +294,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $("#rateform #country").selectmenu();
             $("#rateform #state").selectmenu();
             $("#rateform #rate-amt").textinput();
-            $("#rateform #rate-amt").val(rate.toFixed(4));
+            $("#rateform #rate-amt").val(rate.toFixed(2));
 
             /*$("#rateform #rate-amt").keypress(function() {
              currency = null;
@@ -300,24 +303,26 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             $('#rateform #country, #rateform #state').on('change', function() {
                 country = $(this).find(":selected").text();
                 currency = $(this).find(":selected").attr('data-currency');
-
-                if (country === 'United States') {
-                    $("#rateform #state-list").show();
-                } else {
-                    $("#rateform #state-list").hide();
-                }
+                currency = $(this).find(":selected").attr('data-currency');
 
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
             });
 
-            $('#rateform a#appliance-rate-form-save').click(function() {
-                rate = $("#rateform #rate-amt").val();
-                if (Utility.isNumeric(rate)) {
-                    Application.saveRate({rate: parseFloat(rate)});
+            $('#rateform #country').on('change', function() {
+                if (country === 'United States') {
+                    $("#rateform #state-list").show();
+                } else {
+                    $("#rateform #state-list").hide();
                 }
             });
 
+            $('#rateform a#appliance-rate-form-save').click(function() {
+                rate = $("#rateform #rate-amt").val();
+                if (Utility.isNumeric(rate)) {
+                    Application.saveRate({rate: parseFloat(rate), currency: currency});
+                }
+            });
 
             $.mobile.loading("hide");
             return this;

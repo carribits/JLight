@@ -332,6 +332,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 }
             });
 
+            $('#rateform a#appliance-rate-cancel').click(function(event) {
+                Application.initializeRate();
+                //event.preventDefault();
+            });
+
             $("#country option").each(function() {
                 this.selected = false;
             });
@@ -349,11 +354,11 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     country = '';
                 }
             });
-            
+
             if (country === 'United States') {
                 $("#rateform #state-list").show();
             }
-            
+
             $.mobile.loading("hide");
             return this;
         }
@@ -408,7 +413,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     room: room,
                     time_unit: $("#custom-appl-form #time-unit").val()
                 };
-                var appid = Appliance.getKey(params['name'].toLowerCase() + params['watt'])
+                var appid = Appliance.getKey(params['name'].toLowerCase() + params['watt']);
 
                 if (BaseView.prototype.validateCustomAppliance.call(this, params)) {
                     Appliance.saveAppliance(params, room, appid);
@@ -553,7 +558,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         render: function() {
             var pieData = [];
-            var totalWatt = 0;
+            var totalWatt = 0.00;
 
             var bathroom = Appliance.getRoomInfo('bathroom');
             totalWatt += bathroom['watt'];
@@ -599,14 +604,17 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             canvas.width = 208;
             canvas.height = 208;
 
-            var myPie = new Chart(canvas.getContext("2d")).Pie(pieData);
+            new Chart(canvas.getContext("2d")).Pie(pieData);
 
             $.mobile.loading("hide");
             return this;
         },
         percentage: function(value, total) {
-            console.log([value, total]);
-            var perc = value / total * 100;
+            if (total === 0) {
+                return '0%';
+            }
+            var perc = (value / total) * 100;
+            console.log(perc);
             return perc.toFixed(2) + '%';
         }
     });

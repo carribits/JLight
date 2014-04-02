@@ -45,6 +45,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 routes: {
                     "": "home",
                     "home": "home",
+                    "index": "home",
                     "tips": "tips",
                     "setting": "setting",
                     "room?:room": "room",
@@ -77,8 +78,13 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     $('#graph-icon').removeClass('ui-icon-graph-a');
                 },
                 home: function() {
-                    $('#home-icon').addClass('ui-icon-home-a');
-                    this.homeView.render();
+                    if (!Application.applicationConfigured()) {
+                        $('#home-icon').addClass('ui-icon-setting-a');
+                        this.setting();
+                    } else {
+                        $('#home-icon').addClass('ui-icon-home-a');
+                        this.homeView.render();
+                    }
                     $.mobile.loading("hide");
                 },
                 appliance: function(name) {

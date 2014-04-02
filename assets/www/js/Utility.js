@@ -67,6 +67,18 @@ define([], function() {
         return rate;
     };
 
+    Application.initializeRate = function() {
+        var rate = Storage.readJson('rate');
+        if (rate === null || rate === undefined) {
+            Application.saveRate(Application.defaultRate);
+        }
+    };
+
+    Application.applicationConfigured = function() {
+        var rate = Storage.readJson('rate');
+        return !!(rate !== null & rate !== undefined);
+    };
+
     Application.getCurrency = function() {
         var rateObj = Storage.readJson('rate');
 
@@ -74,6 +86,10 @@ define([], function() {
             return rateObj.currency;
         }
         return Application.defaultRate.currency;
+    };
+    
+    Application.reload = function() {
+        location.reload(false);
     };
 
     var Appliance = function() {
@@ -442,7 +458,7 @@ define([], function() {
         {name: "Alaska", rate: 18.21, currency: "USD"},
         {name: "California", rate: 16.64, currency: "USD"},
         {name: "Connecticut", rate: 18.3, currency: "USD"},
-        {name: "Maine", rate: 14.45},
+        {name: "Maine", rate: 14.45, currency: "USD"},
         {name: "Massachusetts", rate: 16.38, currency: "USD"},
         {name: "New Hampshire", rate: 16.54, currency: "USD"},
         {name: "Rhode Island", rate: 20.16, currency: "USD"},

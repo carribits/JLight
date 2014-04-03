@@ -5,7 +5,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=1">
         <!--<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, target-densitydpi=medium-dpi, user-scalable=0" />-->
-        <!--<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+        <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/sha256.js"></script>
         <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.0.min.css">
         <link rel="shortcut icon" href="../favicon.ico">
@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-            var parts = val.toString().split(".");
-            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-            if (str !== null && str !== undefined)
-            return str.charAt(0).toUpperCase() + str.slice(1);
+                if (str !== null && str !== undefined)
+                    return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-            function(n, useWordBoundary) {
-            var toLong = this.length > n,
-            s_ = toLong ? this.substr(0, n - 1) : this;
-            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-            return  toLong ? s_ + '...' : s_;
-            };
+                    function(n, useWordBoundary) {
+                        var toLong = this.length > n,
+                                s_ = toLong ? this.substr(0, n - 1) : this;
+                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+                        return  toLong ? s_ + '...' : s_;
+                    };
         </script>
     </head>
     <body>
@@ -62,9 +62,9 @@
             <div id="main_head" data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
                 <ul class="jqm-list ui-alt-icon ui-nodisc-icon">
                     <li data-filtertext="demos homepage"><a class="" href="index.html">Home</a></li>
+                    <li data-filtertext="demos homepage"><a id="reset-link" class="" href="index.html#reset">Clear data</a></li>
                     <li data-filtertext="demos homepage"><a id="disclaimer-link" class="" href="index.html#disclaimer">Disclaimer</a></li>
                     <li data-filtertext="demos homepage"><a id="about-link" class="" href="index.html#about">About</a></li>
-                    <li data-filtertext="demos homepage"><a id="reset-link" class="" href="index.html#reset">Clear data</a></li>
                     <li data-role="collapsible" data-collapsed-icon="carat-d" data--icon="carat-u" data-iconpos="right" data-inset="false">
                 </ul>
             </div>
@@ -195,7 +195,7 @@
                                 <span class="room-watt" style="font-size: 0.8em">0 KW</span>
                             </li>
                             <li>
-                                <span class="room-cost" style="font-size: 1.4em">$0</span>
+                                <span class="room-cost" style="font-size: 1.2em">$0</span>
                             </li>
                         </ul> 
                     </div>
@@ -464,7 +464,7 @@
             <a href="#editappliance?<%=row['room']%>?<%=key%>" class="ui-btn /*ui-btn-icon-right*/ ui-icon-carat-r">
             <span class="appliance-list-item app-li-app-name"><span><%=row['name']%><span> x<%=row['quantity']%></span></span></span>
             <span class="appliance-list-item app-li-app-watt"><%=row['watt']%> Kilowatts</span>
-            <span class="appliance-list-item app-li-app-cost">$<%=row['cost']%></span>
+            <span class="appliance-list-item app-li-app-cost"><%=row['symbol']%><%=row['cost']%></span>
             </a>
             </li>
             <% }); %>

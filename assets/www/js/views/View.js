@@ -110,11 +110,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         renderRoom: function(room, roomName, elClass) {
             var appliances = Appliance.getAppliances(room);
+            var symbol = Application.getSymbol();
 
             for (var key in appliances) {
                 var appliance = appliances[key];
                 appliance['cost'] = Appliance.getItemCost(appliance);
                 appliance['watt'] = Appliance.getItemWatt(appliance);
+                appliance['symbol'] = symbol + ' ';
             }
 
             var divider = _.template($("script#appliance-divider").html(), {room: room, roomName: roomName, class: elClass});
@@ -125,6 +127,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         },
         renderIconView: function() {
             var currency = Application.getCurrency();
+            var symbol = Application.getSymbol();
+
             this.houseInfo = {
                 count: 0,
                 cost: 0,
@@ -146,13 +150,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             this.$el.find('ul#meter-total .appliance-count').text(this.houseInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#meter-total .room-watt').text(this.houseInfo['watt'] + ' KW');
-            this.$el.find('ul#meter-total .room-cost').text('$ ' + this.houseInfo['cost'] + ' ' + currency);
+            this.$el.find('ul#meter-total .room-cost').text(symbol + ' ' + toMoney(this.houseInfo['cost']) + ' ' + currency);
         },
         computeRoom: function(room) {
+            var symbol = Application.getSymbol();
             var roomInfo = Appliance.getRoomInfo(room);
             this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' KW');
-            this.$el.find('ul#' + room + ' .room-cost').text('$ ' + roomInfo['cost']);
+            this.$el.find('ul#' + room + ' .room-cost').text(symbol + ' ' + toMoney(roomInfo['cost']));
 
             this.houseInfo.count += roomInfo['count'];
             this.houseInfo.watt += parseFloat(roomInfo['watt']);
@@ -309,7 +314,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
-                $("#rateform #currency-ind").text('Current rate is in ' + currency);
+                $("#rateform #currency-ind").text('Current rate is ' + currency);
                 $("#rateform #currency-ind").show();
             });
 

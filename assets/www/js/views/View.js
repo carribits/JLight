@@ -274,8 +274,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#rateform').html(formContent);
 
             if (currency !== null && currency !== '') {
-                $("#rateform #currency-ind").text('Current rate is in ' + currency);
-
+                $("#rateform #currency-ind").text('Current rate is ' + currency);
             }
 
             for (var i = 0; i < Countries.length; i++) {
@@ -334,7 +333,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             $('#rateform a#appliance-rate-cancel').click(function(event) {
                 Application.initializeRate();
-                //event.preventDefault();
             });
 
             $("#country option").each(function() {
@@ -352,6 +350,15 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     $("#rateform #currency-ind").hide();
                     currency = '';
                     country = '';
+
+                    $("#country option").each(function() {
+                        this.selected = false;
+                    });
+                    $("#country option").each(function() {
+                        this.selected = (this.value === 0);
+                        console.log(this.selected);
+                    });
+                    $('#country').selectmenu('refresh');
                 }
             });
 

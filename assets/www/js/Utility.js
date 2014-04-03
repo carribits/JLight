@@ -57,10 +57,16 @@ define([], function() {
 
     Application.view = 'icon';
     Application._id_ = 'power_house';
+    Application._version_ = '1.0.0';
     Application.defaultRate = {rate: 0.12, country: 'United States', currency: 'USD'};
 
     Application.saveRate = function(rateInfo) {
         Storage.writeJson(Application._id_ + '_rate', rateInfo);
+        Application.setVersion();
+    };
+
+    Application.setVersion = function() {
+        Storage.writeJson('version', Application._version_);
     };
 
     Application.getRate = function() {
@@ -75,6 +81,7 @@ define([], function() {
         var rate = Storage.readJson(Application._id_ + '_rate');
         if (rate === null || rate === undefined) {
             Application.saveRate(Application.defaultRate);
+            Application.setVersion();
         }
     };
 

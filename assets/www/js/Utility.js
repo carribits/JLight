@@ -277,13 +277,13 @@ define([], function() {
     };
 
     var lighting = [
-        {name: "Compact Fluorescent Light Bulbs (CFL 24 Watt)", hours: 5, watt: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Compact Fluorescent Light Bulbs (CFL 18 Watt)", hours: 5, watt: 18, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Compact Fluorescent Light Bulbs (CFL 14 Watt)", hours: 5, watt: 14, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Incandescent Light Bulb (100 Watt)", hours: 5, watt: 100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Incandescent Light Bulb (60 Watt)", hours: 5, watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Incandescent Light Bulb (40 Watt)", hours: 5, watt: 40, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"},
-        {name: "Incandescent Light Bulb (15 Watt)", hours: 5, watt: 15, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "bulb"}
+        {name: "Compact Fluorescent Light Bulbs (CFL 24 Watt)", hours: 5, watt: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "fluorescent"},
+        {name: "Compact Fluorescent Light Bulbs (CFL 18 Watt)", hours: 5, watt: 18, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "fluorescent"},
+        {name: "Compact Fluorescent Light Bulbs (CFL 14 Watt)", hours: 5, watt: 14, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "fluorescent"},
+        {name: "Incandescent Light Bulb (100 Watt)", hours: 5, watt: 100, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "incandescent"},
+        {name: "Incandescent Light Bulb (60 Watt)", hours: 5, watt: 60, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "incandescent"},
+        {name: "Incandescent Light Bulb (40 Watt)", hours: 5, watt: 40, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "incandescent"},
+        {name: "Incandescent Light Bulb (15 Watt)", hours: 5, watt: 15, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "incandescent"}
     ];
 
     var entertainment = [

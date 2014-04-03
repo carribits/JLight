@@ -175,7 +175,7 @@ window.Chart = function(context){
 			scaleShowLabels : true,
 			scaleLabel : "<%=value%>",
 			scaleFontFamily : "'Arial'",
-			scaleFontSize : 12,
+			scaleFontSize : 6,
 			scaleFontStyle : "normal",
 			scaleFontColor : "#666",
 			scaleShowLabelBackdrop : true,

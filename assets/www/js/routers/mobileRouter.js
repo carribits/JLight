@@ -25,7 +25,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
             Countries = AppModules.Utility.Countries;
             USStates = AppModules.Utility.USStates;
 
-            var CategoryRouter = Backbone.Router.extend({
+            var AppRouter = Backbone.Router.extend({
                 initialize: function() {
                     this.homeView = new AppModules.Views.HomeView({el: "#appview", model: new AppModules.Models.Reading()});
                     this.tipsView = new AppModules.Views.TipsView({el: "#appview", model: new AppModules.Models.Tips()});
@@ -40,6 +40,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.disclaimerView = new AppModules.Views.DisclaimerView({el: "#appview"});
                     this.addcustomApplianceView = new AppModules.Views.AddCustomApplianceView({el: "#appview"});
                     this.roomStatView = new AppModules.Views.RoomStatView({el: "#appview"});
+                    this.resetView = new AppModules.Views.ResetView({el: "#appview"});
 
                     Backbone.history.start();
                 },
@@ -60,7 +61,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "addcustom?:room": "addcustom",
                     "roomstat": "roomstat",
                     "about": "about",
-                    "disclaimer": "disclaimer"
+                    "disclaimer": "disclaimer",
+                    "reset": "reset"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -150,7 +152,17 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 roomstat: function(room) {
                     this.roomStatView.render(room);
                     $.mobile.loading("hide");
+                },
+                reset: function(room) {
+                    $(".jqm-navmenu-panel").panel("close");
+
+                    $('.jqm-navmenu-panel #reset-link').on('click', function(e) {
+                        $(".jqm-navmenu-panel").panel("close");
+                    });
+
+                    this.resetView.render(room);
+                    $.mobile.loading("hide");
                 }
             });
-            return CategoryRouter;
+            return AppRouter;
         });

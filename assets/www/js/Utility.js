@@ -23,6 +23,9 @@ define([], function() {
         return JSON.parse(window.localStorage.getItem(key));
     };
 
+    Storage.remove = function(key) {
+        return window.localStorage.removeItem(key);
+    };
 
     /* Utility */
     var Utility = function() {
@@ -53,14 +56,15 @@ define([], function() {
     };
 
     Application.view = 'icon';
+    Application._id_ = 'power_house';
     Application.defaultRate = {rate: 0.12, country: 'United States', currency: 'USD'};
 
     Application.saveRate = function(rateInfo) {
-        Storage.writeJson('rate', rateInfo);
+        Storage.writeJson(Application._id_ + '_rate', rateInfo);
     };
 
     Application.getRate = function() {
-        var rate = Storage.readJson('rate');
+        var rate = Storage.readJson(Application._id_ + '_rate');
         if (rate === null || rate === undefined) {
             return Application.defaultRate;
         }
@@ -68,28 +72,37 @@ define([], function() {
     };
 
     Application.initializeRate = function() {
-        var rate = Storage.readJson('rate');
+        var rate = Storage.readJson(Application._id_ + '_rate');
         if (rate === null || rate === undefined) {
             Application.saveRate(Application.defaultRate);
         }
     };
 
     Application.applicationConfigured = function() {
-        var rate = Storage.readJson('rate');
+        var rate = Storage.readJson(Application._id_ + '_rate');
         return !!(rate !== null & rate !== undefined);
     };
 
     Application.getCurrency = function() {
-        var rateObj = Storage.readJson('rate');
+        var rateObj = Storage.readJson(Application._id_ + '_rate');
 
         if (rateObj !== undefined && rateObj !== null) {
             return rateObj.currency;
         }
         return Application.defaultRate.currency;
     };
-    
+
     Application.reload = function() {
         location.reload(false);
+    };
+
+    Application.clearData = function() {
+        Storage.remove('bathroom_appliances');
+        Storage.remove('homeoffice_appliances');
+        Storage.remove('kitchen_appliances');
+        Storage.remove('washroom_appliances');
+        Storage.remove('livingroom_appliances');
+        Storage.remove('bedroom_appliances');
     };
 
     var Appliance = function() {

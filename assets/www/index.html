@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-                if (str !== null && str !== undefined)
-                    return str.charAt(0).toUpperCase() + str.slice(1);
+            if (str !== null && str !== undefined)
+            return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-                    function(n, useWordBoundary) {
-                        var toLong = this.length > n,
-                                s_ = toLong ? this.substr(0, n - 1) : this;
-                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-                        return  toLong ? s_ + '...' : s_;
-                    };
+            function(n, useWordBoundary) {
+            var toLong = this.length > n,
+            s_ = toLong ? this.substr(0, n - 1) : this;
+            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+            return  toLong ? s_ + '...' : s_;
+            };
         </script>
     </head>
     <body>
@@ -64,6 +64,7 @@
                     <li data-filtertext="demos homepage"><a class="" href="index.html">Home</a></li>
                     <li data-filtertext="demos homepage"><a id="disclaimer-link" class="" href="index.html#disclaimer">Disclaimer</a></li>
                     <li data-filtertext="demos homepage"><a id="about-link" class="" href="index.html#about">About</a></li>
+                    <li data-filtertext="demos homepage"><a id="reset-link" class="" href="index.html#reset">Clear data</a></li>
                     <li data-role="collapsible" data-collapsed-icon="carat-d" data--icon="carat-u" data-iconpos="right" data-inset="false">
                 </ul>
             </div>
@@ -270,7 +271,9 @@
         <div id="room" data-role="page" data-title="Rooms">
             <div class="room-appliances" style="margin:0.35em">
                 <span id="room-name" class="header">APPLIANCES</span>
-                <div><a style="margin-left:0" id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Regular Appliance</a></div>
+                <div>
+                    <a style="margin-left:0" id="room-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Regular Appliance</a>
+                </div>
                 <div id="room-appliances">
                     <ul id="room-appliances-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow owned-appliance">
                     </ul>
@@ -279,7 +282,7 @@
                 <div><a style="margin-left:0" id="custom-app-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">+ Add Custom Appliance</a></div>
             </div>
         </div>
-        <!--roomstat-->
+        <!--room stats-->
         <div id="roomstat" data-role="page" data-title="Rooms Stats">
             <h4 style="margin-bottom: 1em" class="header">MONTHLY WATTAGE CONSUMPTION</h4>
             <canvas style="margin:0" id="canvas"></canvas>
@@ -372,12 +375,25 @@
             </div>
         </div>
         <div id="about" data-role="page" data-title="About">
-            <h4 style="margin-bottom: 1em" class="header">ABOUT</h4>
-            <p>About</p>
+            <div class="application-info-text">
+                <h4 style="margin-bottom: 1em" class="header">ABOUT</h4>
+                <p>Power House is a free application designed to help you manage electricity consumption in your home. 
+                    Power House is developed by Rivalbits.</p>
+            </div>
         </div>
         <div id="disclaimer" data-role="page" data-title="Disclaimer">
-            <h4 style="margin-bottom: 1em" class="header">DISCLAIMER</h4>
-            <p>Disclaimer</p>
+            <div class="application-info-text">
+                <h4 style="margin-bottom: 1em" class="header">DISCLAIMER</h4>
+                <p>This application gives you only an estimate of your energy consumption does not represent your actual consumption.</p>
+            </div>
+        </div>
+        <div id="reset" data-role="page" data-title="Disclaimer">
+            <div class="application-info-text">
+                Warning! This action will clear all appliance details.
+                <div>
+                    <a style="margin-left:0" href="#home" id="clear-link" class="jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini form-button">Clear Now</a>
+                </div>
+            </div>
         </div>
         <script  id="appliance-add" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">

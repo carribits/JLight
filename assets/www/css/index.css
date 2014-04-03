@@ -540,3 +540,8 @@ a.appliance-item{
     font-weight: 200 !important;
     font-style: italic;
 }
+
+.application-info-text{
+    margin: 0.5em;
+    line-height: 2.0 !important;
+}

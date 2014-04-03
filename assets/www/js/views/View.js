@@ -684,6 +684,20 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         }
     });
 
+    var ResetView = Backbone.View.extend({
+        initialize: function() {
+        },
+        render: function() {
+            var template = _.template($("#reset").html());
+            this.$el.find("#content-holder").html(template);
+
+            $('#clear-link').click(function(event) {
+                Application.clearData();
+            });
+            return this;
+        }
+    });
+
     // Returns the View class
     return{
         HomeView: HomeView,
@@ -699,7 +713,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         AddCustomApplianceView: AddCustomApplianceView,
         RoomStatView: RoomStatView,
         AboutView: AboutView,
-        DisclaimerView: DisclaimerView
+        DisclaimerView: DisclaimerView,
+        ResetView: ResetView
     };
-
 });

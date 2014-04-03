@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-            var parts = val.toString().split(".");
-            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+                var parts = val.toString().split(".");
+                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-            if (str !== null && str !== undefined)
-            return str.charAt(0).toUpperCase() + str.slice(1);
+                if (str !== null && str !== undefined)
+                    return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-            function(n, useWordBoundary) {
-            var toLong = this.length > n,
-            s_ = toLong ? this.substr(0, n - 1) : this;
-            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-            return  toLong ? s_ + '...' : s_;
-            };
+                    function(n, useWordBoundary) {
+                        var toLong = this.length > n,
+                                s_ = toLong ? this.substr(0, n - 1) : this;
+                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+                        return  toLong ? s_ + '...' : s_;
+                    };
         </script>
     </head>
     <body>
@@ -370,6 +370,14 @@
 
                 </form>
             </div>
+        </div>
+        <div id="about" data-role="page" data-title="About">
+            <h4 style="margin-bottom: 1em" class="header">ABOUT</h4>
+            <p>About</p>
+        </div>
+        <div id="disclaimer" data-role="page" data-title="Disclaimer">
+            <h4 style="margin-bottom: 1em" class="header">DISCLAIMER</h4>
+            <p>Disclaimer</p>
         </div>
         <script  id="appliance-add" type="text/template">
             <li class="ui-li-has-alt ui-li-has-thumb <%=appliance['class']%>">

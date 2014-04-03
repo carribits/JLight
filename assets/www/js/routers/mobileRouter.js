@@ -36,7 +36,8 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.discoverApplianceView = new AppModules.Views.DiscoverApplianceView({el: "#appview"});
                     this.addApplianceView = new AppModules.Views.AddApplianceView({el: "#appview"});
                     this.editApplianceView = new AppModules.Views.EditApplianceView({el: "#appview"});
-                    //this.rateView = new AppModules.Views.RateView({el: "#appview"});
+                    this.aboutView = new AppModules.Views.AboutView({el: "#appview"});
+                    this.disclaimerView = new AppModules.Views.DisclaimerView({el: "#appview"});
                     this.addcustomApplianceView = new AppModules.Views.AddCustomApplianceView({el: "#appview"});
                     this.roomStatView = new AppModules.Views.RoomStatView({el: "#appview"});
 
@@ -57,7 +58,9 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     "appliancestat": "appliancestat",
                     "setrate": "setrate",
                     "addcustom?:room": "addcustom",
-                    "roomstat": "roomstat"
+                    "roomstat": "roomstat",
+                    "about": "about",
+                    "disclaimer": "disclaimer"
                 },
                 route: function(route, name, callback) {
                     var router = this;
@@ -79,7 +82,7 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 home: function() {
                     if (!Application.applicationConfigured()) {
-                        $('#home-icon').addClass('ui-icon-setting-a');
+                        $('#setting-icon').addClass('ui-icon-setting-a');
                         this.setting();
                     } else {
                         $('#home-icon').addClass('ui-icon-home-a');
@@ -97,7 +100,6 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                     this.addApplianceView.render(room, appid);
                 },
                 editappliance: function(room, appid) {
-                    console.log('cccc');
                     this.editApplianceView.render(room, appid);
                 },
                 room: function(name) {
@@ -139,7 +141,6 @@ define(["jquery", "backbone", "indexjs", "AppModules"],
                 },
                 setrate: function() {
                     this.rateView.render();
-                    //$.mobile.changePage("#test");
                     $.mobile.loading("hide");
                 },
                 addcustom: function(room) {

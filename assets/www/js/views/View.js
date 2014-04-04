@@ -6,6 +6,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
     var BaseView = Backbone.View.extend({
         validateAppliance: function(params) {
+            console.log(params);
             if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
                 Utility.alert("Values entered are incorrect");
                 return false;
@@ -37,12 +38,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
 
             //Validate monthly usage
-            if (params['usage'] === 'monthly' && params['hours'] > 730 === 'hour') {
+            if (params['usage'] === 'monthly' && params['hours'] > 730 && params['time_unit'] === 'hour') {
                 Utility.alert("Hours must be between 1 and 730 for monthly usage");
                 return false;
             }
-            if (params['usage'] === 'monthly' && params['hours'] > 44640 === 'minute') {
-                Utility.alert("Hours must be between 1 and 44640 for monthly usage");
+            if (params['usage'] === 'monthly' && params['hours'] > 44640 && params['time_unit'] === 'minute') {
+                Utility.alert("Minutes must be between 1 and 44640 for monthly usage");
                 return false;
             }
 

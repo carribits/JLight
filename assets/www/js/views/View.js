@@ -528,7 +528,15 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var appliance = Appliance.getAppliance(room, appid);
             appliance['quantity'] = 1;
             var option = '';
+            var unitValue = appliance['hours'];
+            var unit = 'hour';
 
+            //Change time unit to minute if hours less than 1
+            if (unitValue < 1) {
+                unitValue = Math.round(unitValue * 60);
+                unit = 'minute';
+            }
+            appliance['hours'] = unitValue;
             var applianceForm = _.template($("script#appliance-add-form").html(), {"appliance": appliance});
 
             var template = _.template($("#addappliance").html());
@@ -536,10 +544,13 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#addappliance-form').html(applianceForm);
             $("#addappliance-form input#appliance-hours").textinput();
 
+            //Add usage list
             for (var i = 0; i < appliance['usage_list'].length; i++) {
                 option += '<option value="' + appliance['usage_list'][i] + '">' + ucfirst(appliance['usage_list'][i]) + '</option>';
             }
             $("#addappliance-form #appliance-usage").html(option);
+
+            $("#addappliance-form #time-unit").val(unit);
 
             $("#addappliance-form #appliance-usage").selectmenu();
             $("#addappliance-form #appliance-quantity").textinput();

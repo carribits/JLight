@@ -279,9 +279,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#rateform').html(formContent);
 
             if (currency !== null && currency !== '') {
-                $("#rateform #currency-ind").text('Current rate is ' + currency);
+                $("#rateform #currency-ind").text('Currency is ' + currency);
             }
 
+            //Load countries
             for (var i = 0; i < Countries.length; i++) {
                 var countryObj = {name: Countries[i]['name'], rate: Countries[i]['rate'], currency: Countries[i]['currency']};
                 if (countryObj['currency'] === 'USD') {
@@ -292,6 +293,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.$el.find('#rateform #country').append(countryList);
 
 
+            //Load USA states
             for (var i = 0; i < USStates.length; i++) {
                 var state = {name: USStates[i]['name'], rate: USStates[i]['rate'], currency: USStates[i]['currency']};
                 if (state['currency'] === 'USD') {
@@ -301,13 +303,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             }
             this.$el.find('#rateform #state').append(stateList);
 
-            //$("#country").val((rate).toFixed(2));
+            //Initialize widgets
             $("#rateform #state-list").hide();
             $("#rateform #country").selectmenu();
             $("#rateform #state").selectmenu();
             $("#rateform #rate-amt").textinput();
             $("#rateform #rate-amt").val(rate);
 
+            //Change the rate amount everytime the country or state changes
             $('#rateform #country, #rateform #state').on('change', function() {
                 country = $(this).find(":selected").text();
                 currency = $(this).find(":selected").attr('data-currency');
@@ -318,6 +321,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 $("#rateform #currency-ind").show();
             });
 
+            //Show US states of country selected is USA
             $('#rateform #country').on('change', function() {
                 if (country === 'United States') {
                     $("#rateform #state-list").show();
@@ -326,6 +330,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 }
             });
 
+            //Save rate entered
             $('#rateform a#appliance-rate-form-save').click(function(event) {
                 rate = $("#rateform #rate-amt").val();
                 if (Utility.isNumeric(rate) && rate > 0) {
@@ -336,10 +341,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 }
             });
 
+            //Initialize rate on startup if user cancels rate seletction
             $('#rateform a#appliance-rate-cancel').click(function(event) {
                 Application.initializeRate();
             });
 
+            //Select the country found
             $("#country option").each(function() {
                 this.selected = false;
             });
@@ -348,7 +355,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             });
             $('#country').selectmenu('refresh');
 
-            //var lastValue = $("#rateform #rate-amt").val();
+            //Reset country and currency if rate change
             $("#rateform #rate-amt").on('change keyup paste mouseup', function() {
                 if ($(this).val() !== rate) {
                     rate = $(this).val();
@@ -367,6 +374,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 }
             });
 
+            //Show states
             if (country === 'United States') {
                 $("#rateform #state-list").show();
             }
@@ -380,7 +388,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         initialize: function() {
         },
         render: function(room) {
-            var appliance = {};
             var template = _.template($("#addcustom").html());
             this.$el.find("#content-holder").html(template);
             var formContent = _.template($("script#add-custom-appl-tmp").html());
@@ -389,9 +396,12 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             $('#custom-appl-form .room-custom').html(room);
 
-            $("#custom-appl-form #appliance-usage").val(appliance['usage']);
-            $("#custom-appl-form #time-unit").val(appliance['time_unit']);
+            // Set input to zero to avoid crash
+            $("#custom-appl-form #appliance-watt").val(0);
+            $("#custom-appl-form #appliance-hours").val(0);
+            $("#custom-appl-form #appliance-quantity").val(0);
 
+            //Initialize text inpute
             $("#custom-appl-form #appliance-name").textinput();
             $("#custom-appl-form #appliance-watt").textinput();
             $("#custom-appl-form #appliance-hours").textinput();

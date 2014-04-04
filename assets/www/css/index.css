@@ -11,7 +11,7 @@
 }
 
 #content-holder{
-    margin-bottom: 2.5em;
+    margin-bottom: 4em;
 }
 
 .ui-content {
@@ -536,8 +536,8 @@ a.appliance-item{
 }
 
 #currency-ind{
-    font-size: 0.7em !important;
-    font-weight: 200 !important;
+    font-size: 0.8em !important;
+    font-weight: 300 !important;
     font-style: italic;
 }
 

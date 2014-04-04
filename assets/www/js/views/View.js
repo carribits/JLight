@@ -16,23 +16,33 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 return false;
             }
 
+            //Validate daily usage
             if (params['usage'] === 'daily' && params['hours'] > 24 && params['time_unit'] === 'hour') {
                 Utility.alert("Hours must be between 1 and 24 for daily usage");
                 return false;
             }
-
             if (params['usage'] === 'daily' && params['hours'] > 1440 && params['time_unit'] === 'minute') {
                 Utility.alert("Minutes must be between 1 and 1440 for daily usage");
                 return false;
             }
 
-            if (params['usage'] === 'weekly' && params['hours'] > 168) {
+            //Validate weekly usage
+            if (params['usage'] === 'weekly' && params['hours'] > 168 && params['time_unit'] === 'hour') {
                 Utility.alert("Hours must be between 1 and 168 for weekly usage");
                 return false;
             }
+            if (params['usage'] === 'weekly' && params['hours'] > 10080 && params['time_unit'] === 'minute') {
+                Utility.alert("Minutes must be between 1 and 10080 for weekly usage");
+                return false;
+            }
 
-            if (params['usage'] === 'monthly' && params['hours'] > 730) {
+            //Validate monthly usage
+            if (params['usage'] === 'monthly' && params['hours'] > 730 === 'hour') {
                 Utility.alert("Hours must be between 1 and 730 for monthly usage");
+                return false;
+            }
+            if (params['usage'] === 'monthly' && params['hours'] > 44640 === 'minute') {
+                Utility.alert("Hours must be between 1 and 44640 for monthly usage");
                 return false;
             }
 

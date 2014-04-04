@@ -16,21 +16,21 @@
         <script type="text/javascript" charset="utf-8" src="js/Chart.js"></script>
         <script type="text/javascript">
             function toMoney(val) {
-                var parts = val.toString().split(".");
-                return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+            var parts = val.toString().split(".");
+            return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
             }
             function ucfirst(str) {
-                if (str !== null && str !== undefined)
-                    return str.charAt(0).toUpperCase() + str.slice(1);
+            if (str !== null && str !== undefined)
+            return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
             String.prototype.ellipse =
-                    function(n, useWordBoundary) {
-                        var toLong = this.length > n,
-                                s_ = toLong ? this.substr(0, n - 1) : this;
-                        s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-                        return  toLong ? s_ + '...' : s_;
-                    };
+            function(n, useWordBoundary) {
+            var toLong = this.length > n,
+            s_ = toLong ? this.substr(0, n - 1) : this;
+            s_ = useWordBoundary && toLong ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+            return  toLong ? s_ + '...' : s_;
+            };
         </script>
     </head>
     <body>
@@ -215,9 +215,9 @@
                 <span class="header">ENERGY SAVING TIPS</span>
                 <h4>Living Room</h4>
                 <ul class="tips-list">
-                    <li>Switch light bulbs to CFLs</li>
+                    <li>Switch light bulbs to fluorescent light bulbs</li>
                     <li>Unplug unused appliances or switch them off</li>
-                    <li>Seal Windows and Doors to Reduce Drafts</li>
+                    <li>Seal windows and doors to reduce drafts</li>
                     <li>Make sure all windows and doors are  closed when the AC unit is on</li>
                 </ul>
                 <h4>Bedrooms</h4>
@@ -227,7 +227,7 @@
                 </ul>
                 <h4>Bathroom</h4>
                 <ul class="tips-list">
-                    <li>Reduce Hot Water Use</li>
+                    <li>Reduce hot water use</li>
                     <li>Lower the temperature on your hot water heater</li>
                 </ul>
                 <h4>Washroom</h4>
@@ -236,7 +236,7 @@
                     <li>Wash full loads when using the washing machine</li>
                     <li>Use shorter wash cycles for smaller load sizes</li>
                     <li>Use cold water to wash clothes</li>
-                    <li>Use the sun to dry clothes when you can</li>
+                    <li>Use the sun to dry clothes when you can rather that using the clothes dryer</li>
                 </ul>
                 <h4>Kitchen</h4>
                 <ul class="tips-list">
@@ -250,9 +250,9 @@
                 </ul>
                 <h4>Home Office</h4>
                 <ul class="tips-list">
-                    <li>Configure power plan software on computers</li>
+                    <li>Switch to a power saver plan on computers</li>
                     <li>Switch computer monitors off when not in use</li>
-                    <li>Switch off lights when room not occupied</li>
+                    <li>Switch off lights when not in use</li>
                     <li>Use daylight where possible</li>
                 </ul>
             </div>
@@ -340,7 +340,7 @@
         <!--discover appliance-->
         <div id="discoverappliance" data-role="page" data-title="Discover Appliance">
             <div class="room-appliances" style="margin:0.35em">
-                <span id="discoverappliance-title">SELECT APPLIANCES TO ADD</span>
+                <span id="discoverappliance-title">ADD APPLIANCES</span>
                 <div data-demo-html="true">
                     <ul id="discoverappliance-list" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow new-appliance">
 
@@ -384,7 +384,7 @@
         <div id="disclaimer" data-role="page" data-title="Disclaimer">
             <div class="application-info-text">
                 <h4 style="margin-bottom: 1em" class="header">DISCLAIMER</h4>
-                <p>This application gives you only an estimate of your energy consumption and does not represent your actual consumption.</p>
+                <p>This application only gives you an estimate of your energy consumption and does not reflect your actual consumption.</p>
             </div>
         </div>
         <div id="reset" data-role="page" data-title="Disclaimer">

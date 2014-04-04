@@ -527,7 +527,7 @@ a.appliance-item{
 .header{
     font-family: 'Open Sans', sans-serif !important;
     font-size: 1.0em !important;
-    font-weight: 300 !important;
+    font-weight: bold !important;
     color: #3eb249 !important;
 }
 

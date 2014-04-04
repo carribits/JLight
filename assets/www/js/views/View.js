@@ -182,9 +182,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             var count = 0;
             var storageIndex = room + '_appliances';
             var appliances = DefaultAppliances[room];
+            var title = Room.getName(room).toUpperCase();
             var template = _.template($("#discoverappliance").html());
             this.$el.find("#content-holder").html(template);
-            var title = 'CHOOSE ' + room.toUpperCase() + ' ' + 'APPLIANCES TO ADD';
+            var title = 'ADD ' + title.toUpperCase() + ' APPLIANCES';
 
             $('#discoverappliance-title').text(title);
 
@@ -317,7 +318,7 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
                 rate = $(this).val();
                 $("#rateform #rate-amt").val(rate);
-                $("#rateform #currency-ind").text('Current rate is ' + currency);
+                $("#rateform #currency-ind").text('Currency is ' + currency);
                 $("#rateform #currency-ind").show();
             });
 

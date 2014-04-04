@@ -334,7 +334,7 @@ define([], function() {
     var internet = [
         {name: "Wi-Fi Router", watt: 6, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "wifi"},
         {name: "Cable Box", watt: 20, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "cable_box"},
-        {name: "Satellite dish", watt: 30, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "satellite"}
+        {name: "Satellite Dish", watt: 30, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "satellite"}
     ];
 
     var general = [
@@ -388,7 +388,7 @@ define([], function() {
         {name: "Hair Dryer", watt: 1500, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "hairdryer"},
         {name: "Shaver", watt: 15, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "shaver"},
         {name: "Waterpik", watt: 100, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"},
-        {name: "Electric Toothbrush", watt: 220, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"}
+        {name: "Electric Toothbrush", watt: 220, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toothbrush"}
     ], [heating, lighting]);
 
     var DefaultAppliances = {

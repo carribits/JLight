@@ -6,8 +6,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
     var BaseView = Backbone.View.extend({
         validateAppliance: function(params) {
-            console.log(params);
-
             if (!Utility.isNumeric(params['quantity']) || !Utility.isNumeric(params['hours'])) {
                 Utility.alert("Values entered are incorrect");
                 return false;
@@ -114,8 +112,8 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
 
             for (var key in appliances) {
                 var appliance = appliances[key];
-                appliance['cost'] = Appliance.getItemCost(appliance);
-                appliance['watt'] = Appliance.getItemWatt(appliance);
+                appliance['cost'] = Appliance.getItemCost(appliance).toFixed(2);
+                appliance['watt'] = Appliance.getItemWatt(appliance).toFixed(2);
                 appliance['symbol'] = symbol + ' ';
             }
 
@@ -155,6 +153,10 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
         computeRoom: function(room) {
             var symbol = Application.getSymbol();
             var roomInfo = Appliance.getRoomInfo(room);
+
+            roomInfo['watt'] = Utility.parseFloat(roomInfo['watt']).toFixed(2);
+            roomInfo['cost'] = Utility.parseFloat(roomInfo['cost']).toFixed(2);
+
             this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
             this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' kWh');
             this.$el.find('ul#' + room + ' .room-cost').text(symbol + ' ' + toMoney(roomInfo['cost']));
@@ -369,7 +371,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                     });
                     $("#country option").each(function() {
                         this.selected = (this.value === 0);
-                        console.log(this.selected);
                     });
                     $('#country').selectmenu('refresh');
                 }
@@ -648,7 +649,6 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
                 return '0%';
             }
             var perc = (value / total) * 100;
-            console.log(perc);
             return perc.toFixed(2) + '%';
         }
     });

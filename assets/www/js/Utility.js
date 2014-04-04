@@ -43,6 +43,13 @@ define([], function() {
         return false;
     };
 
+    Utility.parseFloat = function(number) {
+        if (Utility.isNumeric(number)) {
+            return parseFloat(number);
+        }
+        return 0;
+    };
+
     Utility.alert = function(msg) {
         navigator.notification.alert(msg);
     };
@@ -203,15 +210,15 @@ define([], function() {
     Appliance.getItemCost = function(appliance) {
         var config = Appliance.getConfig();
         var cost = config.rate * Appliance.getItemWatt(appliance);
-        return parseFloat(cost.toFixed(2));
+        return parseFloat(cost);
     };
     Appliance.getItemWatt = function(appliance) {
         var hours = Appliance.getHours(appliance);
         var watt = hours * appliance['quantity'] * (appliance['watt'] / 1000);
-        return parseFloat(watt.toFixed(2));
+        return parseFloat(watt);
     };
     Appliance.getHours = function(appliance) {
-        var factor = (appliance['time_unit'] === 'minute') ? 0.01666 : 1;
+        var factor = (appliance['time_unit'] === 'minute') ? (1 / 60) : 1;
         var hours = 0;
         switch (appliance['usage']) {
             case 'daily':
@@ -259,8 +266,8 @@ define([], function() {
 
         var result = {
             count: count,
-            cost: parseFloat(cost.toFixed(2)),
-            watt: parseFloat((kwh).toFixed(2))
+            cost: parseFloat(cost),
+            watt: parseFloat(kwh)
         };
         return result;
     };
@@ -387,9 +394,9 @@ define([], function() {
 
     var bathroom = Appliance.setUpAppliance([
         {name: "Hair Dryer", watt: 1500, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "hairdryer"},
-        {name: "Shaver", watt: 15, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "shaver"},
-        {name: "Waterpik", watt: 100, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"},
-        {name: "Electric Toothbrush", watt: 220, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toothbrush"}
+        {name: "Shaver", watt: 15, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "shaver"},
+        {name: "Waterpik", watt: 100, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"},
+        {name: "Electric Toothbrush", watt: 220, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toothbrush"}
     ], [heating, lighting]);
 
     var DefaultAppliances = {

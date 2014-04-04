@@ -323,7 +323,7 @@ define([], function() {
     var computing = [
         {name: "Desktop Computer", watt: 150, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "desktop"},
         {name: "Printer", watt: 40, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
-        {name: "Laser Printers", watt: 600, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
+        {name: "Laser Printer", watt: 600, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
         {name: "Scanner", watt: 40, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
         {name: "Cordless Phone", watt: 2, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "cordless_phone"},
         {name: "Radio", watt: 40, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "radio"},

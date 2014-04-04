@@ -21,7 +21,7 @@
     package="org.rivalbits.jlight"
     android:hardwareAccelerated="true"
     android:versionCode="1"
-    android:versionName="1.0"
+    android:versionName="1.0.0"
     android:windowSoftInputMode="adjustPan" >
 
     <supports-screens

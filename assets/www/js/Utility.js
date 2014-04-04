@@ -323,6 +323,7 @@ define([], function() {
     var computing = [
         {name: "Desktop Computer", watt: 150, hours: 6, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "desktop"},
         {name: "Printer", watt: 40, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
+        {name: "Scanner", watt: 40, hours: 0.25, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "printer"},
         {name: "Cordless Phone", watt: 2, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "cordless_phone"},
         {name: "Radio", watt: 40, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "radio"},
         {name: "Stereo", watt: 2, hours: 3, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "speaker"},
@@ -345,15 +346,25 @@ define([], function() {
         {name: "Cooking Stove Top", watt: 1500, hours: 2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "computer"},
         {name: "Electric Oven", watt: 2400, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "oven"},
         {name: "Dishwasher", watt: 1800, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "dishwasher"},
-        {name: "Refrigerator", watt: 180, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Mini Refrigerator", watt: 70, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
-        {name: "Freezer", watt: 200, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
         {name: "Coffee Maker", watt: 800, hours: 0.33, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "coffee_maker"},
         {name: "Microwave", watt: 1200, hours: 0.5, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "microwave"},
         {name: "Toaster", watt: 1200, hours: 0.2, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"},
         {name: "Blender", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "blender"},
-        {name: "Can Opener", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "toaster"},
-        {name: "Egg Mixer", watt: 200, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "egg_mixer"}
+        {name: "Can Opener", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "can_opener"},
+        {name: "Egg Mixer", watt: 200, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "egg_mixer"},
+        {name: "Rice Cooker, 1-liter", watt: 450, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "pot"},
+        {name: "Rice Cooker, 1.8 liter", watt: 650, hours: 1, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "pot"},
+        {name: "Mini Refrigerator", watt: 70, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.5, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 10 cubic feet (w/frost)", watt: 170, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 12 cubic feet (w/frost)", watt: 240, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 14 cubic feet (w/frost)", watt: 330, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 14 cubic feet (frost-free)", watt: 610, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 18 cubic feet (frost-free)", watt: 720, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Refrigerator-Freezer 21 cubic feet (frost-free)", watt: 750, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+        {name: "Freezer, 15 cu. ft. (frost free)", watt: 266, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "fros"},
+        {name: "Chest Freezer, 8 cu. ft.", watt: 160, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "fros"},
+        {name: "Chest Freezer, 10 cu. ft.", watt: 180, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "fros"},
+        {name: "Chest Freezer, 12 cu. ft.", watt: 200, hours: 24, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "fros"}
     ], [lighting]);
 
     var homeoffice = Appliance.setUpAppliance([
@@ -376,7 +387,8 @@ define([], function() {
     var bathroom = Appliance.setUpAppliance([
         {name: "Hair Dryer", watt: 1500, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "hairdryer"},
         {name: "Shaver", watt: 15, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "shaver"},
-        {name: "Waterpik", watt: 100, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"}
+        {name: "Waterpik", watt: 100, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"},
+        {name: "Electric Toothbrush", watt: 220, hours: 0.1666, usage_list: ['weekly', 'monthly'], duty_cycle: 1.0, ballast_factor: 1, icon: "waterpik"}
     ], [heating, lighting]);
 
     var DefaultAppliances = {

@@ -1,1 +1,25 @@
-<input type="number" data-type="range" name="slider" id="appliance-hours" value="1" min="1" step="1" max="168" class="ui-shadow-inset ui-body-inherit ui-corner-all">
+{name: "Freezer, 15 cu. ft. (frost free)", watt: 266, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Freezer non-self defrosting", watt: 250, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Chest Freezer, 8 cu. ft.", watt: 160, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+
+
+{name: "Chest Freezer, 10 cu. ft.", watt: 180, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Chest Freezer, 12 cu. ft.", watt: 200, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Refrigerator Freezer, 12 cu. ft.", watt: 300, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Refrigerator, 10 cu. ft.", watt: 170, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+
+
+{name: "Refrigerator, 8 cu. ft.", watt:150 , hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Refrigerator, 9 cu. ft. (frost free) ", watt: 280, hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Refrigerator, 11 cu. ft. (frost free) ", watt:150 , hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "Upright Freezer, 8 cu. ft.", watt:60 , hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+
+
+
+
+
+{name: "", watt: , hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+{name: "", watt: , hours: 0.1666, usage_list: ['daily', 'weekly', 'monthly'], duty_cycle: 0.58, ballast_factor: 1, icon: "refrigerator"},
+
+
+

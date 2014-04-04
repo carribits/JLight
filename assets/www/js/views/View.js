@@ -149,14 +149,14 @@ define(["jquery", "backbone", "models/Model"], function($, Backbone, ModelModule
             this.houseInfo['cost'] = this.houseInfo['cost'].toFixed(2);
 
             this.$el.find('ul#meter-total .appliance-count').text(this.houseInfo['count'] + ' Appliance(s)');
-            this.$el.find('ul#meter-total .room-watt').text(this.houseInfo['watt'] + ' KW');
+            this.$el.find('ul#meter-total .room-watt').text(this.houseInfo['watt'] + ' kWh');
             this.$el.find('ul#meter-total .room-cost').text(symbol + ' ' + toMoney(this.houseInfo['cost']) + ' ' + currency);
         },
         computeRoom: function(room) {
             var symbol = Application.getSymbol();
             var roomInfo = Appliance.getRoomInfo(room);
             this.$el.find('ul#' + room + ' .appliance-count').text(roomInfo['count'] + ' Appliance(s)');
-            this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' KW');
+            this.$el.find('ul#' + room + ' .room-watt').text(roomInfo['watt'] + ' kWh');
             this.$el.find('ul#' + room + ' .room-cost').text(symbol + ' ' + toMoney(roomInfo['cost']));
 
             this.houseInfo.count += roomInfo['count'];
